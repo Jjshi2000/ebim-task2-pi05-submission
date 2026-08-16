@@ -1,0 +1,21 @@
+{
+  "model": "PI0.5 full fine-tune for EBiM Task 2",
+  "training_step": 20000,
+  "checkpoint_layout": "LeRobot pretrained_model",
+  "weights_file": "model.safetensors",
+  "weights_size_bytes": 9354050784,
+  "weights_sha256": "661e4995cda5421ed23258dea6a51c751f23dce25095f0614e44af7fbd5d40a8",
+  "peft": false,
+  "input_cameras": [
+    "observation.images.head",
+    "observation.images.wrist_left",
+    "observation.images.wrist_right"
+  ],
+  "state_dimensions": 37,
+  "action_dimensions": 20,
+  "chunk_size": 50,
+  "deployment_n_action_steps": 50,
+  "lerobot_commit": "22bd7a2f489b367d8df42de803b1e8c4ca63a3f9",
+  "benchmark_base_commit": "0004645a4b8843f0e04a5ca531fce0598e058910"
+}
+

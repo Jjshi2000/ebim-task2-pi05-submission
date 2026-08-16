@@ -1,0 +1,8 @@
+.git
+.gitignore
+*.md
+LICENSE
+NOTICE
+__pycache__
+*.pyc
+

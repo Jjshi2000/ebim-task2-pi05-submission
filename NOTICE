@@ -1,0 +1,10 @@
+This submission contains Task 2 deployment code derived from the
+EBiM-Benchmark/benchmark repository at commit
+0004645a4b8843f0e04a5ca531fce0598e058910, with team-authored PI0.5 deployment
+and control changes. The upstream repository and this submission are provided
+under the Apache License 2.0 included in LICENSE.
+
+LeRobot is installed at build time from huggingface/lerobot commit
+22bd7a2f489b367d8df42de803b1e8c4ca63a3f9 and retains its own licensing and
+notices.
+
