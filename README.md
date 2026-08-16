@@ -5,9 +5,11 @@ Material Handling (Thermal Pad Placement)**. It deploys a fully fine-tuned
 LeRobot PI0.5 policy at training step 20,000 against the official Isaac Sim ROS
 topic contract.
 
-The model weights are supplementary material hosted separately in a private
-Hugging Face model repository. This public repository contains the complete
-container build recipe, policy runtime, ROS adapter, and integration guide.
+The model weights are supplementary material hosted separately in the public
+Hugging Face model repository
+[`junjie-jjs/ebim-task2-pi05-fullft-20k`](https://huggingface.co/junjie-jjs/ebim-task2-pi05-fullft-20k).
+This repository contains the complete container build recipe, policy runtime,
+ROS adapter, and integration guide.
 
 ## Policy contract
 
@@ -41,8 +43,8 @@ silently resize a camera whose geometry differs from the checkpoint contract.
 - NVIDIA driver compatible with the PyTorch CUDA runtime
 - Docker Engine and NVIDIA Container Toolkit
 - Official EBiM Task 2 Isaac Sim scene publishing the ROS topics below
-- Access to the private Hugging Face model repository, or a local checkpoint
-  directory mounted into the container
+- Internet access to download the public Hugging Face checkpoint, or a local
+  checkpoint directory mounted into the container
 
 ## Build
 
@@ -60,23 +62,24 @@ exact training revision:
 No model weight, dataset, token, or machine-specific path is baked into the
 image.
 
-## Run with private Hugging Face weights
+## Run with the public Hugging Face weights
 
-The evaluator's Hugging Face account must first be granted read access to the
-private model repository. Pass an access token belonging to that authorized
-account at runtime; never add a token to this repository or Docker image.
+The image defaults to the submitted public checkpoint. No Hugging Face account
+or access token is required.
 
 ```bash
 docker run --rm \
   --gpus all \
   --network host \
   --ipc host \
-  -e MODEL_REPO=YOUR_HF_ORG/ebim-task2-pi05-fullft-20k \
-  -e HF_TOKEN \
   -v ebim-hf-cache:/cache/huggingface \
   -v ebim-models:/models \
   ebim-task2-pi05:20k
 ```
+
+If the evaluator host requires an HTTP proxy to reach Hugging Face, pass its
+existing `HTTP_PROXY`, `HTTPS_PROXY`, and `NO_PROXY` variables with `-e`. This
+is only a network setting; the public checkpoint still requires no token.
 
 The entrypoint downloads the complete checkpoint to
 `/models/pi05-task2-fullft-20k`, validates the required processor/tokenizer
@@ -114,9 +117,9 @@ environment variables:
 | Variable | Default | Purpose |
 | --- | --- | --- |
 | `MODE` | `all` | `all`, `inference`, or `ros` |
-| `MODEL_REPO` | empty | Private Hugging Face model repository |
+| `MODEL_REPO` | `junjie-jjs/ebim-task2-pi05-fullft-20k` | Hugging Face model repository |
 | `MODEL_DIR` | `/models/pi05-task2-fullft-20k` | Download or mounted checkpoint directory |
-| `HF_TOKEN` | empty | Runtime-only token for an authorized HF account |
+| `HF_TOKEN` | empty | Optional token; not needed for the submitted public model |
 | `DEVICE` | `cuda` | PI0.5 inference device |
 | `INFERENCE_HOST` | `127.0.0.1` | Policy socket host |
 | `INFERENCE_PORT` | `8765` | Policy socket port |
@@ -158,8 +161,8 @@ latency.
 
 - `checkpoint is incomplete`: mount or upload the entire `pretrained_model`
   directory, not only `model.safetensors`.
-- `401` or `403` from Hugging Face: grant the evaluator account access and use
-  that account's runtime token. Do not send personal credentials to organizers.
+- `401` or `403` from Hugging Face: confirm that `MODEL_REPO` still points to
+  the public submitted repository and that the host can reach Hugging Face.
 - missing camera topic: confirm the official Isaac scene was launched with the
   robot RGB cameras and ROS bridge enabled.
 - camera shape mismatch: use the exact camera resolutions in the policy
@@ -182,4 +185,3 @@ rebuilding statistics from an external dataset.
 ## License
 
 See [`LICENSE`](LICENSE) and [`NOTICE`](NOTICE).
-

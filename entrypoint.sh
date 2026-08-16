@@ -1,11 +1,12 @@
 #!/usr/bin/env bash
-set -euo pipefail
+set -eo pipefail
 
 source /opt/ros/jazzy/setup.bash
+set -u
 
 MODE="${MODE:-all}"
 MODEL_DIR="${MODEL_DIR:-/models/pi05-task2-fullft-20k}"
-MODEL_REPO="${MODEL_REPO:-}"
+MODEL_REPO="${MODEL_REPO:-junjie-jjs/ebim-task2-pi05-fullft-20k}"
 INFERENCE_HOST="${INFERENCE_HOST:-127.0.0.1}"
 INFERENCE_PORT="${INFERENCE_PORT:-8765}"
 DEVICE="${DEVICE:-cuda}"
@@ -76,4 +77,3 @@ case "${MODE}" in
         exit 2
         ;;
 esac
-

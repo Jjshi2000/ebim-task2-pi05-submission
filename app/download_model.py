@@ -21,7 +21,7 @@ REQUIRED_FILES = (
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Download the private Task 2 PI0.5 checkpoint")
+    parser = argparse.ArgumentParser(description="Download the Task 2 PI0.5 checkpoint")
     parser.add_argument("--repo-id", required=True)
     parser.add_argument("--local-dir", required=True)
     args = parser.parse_args()
@@ -43,4 +43,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-
