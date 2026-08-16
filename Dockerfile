@@ -9,6 +9,7 @@ ENV PYTHONUNBUFFERED=1 \
     PATH=/opt/venv/bin:$PATH \
     HF_HOME=/cache/huggingface \
     HF_HUB_CACHE=/cache/huggingface/hub \
+    HF_HUB_DISABLE_XET=1 \
     TOKENIZERS_PARALLELISM=false \
     RMW_IMPLEMENTATION=rmw_fastrtps_cpp \
     FASTDDS_BUILTIN_TRANSPORTS=UDPv4 \

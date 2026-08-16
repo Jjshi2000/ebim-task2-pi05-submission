@@ -120,6 +120,7 @@ environment variables:
 | `MODEL_REPO` | `junjie-jjs/ebim-task2-pi05-fullft-20k` | Hugging Face model repository |
 | `MODEL_DIR` | `/models/pi05-task2-fullft-20k` | Download or mounted checkpoint directory |
 | `HF_TOKEN` | empty | Optional token; not needed for the submitted public model |
+| `HF_HUB_DISABLE_XET` | `1` | Uses standard HTTP downloads for proxy-compatible HF access |
 | `DEVICE` | `cuda` | PI0.5 inference device |
 | `INFERENCE_HOST` | `127.0.0.1` | Policy socket host |
 | `INFERENCE_PORT` | `8765` | Policy socket port |
