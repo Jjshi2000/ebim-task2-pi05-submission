@@ -1,10 +1,12 @@
 {
   "model": "PI0.5 full fine-tune for EBiM Task 2",
   "training_step": 30000,
+  "model_repo": "junjie-jjs/ebim-task2-pi05-fullft-30k",
+  "model_commit": "af799f06e59be97a7a1b2603d610d22669305cf3",
   "checkpoint_layout": "LeRobot pretrained_model",
   "weights_file": "model.safetensors",
   "weights_size_bytes": 9354050784,
-  "weights_sha256": null,
+  "weights_sha256": "799ad26bdfc5ecc4eb6395f6211cfb0e512291d92347385a7a64aae4931f3ece",
   "peft": false,
   "input_cameras": [
     "observation.images.head",

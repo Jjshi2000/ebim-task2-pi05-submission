@@ -7,7 +7,8 @@ there is no rollout timeout or early success exit.
 
 The submitted checkpoint is the 30,000-step full fine-tune. Weights are kept
 outside Git and are downloaded at runtime from the public Hugging Face model
-repository configured with `MODEL_REPO`.
+repository `junjie-jjs/ebim-task2-pi05-fullft-30k`, configurable with
+`MODEL_REPO`.
 
 ## Build
 
@@ -21,13 +22,14 @@ or machine-specific path.
 
 ## Run on the real EBiM platform
 
-Start the robot's ROS 2 drivers and cameras first. Set `MODEL_REPO` to the
-public Hugging Face repository containing the complete LeRobot
+Start the robot's ROS 2 drivers and cameras first. The default
+`MODEL_REPO=junjie-jjs/ebim-task2-pi05-fullft-30k` points to the public
+Hugging Face repository containing the complete LeRobot
 `pretrained_model` directory, then run:
 
 ```bash
 docker run --rm --gpus all --network host --ipc host \
-  -e MODEL_REPO=<owner>/<public-30k-model> \
+  -e MODEL_REPO=junjie-jjs/ebim-task2-pi05-fullft-30k \
   -e NAV_FORWARD_DISTANCE=0.80 \
   -e ROS_PROFILE=real \
   -v ebim-hf-cache:/cache/huggingface \
@@ -75,7 +77,7 @@ official `/isaac/*` topics and deterministic scene-reset handshake.
 | --- | --- | --- |
 | `MODE` | `all` | `all`, `inference`, or `ros` |
 | `ROS_PROFILE` | `real` | `real` or `isaac` topic wiring |
-| `MODEL_REPO` | empty | Public Hugging Face model repository |
+| `MODEL_REPO` | `junjie-jjs/ebim-task2-pi05-fullft-30k` | Public Hugging Face model repository |
 | `MODEL_DIR` | `/models/pi05-task2-fullft-30k` | Mounted/downloaded checkpoint |
 | `N_ACTION_STEPS` | `50` | PI0.5 replanning cadence |
 | `FPS` | `30` | Policy command rate |
