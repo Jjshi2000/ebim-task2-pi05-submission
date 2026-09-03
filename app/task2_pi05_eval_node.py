@@ -10,6 +10,7 @@ import os
 from pathlib import Path
 import pickle
 import random
+import re
 import socket
 import struct
 import threading
@@ -1554,8 +1555,22 @@ def run_ros(args):
                     names = [LEFT_GRIPPER_DRIVER]
                 else:
                     names = [RIGHT_GRIPPER_DRIVER]
-                for i, value in enumerate(m.position[:len(names)]):
-                    self.joints[names[i]] = float(value)
+                assigned = 0
+                # Prefer semantic name matching.  The official broadcaster
+                # names are stable, while message ordering is not guaranteed.
+                for incoming, value in zip(m.name, m.position):
+                    low = incoming.lower()
+                    match = re.search(r"(?:joint|j)[_\- ]?([1-7])(?:$|[^0-9])", low)
+                    if side in ("left", "right") and match:
+                        idx = int(match.group(1)) - 1
+                    else:
+                        idx = 0 if assigned == 0 else None
+                    if idx is not None and idx < len(names):
+                        self.joints[names[idx]] = float(value)
+                        assigned += 1
+                if assigned == 0:
+                    for i, value in enumerate(m.position[:len(names)]):
+                        self.joints[names[i]] = float(value)
 
         def cb_odom(self, m):
             p = m.pose.pose.position
