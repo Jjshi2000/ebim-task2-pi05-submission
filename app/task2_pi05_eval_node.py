@@ -1470,12 +1470,9 @@ def run_ros(args):
             if args.real_right_ee_topic:
                 self.create_subscription(PoseStamped, args.real_right_ee_topic,
                                          lambda m: self.cb_ee("right", m), 10)
-            self.create_subscription(
-                String, SCENE_RESET_TOPIC, self.cb_reset, 10
-            )
-            self.create_subscription(
-                Float32MultiArray, PAD_POINTS_TOPIC, self.cb_pad_points, 10
-            )
+            if not real:
+                self.create_subscription(String, SCENE_RESET_TOPIC, self.cb_reset, 10)
+                self.create_subscription(Float32MultiArray, PAD_POINTS_TOPIC, self.cb_pad_points, 10)
 
             # Connect before starting the control thread so the checkpoint can
             # tell us which camera(s) it needs.

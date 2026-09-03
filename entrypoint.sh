@@ -72,6 +72,11 @@ case "${MODE}" in
         exec "${ros_command[@]}"
         ;;
     all)
+        # On the real testbed, finish the table approach before loading or
+        # starting policy inference so no policy node can contend for the base.
+        if [[ "${ROS_PROFILE}" == "real" && "${NAV_FORWARD_DISTANCE}" != "0" ]]; then
+            "${navigation_command[@]}"
+        fi
         download_checkpoint
         "${inference_command[@]}" &
         inference_pid=$!
@@ -85,9 +90,6 @@ case "${MODE}" in
             --port "${INFERENCE_PORT}" \
             --process-pid "${inference_pid}" \
             --timeout 600
-        if [[ "${ROS_PROFILE}" == "real" && "${NAV_FORWARD_DISTANCE}" != "0" ]]; then
-            "${navigation_command[@]}"
-        fi
         "${ros_command[@]}"
         ;;
     *)
