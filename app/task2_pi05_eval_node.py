@@ -58,8 +58,8 @@ REAL_TOPICS = {
     "wrist_right": "/wrist_camera_right/camera/color/image_raw",
     "left_gripper_cmd": "/left/gripper/gripper_client/target_gripper_width_percent",
     "right_gripper_cmd": "/right/gripper/gripper_client/target_gripper_width_percent",
-    "left_arm_cmd": "/left/joint_commands",
-    "right_arm_cmd": "/right/joint_commands",
+    "left_arm_cmd": "/left/gello/joint_states",
+    "right_arm_cmd": "/right/gello/joint_states",
     "spine_cmd": "/spine/target_height",
 }
 
@@ -2429,8 +2429,8 @@ def main_async():
     p.add_argument("--real-spine-joint-states", dest="real_spine_joint_states", default="/spine/joint_states")
     p.add_argument("--real-left-gripper-states", dest="real_left_gripper_states", default="/left/gripper/joint_states")
     p.add_argument("--real-right-gripper-states", dest="real_right_gripper_states", default="/right/gripper/joint_states")
-    p.add_argument("--real-left-arm-command", dest="real_left_arm_command", default="/left/joint_commands")
-    p.add_argument("--real-right-arm-command", dest="real_right_arm_command", default="/right/joint_commands")
+    p.add_argument("--real-left-arm-command", dest="real_left_arm_command", default="/left/gello/joint_states")
+    p.add_argument("--real-right-arm-command", dest="real_right_arm_command", default="/right/gello/joint_states")
     p.add_argument("--real-left-gripper-command", dest="real_left_gripper_command", default="/left/gripper/gripper_client/target_gripper_width_percent")
     p.add_argument("--real-right-gripper-command", dest="real_right_gripper_command", default="/right/gripper/gripper_client/target_gripper_width_percent")
     p.add_argument("--real-spine-command", dest="real_spine_command", default="/spine/target_height")

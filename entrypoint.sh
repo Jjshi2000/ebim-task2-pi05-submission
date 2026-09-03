@@ -15,8 +15,8 @@ FPS="${FPS:-30}"
 TASK="${TASK:-Pick up the thermal pad and place it on the target RAM board.}"
 ROS_PROFILE="${ROS_PROFILE:-real}"
 NAV_FORWARD_DISTANCE="${NAV_FORWARD_DISTANCE:-0}"
-REAL_LEFT_ARM_COMMAND="${REAL_LEFT_ARM_COMMAND:-/left/joint_commands}"
-REAL_RIGHT_ARM_COMMAND="${REAL_RIGHT_ARM_COMMAND:-/right/joint_commands}"
+REAL_LEFT_ARM_COMMAND="${REAL_LEFT_ARM_COMMAND:-/left/gello/joint_states}"
+REAL_RIGHT_ARM_COMMAND="${REAL_RIGHT_ARM_COMMAND:-/right/gello/joint_states}"
 
 download_checkpoint() {
     if [[ -f "${MODEL_DIR}/model.safetensors" ]]; then

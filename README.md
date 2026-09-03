@@ -52,8 +52,11 @@ The official real-robot input topics are wired by default:
 | Head RGB | `/head_camera/zed_node/rgb/color/rect/image` |
 | Wrist RGB | `/wrist_camera_left/right/camera/color/image_raw` |
 
-Arm command topics are deployment-specific controller inputs and can be
-overridden with `--real-left-arm-command` and `--real-right-arm-command`.
+The official Franka impedance controller consumes arm targets on
+`/left/gello/joint_states` and `/right/gello/joint_states` (the same topics used
+by the released teleoperation stack). These can be overridden with
+`--real-left-arm-command` and `--real-right-arm-command` if the testbed uses a
+different controller.
 Gripper and spine commands use the official `std_msgs/msg/Float32` topics by
 default. If the platform supplies calibrated EE pose topics, pass
 `--real-left-ee-topic` and `--real-right-ee-topic`; otherwise the adapter keeps
