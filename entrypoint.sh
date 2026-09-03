@@ -5,14 +5,18 @@ source /opt/ros/jazzy/setup.bash
 set -u
 
 MODE="${MODE:-all}"
-MODEL_DIR="${MODEL_DIR:-/models/pi05-task2-fullft-20k}"
-MODEL_REPO="${MODEL_REPO:-junjie-jjs/ebim-task2-pi05-fullft-20k}"
+MODEL_DIR="${MODEL_DIR:-/models/pi05-task2-fullft-30k}"
+MODEL_REPO="${MODEL_REPO:-}"
 INFERENCE_HOST="${INFERENCE_HOST:-127.0.0.1}"
 INFERENCE_PORT="${INFERENCE_PORT:-8765}"
 DEVICE="${DEVICE:-cuda}"
 N_ACTION_STEPS="${N_ACTION_STEPS:-50}"
 FPS="${FPS:-30}"
 TASK="${TASK:-Pick up the thermal pad and place it on the target RAM board.}"
+ROS_PROFILE="${ROS_PROFILE:-real}"
+NAV_FORWARD_DISTANCE="${NAV_FORWARD_DISTANCE:-0}"
+REAL_LEFT_ARM_COMMAND="${REAL_LEFT_ARM_COMMAND:-/left/joint_commands}"
+REAL_RIGHT_ARM_COMMAND="${REAL_RIGHT_ARM_COMMAND:-/right/joint_commands}"
 
 download_checkpoint() {
     if [[ -f "${MODEL_DIR}/model.safetensors" ]]; then
@@ -44,8 +48,16 @@ ros_command=(
     --host "${INFERENCE_HOST}"
     --port "${INFERENCE_PORT}"
     --fps "${FPS}"
+    --ros-profile "${ROS_PROFILE}"
+    --real-left-arm-command "${REAL_LEFT_ARM_COMMAND}"
+    --real-right-arm-command "${REAL_RIGHT_ARM_COMMAND}"
     --start-delay-sim 1.0
     --reset-scene-on-start
+)
+
+navigation_command=(
+    python3 /app/task2_base_nav.py
+    --forward-distance "${NAV_FORWARD_DISTANCE}"
 )
 
 case "${MODE}" in
@@ -54,6 +66,9 @@ case "${MODE}" in
         exec "${inference_command[@]}"
         ;;
     ros)
+        if [[ "${ROS_PROFILE}" == "real" && "${NAV_FORWARD_DISTANCE}" != "0" ]]; then
+            "${navigation_command[@]}"
+        fi
         exec "${ros_command[@]}"
         ;;
     all)
@@ -70,6 +85,9 @@ case "${MODE}" in
             --port "${INFERENCE_PORT}" \
             --process-pid "${inference_pid}" \
             --timeout 600
+        if [[ "${ROS_PROFILE}" == "real" && "${NAV_FORWARD_DISTANCE}" != "0" ]]; then
+            "${navigation_command[@]}"
+        fi
         "${ros_command[@]}"
         ;;
     *)

@@ -1,188 +1,95 @@
-# EBiM Task 2 - PI0.5 Full Fine-Tune
+# EBiM Phase II Task 2
 
-This repository is the runnable Phase I submission for **Task 2 - Deformable
-Material Handling (Thermal Pad Placement)**. It deploys a fully fine-tuned
-LeRobot PI0.5 policy at training step 20,000 against the official Isaac Sim ROS
-topic contract.
+This is a public, reproducible Docker submission for Task 2 (thermal-pad
+handling). It first approaches the table with the official mobile-base ROS 2
+topics, then starts a PI0.5 full-fine-tune policy. The policy runs continuously;
+there is no rollout timeout or early success exit.
 
-The model weights are supplementary material hosted separately in the public
-Hugging Face model repository
-[`junjie-jjs/ebim-task2-pi05-fullft-20k`](https://huggingface.co/junjie-jjs/ebim-task2-pi05-fullft-20k).
-This repository contains the complete container build recipe, policy runtime,
-ROS adapter, and integration guide.
-
-## Policy contract
-
-| Item | Value |
-| --- | --- |
-| Policy | LeRobot PI0.5, full fine-tune (`peft=false`) |
-| Training checkpoint | 20,000 steps |
-| Language task | `Pick up the thermal pad and place it on the target RAM board.` |
-| State | 37 dimensions |
-| Action | 20 dimensions |
-| Action chunk | 50 steps |
-| Deployment horizon | 50 steps with asynchronous prefetch |
-| Cameras | head, left wrist, right wrist |
-| Control rate | 30 Hz |
-
-Expected image features and ROS topics:
-
-| Checkpoint feature | Shape | Preferred ROS topic |
-| --- | --- | --- |
-| `observation.images.head` | `3 x 720 x 1280` | `/isaac/head_camera/image_raw` |
-| `observation.images.wrist_left` | `3 x 480 x 848` | `/isaac/left_wrist_camera/image_raw` |
-| `observation.images.wrist_right` | `3 x 480 x 848` | `/isaac/right_wrist_camera/image_raw` |
-
-The adapter discovers compatible aliases from the ROS graph, but it refuses to
-silently resize a camera whose geometry differs from the checkpoint contract.
-
-## Requirements
-
-- Linux x86_64
-- NVIDIA GPU with sufficient memory for the 9.35 GB full checkpoint
-- NVIDIA driver compatible with the PyTorch CUDA runtime
-- Docker Engine and NVIDIA Container Toolkit
-- Official EBiM Task 2 Isaac Sim scene publishing the ROS topics below
-- Internet access to download the public Hugging Face checkpoint, or a local
-  checkpoint directory mounted into the container
+The submitted checkpoint is the 30,000-step full fine-tune. Weights are kept
+outside Git and are downloaded at runtime from the public Hugging Face model
+repository configured with `MODEL_REPO`.
 
 ## Build
 
 ```bash
-docker build --pull -t ebim-task2-pi05:20k .
+docker build --pull -t ebim-task2-pi05:30k .
 ```
 
-The Dockerfile starts from `ros:jazzy-ros-base` and installs LeRobot from the
-exact training revision:
+The image is based on `ros:jazzy-ros-base`, installs the pinned LeRobot
+revision, and contains no checkpoint, dataset, token, Isaac Sim installation,
+or machine-specific path.
 
-```text
-22bd7a2f489b367d8df42de803b1e8c4ca63a3f9
-```
+## Run on the real EBiM platform
 
-No model weight, dataset, token, or machine-specific path is baked into the
-image.
-
-## Run with the public Hugging Face weights
-
-The image defaults to the submitted public checkpoint. No Hugging Face account
-or access token is required.
+Start the robot's ROS 2 drivers and cameras first. Set `MODEL_REPO` to the
+public Hugging Face repository containing the complete LeRobot
+`pretrained_model` directory, then run:
 
 ```bash
-docker run --rm \
-  --gpus all \
-  --network host \
-  --ipc host \
+docker run --rm --gpus all --network host --ipc host \
+  -e MODEL_REPO=<owner>/<public-30k-model> \
+  -e NAV_FORWARD_DISTANCE=0.80 \
+  -e ROS_PROFILE=real \
   -v ebim-hf-cache:/cache/huggingface \
   -v ebim-models:/models \
-  ebim-task2-pi05:20k
+  ebim-task2-pi05:30k
 ```
 
-If the evaluator host requires an HTTP proxy to reach Hugging Face, pass its
-existing `HTTP_PROXY`, `HTTPS_PROXY`, and `NO_PROXY` variables with `-e`. This
-is only a network setting; the public checkpoint still requires no token.
+`NAV_FORWARD_DISTANCE` is measured from the startup pose in the odometry frame.
+For a calibrated fixed target, pass `--target-x/--target-y/--target-yaw` by
+using `NAV_ARGS` in a small wrapper or run `/app/task2_base_nav.py` directly.
+The navigator publishes `geometry_msgs/msg/TwistStamped` on
+`/swerve_drive_controller/cmd_vel` and stops before policy control starts.
 
-The entrypoint downloads the complete checkpoint to
-`/models/pi05-task2-fullft-20k`, validates the required processor/tokenizer
-artifacts, starts PI0.5 inference, waits for port `8765`, and then starts the
-ROS adapter. The policy runs continuously. It does not stop on elapsed time or
-preliminary grasp detection.
+The official real-robot input topics are wired by default:
 
-## Run with a pre-downloaded checkpoint
+| Signal | Topic |
+| --- | --- |
+| Base odometry | `/swerve_drive_controller/odom` |
+| Left/right arm state | `/left/right/franka_robot_state_broadcaster/measured_joint_states` |
+| Spine state | `/spine/joint_states` |
+| Gripper state | `/left/right/gripper/joint_states` |
+| Head RGB | `/head_camera/zed_node/rgb/color/rect/image` |
+| Wrist RGB | `/wrist_camera_left/right/camera/color/image_raw` |
 
-The mounted directory must contain the *contents* of LeRobot's
-`pretrained_model` directory, including `config.json`, `model.safetensors`, both
-processor JSON files, normalization statistics, and the `tokenizer/` folder.
+Arm command topics are deployment-specific controller inputs and can be
+overridden with `--real-left-arm-command` and `--real-right-arm-command`.
+Gripper and spine commands use the official `std_msgs/msg/Float32` topics by
+default. If the platform supplies calibrated EE pose topics, pass
+`--real-left-ee-topic` and `--real-right-ee-topic`; otherwise the adapter keeps
+the required 37D contract with explicit zero EE placeholders.
 
-```bash
-docker run --rm \
-  --gpus all \
-  --network host \
-  --ipc host \
-  -e MODEL_DIR=/models/pi05-task2-fullft-20k \
-  -v /absolute/path/to/pretrained_model:/models/pi05-task2-fullft-20k:ro \
-  ebim-task2-pi05:20k
-```
+## Isaac Sim or split deployment
 
-The expected `model.safetensors` checksum is:
+For the official Isaac scene use `-e ROS_PROFILE=isaac`. To run inference and
+ROS separately, set `MODE=inference` in one container and `MODE=ros` in another,
+sharing port `8765` over the host network. The Isaac profile retains the
+official `/isaac/*` topics and deterministic scene-reset handshake.
 
-```text
-661e4995cda5421ed23258dea6a51c751f23dce25095f0614e44af7fbd5d40a8
-```
+## Runtime variables
 
-## Runtime configuration
-
-The default container mode starts inference and ROS together. Supported
-environment variables:
-
-| Variable | Default | Purpose |
+| Variable | Default | Meaning |
 | --- | --- | --- |
 | `MODE` | `all` | `all`, `inference`, or `ros` |
-| `MODEL_REPO` | `junjie-jjs/ebim-task2-pi05-fullft-20k` | Hugging Face model repository |
-| `MODEL_DIR` | `/models/pi05-task2-fullft-20k` | Download or mounted checkpoint directory |
-| `HF_TOKEN` | empty | Optional token; not needed for the submitted public model |
-| `HF_HUB_DISABLE_XET` | `1` | Uses standard HTTP downloads for proxy-compatible HF access |
-| `DEVICE` | `cuda` | PI0.5 inference device |
-| `INFERENCE_HOST` | `127.0.0.1` | Policy socket host |
-| `INFERENCE_PORT` | `8765` | Policy socket port |
-| `N_ACTION_STEPS` | `50` | Executed action horizon and replan interval |
-| `FPS` | `30` | ROS command loop rate |
-| `TASK` | official Task 2 instruction | Language instruction |
+| `ROS_PROFILE` | `real` | `real` or `isaac` topic wiring |
+| `MODEL_REPO` | empty | Public Hugging Face model repository |
+| `MODEL_DIR` | `/models/pi05-task2-fullft-30k` | Mounted/downloaded checkpoint |
+| `N_ACTION_STEPS` | `50` | PI0.5 replanning cadence |
+| `FPS` | `30` | Policy command rate |
+| `NAV_FORWARD_DISTANCE` | `0` | Real-mode startup-relative approach distance (m) |
+| `HF_TOKEN` | empty | Optional token for gated repositories |
 
-For split deployment, start an inference container with `MODE=inference`, then
-start a ROS container with `MODE=ros` and set `INFERENCE_HOST` to the reachable
-inference host.
-
-## ROS interface
-
-The adapter consumes the official Task 2 observation streams, including:
-
-- `/isaac/clock`
-- `/isaac/joint_states_full`
-- `/isaac/odom`
-- `/isaac/left_ee_pose`
-- `/isaac/right_ee_pose`
-- `/isaac/task2/pad_points`
-- the three RGB topics listed above
-
-It publishes:
-
-- `/isaac/left_joint_commands`
-- `/isaac/right_joint_commands`
-- `/isaac/left_robotiq_joint_commands`
-- `/isaac/right_robotiq_joint_commands`
-- `/isaac/spine_joint_commands`
-
-At startup it requests a deterministic scene reset through
-`/isaac/task2/scene_reset_request` and waits for acknowledgement. Action targets
-are constrained to demonstrated joint ranges and per-step slew limits. Long
-action chunks are prefetched before the queue is empty to hide inference
-latency.
-
-## Troubleshooting
-
-- `checkpoint is incomplete`: mount or upload the entire `pretrained_model`
-  directory, not only `model.safetensors`.
-- `401` or `403` from Hugging Face: confirm that `MODEL_REPO` still points to
-  the public submitted repository and that the host can reach Hugging Face.
-- missing camera topic: confirm the official Isaac scene was launched with the
-  robot RGB cameras and ROS bridge enabled.
-- camera shape mismatch: use the exact camera resolutions in the policy
-  contract; the adapter intentionally does not silently resize inputs.
-- action queue errors: confirm `TASK2_PI05_USE_ASYNC=1` is present in both
-  inference and ROS processes. It is enabled by default in this image.
+The checkpoint must contain `config.json`, `model.safetensors`, both saved
+processor JSON files, normalization/unnormalization safetensors, and the
+`tokenizer/` directory. The downloader validates all required files before
+starting inference.
 
 ## Reproducibility
 
-- EBiM benchmark base commit:
-  `0004645a4b8843f0e04a5ca531fce0598e058910`
-- LeRobot commit:
-  `22bd7a2f489b367d8df42de803b1e8c4ca63a3f9`
-- Full checkpoint manifest: [`model-manifest.json`](model-manifest.json)
+- LeRobot commit: `22bd7a2f489b367d8df42de803b1e8c4ca63a3f9`
+- PI0.5 contract: state `[37]`, action `[20]`, three RGB inputs, chunk size 50
+- Model details: [`model-manifest.json`](model-manifest.json)
 
-The checkpoint stores its tokenizer and exact QUANTILES normalization and
-unnormalization processors. Deployment loads those saved artifacts rather than
-rebuilding statistics from an external dataset.
-
-## License
-
-See [`LICENSE`](LICENSE) and [`NOTICE`](NOTICE).
+Do not commit model weights, local paths, credentials, or private logs. The
+public GitHub repository is the required code/Docker/README submission; model
+weights are supplementary material.

@@ -44,6 +44,7 @@ RUN chmod +x /entrypoint.sh \
     && python3 -m py_compile \
         /app/task2_pi05_eval_node.py \
         /app/task2_pi05_eval_node_v2.py \
+        /app/task2_base_nav.py \
         /app/download_model.py \
         /app/wait_for_port.py
 

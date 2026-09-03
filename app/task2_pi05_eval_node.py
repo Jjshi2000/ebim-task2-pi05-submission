@@ -29,6 +29,7 @@ SPINE_JOINT = "franka_spine_vertical_joint"
 LEFT_GRIPPER_DRIVER = "left_right_finger_joint"
 RIGHT_GRIPPER_DRIVER = "right_right_finger_joint"
 
+REAL_ROBOT = False
 CLOCK_TOPIC = "/isaac/clock"
 FULL_STATES_TOPIC = "/isaac/joint_states_full"
 ODOM_TOPIC = "/isaac/odom"
@@ -43,6 +44,23 @@ RIGHT_ARM_CMD_TOPIC = "/isaac/right_joint_commands"
 LEFT_GRIPPER_CMD_TOPIC = "/isaac/left_robotiq_joint_commands"
 RIGHT_GRIPPER_CMD_TOPIC = "/isaac/right_robotiq_joint_commands"
 SPINE_CMD_TOPIC = "/isaac/spine_joint_commands"
+
+REAL_TOPICS = {
+    "left_joints": "/left/franka_robot_state_broadcaster/measured_joint_states",
+    "right_joints": "/right/franka_robot_state_broadcaster/measured_joint_states",
+    "spine_joints": "/spine/joint_states",
+    "left_gripper": "/left/gripper/joint_states",
+    "right_gripper": "/right/gripper/joint_states",
+    "odom": "/swerve_drive_controller/odom",
+    "left_camera": "/head_camera/zed_node/rgb/color/rect/image",
+    "wrist_left": "/wrist_camera_left/camera/color/image_raw",
+    "wrist_right": "/wrist_camera_right/camera/color/image_raw",
+    "left_gripper_cmd": "/left/gripper/gripper_client/target_gripper_width_percent",
+    "right_gripper_cmd": "/right/gripper/gripper_client/target_gripper_width_percent",
+    "left_arm_cmd": "/left/joint_commands",
+    "right_arm_cmd": "/right/joint_commands",
+    "spine_cmd": "/spine/target_height",
+}
 
 
 # The current Task2 v3 dataset can contain four RGB streams.  A checkpoint
@@ -78,6 +96,7 @@ CAMERA_LOGICAL_ALIASES = {
 PREFERRED_CAMERA_TOPICS = {
     "head": (
         "/isaac/head_camera/image_raw",
+        "/head_camera/zed_node/rgb/color/rect/image",
     ),
     "eval_camera": (
         "/isaac/eval_camera/image_raw",
@@ -89,12 +108,14 @@ PREFERRED_CAMERA_TOPICS = {
         "/isaac/left_wrist_camera/image_raw",
         "/isaac/wrist_left/image_raw",
         "/isaac/left_wrist/image_raw",
+        "/wrist_camera_left/camera/color/image_raw",
     ),
     "wrist_right": (
         "/isaac/wrist_right_camera/image_raw",
         "/isaac/right_wrist_camera/image_raw",
         "/isaac/wrist_right/image_raw",
         "/isaac/right_wrist/image_raw",
+        "/wrist_camera_right/camera/color/image_raw",
     ),
 }
 
@@ -1325,7 +1346,35 @@ def run_ros(args):
     )
     from rosgraph_msgs.msg import Clock
     from sensor_msgs.msg import Image, JointState
-    from std_msgs.msg import Float32MultiArray, String
+    from std_msgs.msg import Float32, Float32MultiArray, String
+
+    real = args.ros_profile == "real"
+    # The real platform publishes arm/spine/gripper state on separate topics;
+    # Isaac exposes one aggregate state stream.  Keep both wiring profiles in
+    # this adapter so the same container can be evaluated in either setting.
+    if real:
+        state_topics = {
+            "left": args.real_left_joint_states,
+            "right": args.real_right_joint_states,
+            "spine": args.real_spine_joint_states,
+            "left_gripper": args.real_left_gripper_states,
+            "right_gripper": args.real_right_gripper_states,
+        }
+        command_topics = {
+            "left": args.real_left_arm_command,
+            "right": args.real_right_arm_command,
+            "left_gripper": args.real_left_gripper_command,
+            "right_gripper": args.real_right_gripper_command,
+            "spine": args.real_spine_command,
+        }
+    else:
+        state_topics = {"left": FULL_STATES_TOPIC, "right": FULL_STATES_TOPIC,
+                        "spine": FULL_STATES_TOPIC, "left_gripper": FULL_STATES_TOPIC,
+                        "right_gripper": FULL_STATES_TOPIC}
+        command_topics = {"left": LEFT_ARM_CMD_TOPIC, "right": RIGHT_ARM_CMD_TOPIC,
+                          "left_gripper": LEFT_GRIPPER_CMD_TOPIC,
+                          "right_gripper": RIGHT_GRIPPER_CMD_TOPIC,
+                          "spine": SPINE_CMD_TOPIC}
 
     overrides = parse_camera_topic_overrides(args.camera_topic)
     latest_sensor_qos = QoSProfile(
@@ -1347,7 +1396,11 @@ def run_ros(args):
             self.last_clock_wall = time.monotonic()
             self.joints = {}
             self.odom = None
-            self.ee = {"left": None, "right": None}
+            # Real ROS recordings do not expose EE PoseStamped topics in the
+            # public contract.  Keep zero placeholders unless an evaluator
+            # supplies calibrated EE topics via --real-left/right-ee-topic.
+            self.ee = {"left": ([0.0] * 7 if real else None),
+                       "right": ([0.0] * 7 if real else None)}
 
             self.required_image_keys = []
             self.feature_to_logical = {}
@@ -1356,7 +1409,7 @@ def run_ros(args):
             self.camera_subscriptions = []
 
             self.reset_pending = True
-            self.awaiting_initial_scene_reset = bool(args.reset_scene_on_start)
+            self.awaiting_initial_scene_reset = bool(args.reset_scene_on_start and not real)
             self.initial_scene_reset_requested = False
             self.stop = False
             self.last_wait_log_wall = 0.0
@@ -1377,46 +1430,45 @@ def run_ros(args):
 
             self.pubs = {
                 "la": self.create_publisher(
-                    JointState, LEFT_ARM_CMD_TOPIC, 10
+                    JointState, command_topics["left"], 10
                 ),
                 "ra": self.create_publisher(
-                    JointState, RIGHT_ARM_CMD_TOPIC, 10
+                    JointState, command_topics["right"], 10
                 ),
                 "lg": self.create_publisher(
-                    JointState, LEFT_GRIPPER_CMD_TOPIC, 10
+                    Float32 if real else JointState, command_topics["left_gripper"], 10
                 ),
                 "rg": self.create_publisher(
-                    JointState, RIGHT_GRIPPER_CMD_TOPIC, 10
+                    Float32 if real else JointState, command_topics["right_gripper"], 10
                 ),
                 "sp": self.create_publisher(
-                    JointState, SPINE_CMD_TOPIC, 10
+                    Float32 if real else JointState, command_topics["spine"], 10
                 ),
                 "scene_reset": self.create_publisher(
                     String, SCENE_RESET_REQUEST_TOPIC, 10
                 ),
             }
 
+            if not real:
+                self.create_subscription(Clock, CLOCK_TOPIC, self.cb_clock, 10)
+            if real:
+                for side, topic in (("left", state_topics["left"]), ("right", state_topics["right"]),
+                                    ("spine", state_topics["spine"]),
+                                    ("left_gripper", state_topics["left_gripper"]),
+                                    ("right_gripper", state_topics["right_gripper"])):
+                    self.create_subscription(JointState, topic,
+                                             lambda m, side=side: self.cb_real_joints(side, m), 10)
+            else:
+                self.create_subscription(JointState, FULL_STATES_TOPIC, self.cb_joints, 10)
             self.create_subscription(
-                Clock, CLOCK_TOPIC, self.cb_clock, 10
+                Odometry, args.real_odom_topic if real else ODOM_TOPIC, self.cb_odom, 10
             )
-            self.create_subscription(
-                JointState, FULL_STATES_TOPIC, self.cb_joints, 10
-            )
-            self.create_subscription(
-                Odometry, ODOM_TOPIC, self.cb_odom, 10
-            )
-            self.create_subscription(
-                PoseStamped,
-                LEFT_EE_TOPIC,
-                lambda m: self.cb_ee("left", m),
-                10,
-            )
-            self.create_subscription(
-                PoseStamped,
-                RIGHT_EE_TOPIC,
-                lambda m: self.cb_ee("right", m),
-                10,
-            )
+            if args.real_left_ee_topic:
+                self.create_subscription(PoseStamped, args.real_left_ee_topic,
+                                         lambda m: self.cb_ee("left", m), 10)
+            if args.real_right_ee_topic:
+                self.create_subscription(PoseStamped, args.real_right_ee_topic,
+                                         lambda m: self.cb_ee("right", m), 10)
             self.create_subscription(
                 String, SCENE_RESET_TOPIC, self.cb_reset, 10
             )
@@ -1489,6 +1541,22 @@ def run_ros(args):
                     if i < len(m.position):
                         self.joints[n] = float(m.position[i])
 
+        def cb_real_joints(self, side, m):
+            """Accept official per-device JointState streams and normalize names."""
+            with self.lock:
+                if side == "left":
+                    names = LEFT_JOINTS
+                elif side == "right":
+                    names = RIGHT_JOINTS
+                elif side == "spine":
+                    names = [SPINE_JOINT]
+                elif side == "left_gripper":
+                    names = [LEFT_GRIPPER_DRIVER]
+                else:
+                    names = [RIGHT_GRIPPER_DRIVER]
+                for i, value in enumerate(m.position[:len(names)]):
+                    self.joints[names[i]] = float(value)
+
         def cb_odom(self, m):
             p = m.pose.pose.position
             q = m.pose.pose.orientation
@@ -1506,6 +1574,9 @@ def run_ros(args):
                     v.y,
                     w.z,
                 )
+                if real:
+                    self.sim_time = time.monotonic()
+                    self.last_clock_wall = time.monotonic()
 
         def cb_ee(self, side, m):
             p = m.pose.position
@@ -1908,26 +1979,21 @@ def run_ros(args):
             lo = max(0.0, min(1.0, float(a[17])))
             ro = max(0.0, min(1.0, float(a[18])))
 
-            self.pub(
-                self.pubs["lg"],
-                [LEFT_GRIPPER_DRIVER],
-                [(1.0 - lo) * GRIPPER_CLOSED_RAD],
-            )
-            self.pub(
-                self.pubs["rg"],
-                [RIGHT_GRIPPER_DRIVER],
-                [(1.0 - ro) * GRIPPER_CLOSED_RAD],
-            )
+            if real:
+                self.pubs["lg"].publish(Float32(data=lo))
+                self.pubs["rg"].publish(Float32(data=ro))
+            else:
+                self.pub(self.pubs["lg"], [LEFT_GRIPPER_DRIVER], [(1.0 - lo) * GRIPPER_CLOSED_RAD])
+                self.pub(self.pubs["rg"], [RIGHT_GRIPPER_DRIVER], [(1.0 - ro) * GRIPPER_CLOSED_RAD])
 
             spine = max(
                 args.spine_min,
                 min(args.spine_max, float(a[19])),
             )
-            self.pub(
-                self.pubs["sp"],
-                [SPINE_JOINT],
-                [spine],
-            )
+            if real:
+                self.pubs["sp"].publish(Float32(data=spine))
+            else:
+                self.pub(self.pubs["sp"], [SPINE_JOINT], [spine])
 
         # -------------------------- control ----------------------------
 
@@ -2192,6 +2258,8 @@ def main_async():
     )
 
     p.add_argument("--mode", choices=("inference", "ros"), required=True)
+    p.add_argument("--ros-profile", choices=("isaac", "real"), default="isaac",
+                   help="ROS wiring profile; real uses official EBiM robot topics")
     p.add_argument("--host", default=HOST)
     p.add_argument("--port", type=int, default=PORT)
 
@@ -2341,6 +2409,21 @@ def main_async():
             "uses Image header stamps when available, otherwise callback-arrival sim time"
         ),
     )
+    p.add_argument("--real-odom-topic", default="/swerve_drive_controller/odom")
+    p.add_argument("--real-left-joint-states", dest="real_left_joint_states",
+                   default="/left/franka_robot_state_broadcaster/measured_joint_states")
+    p.add_argument("--real-right-joint-states", dest="real_right_joint_states",
+                   default="/right/franka_robot_state_broadcaster/measured_joint_states")
+    p.add_argument("--real-spine-joint-states", dest="real_spine_joint_states", default="/spine/joint_states")
+    p.add_argument("--real-left-gripper-states", dest="real_left_gripper_states", default="/left/gripper/joint_states")
+    p.add_argument("--real-right-gripper-states", dest="real_right_gripper_states", default="/right/gripper/joint_states")
+    p.add_argument("--real-left-arm-command", dest="real_left_arm_command", default="/left/joint_commands")
+    p.add_argument("--real-right-arm-command", dest="real_right_arm_command", default="/right/joint_commands")
+    p.add_argument("--real-left-gripper-command", dest="real_left_gripper_command", default="/left/gripper/gripper_client/target_gripper_width_percent")
+    p.add_argument("--real-right-gripper-command", dest="real_right_gripper_command", default="/right/gripper/gripper_client/target_gripper_width_percent")
+    p.add_argument("--real-spine-command", dest="real_spine_command", default="/spine/target_height")
+    p.add_argument("--real-left-ee-topic", default="")
+    p.add_argument("--real-right-ee-topic", default="")
 
     args = p.parse_args()
 
