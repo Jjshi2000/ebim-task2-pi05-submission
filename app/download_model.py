@@ -24,6 +24,7 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="Download the Task 2 PI0.5 checkpoint")
     parser.add_argument("--repo-id", required=True)
     parser.add_argument("--local-dir", required=True)
+    parser.add_argument("--revision")
     args = parser.parse_args()
 
     target = Path(args.local_dir).expanduser().resolve()
@@ -33,6 +34,7 @@ def main() -> None:
         repo_type="model",
         local_dir=target,
         token=os.environ.get("HF_TOKEN"),
+        revision=args.revision,
     )
 
     missing = [name for name in REQUIRED_FILES if not (target / name).is_file()]

@@ -7,16 +7,21 @@ set -u
 MODE="${MODE:-all}"
 MODEL_DIR="${MODEL_DIR:-/models/pi05-task2-fullft-30k}"
 MODEL_REPO="${MODEL_REPO:-junjie-jjs/ebim-task2-pi05-fullft-30k}"
+MODEL_REVISION="${MODEL_REVISION:-af799f06e59be97a7a1b2603d610d22669305cf3}"
 INFERENCE_HOST="${INFERENCE_HOST:-127.0.0.1}"
 INFERENCE_PORT="${INFERENCE_PORT:-8765}"
 DEVICE="${DEVICE:-cuda}"
-N_ACTION_STEPS="${N_ACTION_STEPS:-50}"
-FPS="${FPS:-30}"
+N_ACTION_STEPS="${N_ACTION_STEPS:-10}"
+FPS="${FPS:-20}"
 TASK="${TASK:-Pick up the thermal pad and place it on the target RAM board.}"
 ROS_PROFILE="${ROS_PROFILE:-real}"
 NAV_FORWARD_DISTANCE="${NAV_FORWARD_DISTANCE:-0}"
 REAL_LEFT_ARM_COMMAND="${REAL_LEFT_ARM_COMMAND:-/left/gello/joint_states}"
 REAL_RIGHT_ARM_COMMAND="${REAL_RIGHT_ARM_COMMAND:-/right/gello/joint_states}"
+REAL_LEFT_WRENCH="${REAL_LEFT_WRENCH:-/left/franka_robot_state_broadcaster/external_wrench_in_stiffness_frame}"
+REAL_RIGHT_WRENCH="${REAL_RIGHT_WRENCH:-/right/franka_robot_state_broadcaster/external_wrench_in_stiffness_frame}"
+REAL_SPINE_HEIGHT="${REAL_SPINE_HEIGHT:-434.0}"
+DRY_RUN="${DRY_RUN:-0}"
 
 download_checkpoint() {
     if [[ -f "${MODEL_DIR}/model.safetensors" ]]; then
@@ -28,7 +33,8 @@ download_checkpoint() {
     fi
     python3 /app/download_model.py \
         --repo-id "${MODEL_REPO}" \
-        --local-dir "${MODEL_DIR}"
+        --local-dir "${MODEL_DIR}" \
+        --revision "${MODEL_REVISION}"
 }
 
 inference_command=(
@@ -51,9 +57,16 @@ ros_command=(
     --ros-profile "${ROS_PROFILE}"
     --real-left-arm-command "${REAL_LEFT_ARM_COMMAND}"
     --real-right-arm-command "${REAL_RIGHT_ARM_COMMAND}"
+    --real-left-wrench "${REAL_LEFT_WRENCH}"
+    --real-right-wrench "${REAL_RIGHT_WRENCH}"
+    --real-spine-height "${REAL_SPINE_HEIGHT}"
     --start-delay-sim 1.0
     --reset-scene-on-start
 )
+
+if [[ "${DRY_RUN}" == "1" ]]; then
+    ros_command+=(--dry-run)
+fi
 
 navigation_command=(
     python3 /app/task2_base_nav.py
@@ -66,7 +79,7 @@ case "${MODE}" in
         exec "${inference_command[@]}"
         ;;
     ros)
-        if [[ "${ROS_PROFILE}" == "real" && "${NAV_FORWARD_DISTANCE}" != "0" ]]; then
+        if [[ "${ROS_PROFILE}" == "real" && "${DRY_RUN}" != "1" && "${NAV_FORWARD_DISTANCE}" != "0" ]]; then
             "${navigation_command[@]}"
         fi
         exec "${ros_command[@]}"
@@ -74,7 +87,7 @@ case "${MODE}" in
     all)
         # On the real testbed, finish the table approach before loading or
         # starting policy inference so no policy node can contend for the base.
-        if [[ "${ROS_PROFILE}" == "real" && "${NAV_FORWARD_DISTANCE}" != "0" ]]; then
+        if [[ "${ROS_PROFILE}" == "real" && "${DRY_RUN}" != "1" && "${NAV_FORWARD_DISTANCE}" != "0" ]]; then
             "${navigation_command[@]}"
         fi
         download_checkpoint

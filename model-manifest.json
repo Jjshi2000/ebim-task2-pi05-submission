@@ -13,10 +13,12 @@
     "observation.images.wrist_left",
     "observation.images.wrist_right"
   ],
-  "state_dimensions": 37,
-  "action_dimensions": 20,
+  "training_dataset": "ebim-benchmark/ebim_task2_realrobotdata task2_munich",
+  "state_dimensions": 42,
+  "action_dimensions": 17,
   "chunk_size": 50,
-  "deployment_n_action_steps": 50,
+  "deployment_n_action_steps": 10,
+  "deployment_fps": 20,
   "lerobot_commit": "22bd7a2f489b367d8df42de803b1e8c4ca63a3f9",
   "benchmark_base_commit": "0004645a4b8843f0e04a5ca531fce0598e058910"
 }

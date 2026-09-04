@@ -45,6 +45,7 @@ RUN chmod +x /entrypoint.sh \
         /app/task2_pi05_eval_node.py \
         /app/task2_pi05_eval_node_v2.py \
         /app/task2_base_nav.py \
+        /app/task2_real_preflight.py \
         /app/download_model.py \
         /app/wait_for_port.py
 

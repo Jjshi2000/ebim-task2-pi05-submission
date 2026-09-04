@@ -24,8 +24,14 @@ DEFAULT_TASK = "Pick up the thermal pad and place it on the target RAM board."
 DEFAULT_ROBOT_TYPE = "fr3duo_mobile_task2"
 GRIPPER_CLOSED_RAD = 0.8
 
+ISAAC_STATE_DIM = 37
+ISAAC_ACTION_DIM = 20
+REAL_STATE_DIM = 42
+REAL_ACTION_DIM = 17
+
 LEFT_JOINTS = [f"left_fr3v2_joint{i}" for i in range(1, 8)]
 RIGHT_JOINTS = [f"right_fr3v2_joint{i}" for i in range(1, 8)]
+REAL_ARM_COMMAND_NAMES = [f"fr3_joint{i}" for i in range(1, 8)]
 SPINE_JOINT = "franka_spine_vertical_joint"
 LEFT_GRIPPER_DRIVER = "left_right_finger_joint"
 RIGHT_GRIPPER_DRIVER = "right_right_finger_joint"
@@ -49,6 +55,10 @@ SPINE_CMD_TOPIC = "/isaac/spine_joint_commands"
 REAL_TOPICS = {
     "left_joints": "/left/franka_robot_state_broadcaster/measured_joint_states",
     "right_joints": "/right/franka_robot_state_broadcaster/measured_joint_states",
+    "left_external_joint_torques": "/left/franka_robot_state_broadcaster/external_joint_torques",
+    "right_external_joint_torques": "/right/franka_robot_state_broadcaster/external_joint_torques",
+    "left_external_wrench": "/left/franka_robot_state_broadcaster/external_wrench_in_stiffness_frame",
+    "right_external_wrench": "/right/franka_robot_state_broadcaster/external_wrench_in_stiffness_frame",
     "spine_joints": "/spine/joint_states",
     "left_gripper": "/left/gripper/joint_states",
     "right_gripper": "/right/gripper/joint_states",
@@ -148,6 +158,18 @@ DEMO_LEFT_ARM_MAX_STEP = (0.010, 0.012, 0.016, 0.010, 0.010, 0.012, 0.010)
 DEMO_RIGHT_ARM_MAX_STEP = (0.050, 0.060, 0.090, 0.045, 0.065, 0.070, 0.060)
 DEMO_SPINE_MAX_STEP = 0.020
 
+# The public Munich real-robot dataset has 238 episodes at 20 Hz. These are the
+# observed action extrema and rounded P99.5 within-episode arm target deltas.
+# Gripper targets are independently clamped to [0, 1]. The recorded spine
+# target is exactly 434.0 for every frame.
+REAL_DEMO_LEFT_ARM_MIN = (0.701, 0.482, -2.505, -2.346, 0.924, 0.718, -1.968)
+REAL_DEMO_LEFT_ARM_MAX = (2.317, 0.696, -1.108, -1.339, 2.377, 2.131, -0.029)
+REAL_DEMO_RIGHT_ARM_MIN = (0.382, -1.387, -2.901, -2.696, -2.877, 0.594, -1.315)
+REAL_DEMO_RIGHT_ARM_MAX = (2.694, -0.450, -0.476, -1.078, 0.173, 3.664, 2.912)
+REAL_DEMO_LEFT_ARM_MAX_STEP = (0.020, 0.002, 0.017, 0.010, 0.016, 0.017, 0.019)
+REAL_DEMO_RIGHT_ARM_MAX_STEP = (0.044, 0.019, 0.050, 0.025, 0.059, 0.066, 0.070)
+REAL_DEMO_SPINE_HEIGHT = 434.0
+
 
 def _clip(value: float, lower: float, upper: float) -> float:
     return max(lower, min(upper, float(value)))
@@ -156,25 +178,34 @@ def _clip(value: float, lower: float, upper: float) -> float:
 class Task2ActionSafetyFilter:
     """Project absolute policy actions into the demonstrated control envelope."""
 
-    def __init__(self, *, spine_min: float, spine_max: float, step_scale: float = 1.0):
+    def __init__(
+        self,
+        *,
+        spine_min: float,
+        spine_max: float,
+        step_scale: float = 1.0,
+        contract: str = "isaac37_20",
+    ):
         if step_scale <= 0:
             raise ValueError("step_scale must be > 0")
         self.spine_min = float(spine_min)
         self.spine_max = float(spine_max)
         self.step_scale = float(step_scale)
+        if contract not in ("isaac37_20", "real42_17"):
+            raise ValueError(f"unsupported Task2 action contract: {contract}")
+        self.contract = contract
         self.last_action = None
         self.total_limited_steps = 0
 
     def reset(self) -> None:
         self.last_action = None
 
-    @staticmethod
-    def _measured_action(joints: dict[str, float]) -> list[float]:
-        required = (
-            LEFT_JOINTS
-            + RIGHT_JOINTS
-            + [LEFT_GRIPPER_DRIVER, RIGHT_GRIPPER_DRIVER, SPINE_JOINT]
-        )
+    def _measured_action(self, joints: dict[str, float]) -> list[float]:
+        required = LEFT_JOINTS + RIGHT_JOINTS
+        if self.contract == "real42_17":
+            required += [RIGHT_GRIPPER_DRIVER]
+        else:
+            required += [LEFT_GRIPPER_DRIVER, RIGHT_GRIPPER_DRIVER, SPINE_JOINT]
         missing = [name for name in required if name not in joints]
         if missing:
             raise RuntimeError(
@@ -182,16 +213,17 @@ class Task2ActionSafetyFilter:
                 + ", ".join(missing)
             )
 
-        left_open = _clip(
-            1.0 - float(joints[LEFT_GRIPPER_DRIVER]) / GRIPPER_CLOSED_RAD,
-            0.0,
-            1.0,
-        )
-        right_open = _clip(
-            1.0 - float(joints[RIGHT_GRIPPER_DRIVER]) / GRIPPER_CLOSED_RAD,
-            0.0,
-            1.0,
-        )
+        if self.contract == "real42_17":
+            return (
+                [float(joints[name]) for name in LEFT_JOINTS]
+                + [1.0]
+                + [float(joints[name]) for name in RIGHT_JOINTS]
+                + [_clip(float(joints[RIGHT_GRIPPER_DRIVER]), 0.0, 1.0)]
+                + [REAL_DEMO_SPINE_HEIGHT]
+            )
+
+        left_open = _clip(1.0 - float(joints[LEFT_GRIPPER_DRIVER]) / GRIPPER_CLOSED_RAD, 0.0, 1.0)
+        right_open = _clip(1.0 - float(joints[RIGHT_GRIPPER_DRIVER]) / GRIPPER_CLOSED_RAD, 0.0, 1.0)
         return (
             [0.0, 0.0, 0.0]
             + [float(joints[name]) for name in LEFT_JOINTS]
@@ -204,38 +236,52 @@ class Task2ActionSafetyFilter:
         action: list[float],
         measured_joints: dict[str, float],
     ) -> tuple[list[float], dict[str, object]]:
-        if len(action) != 20 or not all(math.isfinite(float(x)) for x in action):
-            raise ValueError("invalid 20D action")
+        expected_dim = REAL_ACTION_DIM if self.contract == "real42_17" else ISAAC_ACTION_DIM
+        if len(action) != expected_dim or not all(math.isfinite(float(x)) for x in action):
+            raise ValueError(f"invalid {expected_dim}D action")
         if self.last_action is None:
             self.last_action = self._measured_action(measured_joints)
 
         raw = [float(x) for x in action]
         bounded = list(raw)
-        bounded[0:3] = [0.0, 0.0, 0.0]
+        if self.contract == "real42_17":
+            arm_indices = list(range(0, 7)) + list(range(8, 15))
+            arm_bounds = list(zip(REAL_DEMO_LEFT_ARM_MIN, REAL_DEMO_LEFT_ARM_MAX)) + list(
+                zip(REAL_DEMO_RIGHT_ARM_MIN, REAL_DEMO_RIGHT_ARM_MAX)
+            )
+            gripper_indices = (7, 15)
+            spine_index = 16
+            max_steps = list(REAL_DEMO_LEFT_ARM_MAX_STEP) + list(REAL_DEMO_RIGHT_ARM_MAX_STEP)
+            slew_indices = arm_indices
+        else:
+            bounded[0:3] = [0.0, 0.0, 0.0]
+            arm_indices = list(range(3, 17))
+            arm_bounds = list(zip(DEMO_LEFT_ARM_MIN, DEMO_LEFT_ARM_MAX)) + list(
+                zip(DEMO_RIGHT_ARM_MIN, DEMO_RIGHT_ARM_MAX)
+            )
+            gripper_indices = (17, 18)
+            spine_index = 19
+            max_steps = (
+                list(DEMO_LEFT_ARM_MAX_STEP)
+                + list(DEMO_RIGHT_ARM_MAX_STEP)
+                + [DEMO_SPINE_MAX_STEP]
+            )
+            slew_indices = arm_indices + [spine_index]
 
-        arm_bounds = list(zip(DEMO_LEFT_ARM_MIN, DEMO_LEFT_ARM_MAX)) + list(
-            zip(DEMO_RIGHT_ARM_MIN, DEMO_RIGHT_ARM_MAX)
-        )
         range_limited = []
-        for offset, (lower, upper) in enumerate(arm_bounds, start=3):
-            bounded[offset] = _clip(raw[offset], lower, upper)
-            if not math.isclose(bounded[offset], raw[offset], abs_tol=1.0e-12):
-                range_limited.append(offset)
+        for index, (lower, upper) in zip(arm_indices, arm_bounds):
+            bounded[index] = _clip(raw[index], lower, upper)
+            if not math.isclose(bounded[index], raw[index], abs_tol=1.0e-12):
+                range_limited.append(index)
 
-        bounded[17] = _clip(raw[17], 0.0, 1.0)
-        bounded[18] = _clip(raw[18], 0.0, 1.0)
-        bounded[19] = _clip(raw[19], self.spine_min, self.spine_max)
-        for index in (17, 18, 19):
+        for index in gripper_indices:
+            bounded[index] = _clip(raw[index], 0.0, 1.0)
+        bounded[spine_index] = _clip(raw[spine_index], self.spine_min, self.spine_max)
+        for index in (*gripper_indices, spine_index):
             if not math.isclose(bounded[index], raw[index], abs_tol=1.0e-12):
                 range_limited.append(index)
 
         safe = list(bounded)
-        max_steps = (
-            list(DEMO_LEFT_ARM_MAX_STEP)
-            + list(DEMO_RIGHT_ARM_MAX_STEP)
-            + [DEMO_SPINE_MAX_STEP]
-        )
-        slew_indices = list(range(3, 17)) + [19]
         rate_limited = []
         for index, max_step in zip(slew_indices, max_steps):
             previous = float(self.last_action[index])
@@ -246,11 +292,11 @@ class Task2ActionSafetyFilter:
 
         raw_max_arm_delta = max(
             abs(raw[index] - float(self.last_action[index]))
-            for index in range(3, 17)
+            for index in arm_indices
         )
         safe_max_arm_delta = max(
             abs(safe[index] - float(self.last_action[index]))
-            for index in range(3, 17)
+            for index in arm_indices
         )
         self.last_action = safe
         limited = bool(range_limited or rate_limited)
@@ -429,6 +475,7 @@ class AsyncActionChunkExecutor:
         prefetch_margin_steps=0,
         debug_actions=False,
         action_ensemble_samples=1,
+        action_dim=ISAAC_ACTION_DIM,
     ):
         self.policy = policy
         self.config = config
@@ -447,6 +494,7 @@ class AsyncActionChunkExecutor:
         )
         self.debug_actions = bool(debug_actions)
         self.action_ensemble_samples = max(1, int(action_ensemble_samples))
+        self.action_dim = int(action_dim)
 
         self.cond = threading.Condition()
         self.actions = deque()
@@ -604,9 +652,9 @@ class AsyncActionChunkExecutor:
                                 "PI0.5 chunk postprocessor must return Tensor [B,T,A], "
                                 f"got {type(sampled).__name__} shape={getattr(sampled, 'shape', None)}"
                             )
-                        if sampled.shape[0] != 1 or sampled.shape[2] != 20:
+                        if sampled.shape[0] != 1 or sampled.shape[2] != self.action_dim:
                             raise ValueError(
-                                "expected postprocessed Task2 chunk [1,T,20], "
+                                f"expected postprocessed Task2 chunk [1,T,{self.action_dim}], "
                                 f"got {tuple(sampled.shape)}"
                             )
                         chunks.append(sampled)
@@ -617,8 +665,11 @@ class AsyncActionChunkExecutor:
                         "PI0.5 chunk postprocessor must return Tensor [B,T,A], "
                         f"got {type(actions).__name__} shape={getattr(actions, 'shape', None)}"
                     )
-                if actions.shape[0] != 1 or actions.shape[2] != 20:
-                    raise ValueError(f"expected postprocessed Task2 chunk [1,T,20], got {tuple(actions.shape)}")
+                if actions.shape[0] != 1 or actions.shape[2] != self.action_dim:
+                    raise ValueError(
+                        f"expected postprocessed Task2 chunk [1,T,{self.action_dim}], "
+                        f"got {tuple(actions.shape)}"
+                    )
                 chunk = actions[0].detach().float().cpu().numpy()
                 if not np.isfinite(chunk).all():
                     raise ValueError("non-finite PI0.5 action chunk")
@@ -773,13 +824,19 @@ def load_pi05_policy_and_processors(checkpoint: str, device: str):
 
     state_feature = getattr(config, "robot_state_feature", None)
     state_shape = _feature_shape(state_feature)
-    if state_shape != (37,):
-        raise ValueError(f"Task2 requires checkpoint observation.state shape (37,), got {state_shape}")
-
     action_feature = getattr(config, "action_feature", None)
     action_shape = _feature_shape(action_feature)
-    if action_shape != (20,):
-        raise ValueError(f"Task2 requires checkpoint action shape (20,), got {action_shape}")
+    supported_contracts = {
+        ((ISAAC_STATE_DIM,), (ISAAC_ACTION_DIM,)),
+        ((REAL_STATE_DIM,), (REAL_ACTION_DIM,)),
+    }
+    if (state_shape, action_shape) not in supported_contracts:
+        raise ValueError(
+            "Unsupported Task2 checkpoint contract: "
+            f"state={state_shape}, action={action_shape}; expected "
+            f"({ISAAC_STATE_DIM},{ISAAC_ACTION_DIM}) for Isaac or "
+            f"({REAL_STATE_DIM},{REAL_ACTION_DIM}) for the official real dataset"
+        )
 
     return {
         "policy": policy,
@@ -789,6 +846,8 @@ def load_pi05_policy_and_processors(checkpoint: str, device: str):
         "device": torch.device(device),
         "image_keys": image_keys,
         "expected_shapes": expected_shapes,
+        "state_shape": state_shape,
+        "action_shape": action_shape,
         "is_peft": is_peft,
         "checkpoint": ckpt,
     }
@@ -896,6 +955,10 @@ def run_inference(args):
     device = bundle["device"]
     image_keys = bundle["image_keys"]
     expected_shapes = bundle["expected_shapes"]
+    state_shape = bundle["state_shape"]
+    action_shape = bundle["action_shape"]
+    state_dim = int(state_shape[0])
+    action_dim = int(action_shape[0])
 
     # PI0.5 predicts chunk_size actions but n_action_steps is the intended
     # closed-loop replanning cadence. Keep the complete chunk as latency
@@ -948,6 +1011,7 @@ def run_inference(args):
     print(f"  num_inference_steps: {getattr(config, 'num_inference_steps', None)}")
     print(f"  task: {args.task}")
     print(f"  robot_type: {args.robot_type}")
+    print(f"  state/action contract: {state_dim}D/{action_dim}D")
     print("  checkpoint image features:")
     for key in image_keys:
         print(
@@ -973,6 +1037,7 @@ def run_inference(args):
         prefetch_margin_steps=prefetch_margin_steps,
         debug_actions=args.debug_actions,
         action_ensemble_samples=args.action_ensemble_samples,
+        action_dim=action_dim,
     )
 
     def reset_executor(seed=None):
@@ -1004,8 +1069,8 @@ def run_inference(args):
                     k: (list(v) if v is not None else None)
                     for k, v in expected_shapes.items()
                 },
-                "state_shape": [37],
-                "action_shape": [20],
+                "state_shape": list(state_shape),
+                "action_shape": list(action_shape),
                 "task": args.task,
                 "robot_type": args.robot_type,
                 "chunk_size": int(getattr(config, "chunk_size", 0)),
@@ -1035,7 +1100,7 @@ def run_inference(args):
                 inference_accepted = False
                 if op == "infer":
                     state = np.asarray(req["state"], dtype=np.float32)
-                    if state.shape != (37,) or not np.isfinite(state).all():
+                    if state.shape != state_shape or not np.isfinite(state).all():
                         raise ValueError(
                             f"invalid Task2 state: shape={state.shape}, finite={np.isfinite(state).all()}"
                         )
@@ -1156,6 +1221,53 @@ def build_state(joints, ee, odom):
         s[34:37] = [vx, vy, wz]
 
     return s if all(math.isfinite(x) for x in s) else None
+
+
+def build_real_state(joints, wrenches):
+    """Build the official converted Munich dataset's exact 42D state order."""
+    left = [resolve(joints, name) for name in LEFT_JOINTS]
+    right = [resolve(joints, name) for name in RIGHT_JOINTS]
+    left_wrench = wrenches.get("left")
+    right_wrench = wrenches.get("right")
+    if left_wrench is None or right_wrench is None:
+        return None
+
+    # In the released dataset, both external-joint-torque blocks and the left
+    # gripper state are constant zero. Preserve those training values exactly.
+    state = (
+        left
+        + [0.0]
+        + [0.0] * 7
+        + list(left_wrench)
+        + right
+        + [resolve(joints, RIGHT_GRIPPER_DRIVER)]
+        + [0.0] * 7
+        + list(right_wrench)
+    )
+    if len(state) != REAL_STATE_DIM:
+        raise AssertionError(f"real Task2 state has unexpected length {len(state)}")
+    return state if all(math.isfinite(float(x)) for x in state) else None
+
+
+def split_task2_action(action, *, real, spine_min=0.0, spine_max=0.54, real_spine_height=434.0):
+    expected_dim = REAL_ACTION_DIM if real else ISAAC_ACTION_DIM
+    if len(action) != expected_dim or not all(math.isfinite(float(x)) for x in action):
+        raise ValueError(f"invalid {expected_dim}D action")
+    if real:
+        return {
+            "left_arm": list(action[0:7]),
+            "left_gripper": _clip(action[7], 0.0, 1.0),
+            "right_arm": list(action[8:15]),
+            "right_gripper": _clip(action[15], 0.0, 1.0),
+            "spine": float(real_spine_height),
+        }
+    return {
+        "left_arm": list(action[3:10]),
+        "left_gripper": _clip(action[17], 0.0, 1.0),
+        "right_arm": list(action[10:17]),
+        "right_gripper": _clip(action[18], 0.0, 1.0),
+        "spine": _clip(action[19], spine_min, spine_max),
+    }
 
 
 # ---------------------------------------------------------------------------
@@ -1336,7 +1448,7 @@ def discover_camera_topics(node, logicals, overrides, timeout_s):
 
 def run_ros(args):
     import rclpy
-    from geometry_msgs.msg import PoseStamped
+    from geometry_msgs.msg import PoseStamped, WrenchStamped
     from nav_msgs.msg import Odometry
     from rclpy.node import Node
     from rclpy.qos import (
@@ -1357,9 +1469,10 @@ def run_ros(args):
         state_topics = {
             "left": args.real_left_joint_states,
             "right": args.real_right_joint_states,
-            "spine": args.real_spine_joint_states,
             "left_gripper": args.real_left_gripper_states,
             "right_gripper": args.real_right_gripper_states,
+            "left_wrench": args.real_left_wrench,
+            "right_wrench": args.real_right_wrench,
         }
         command_topics = {
             "left": args.real_left_arm_command,
@@ -1396,12 +1509,10 @@ def run_ros(args):
             self.last_clock = None
             self.last_clock_wall = time.monotonic()
             self.joints = {}
+            self.wrenches = {"left": None, "right": None}
+            self.real_state_arrival = {}
             self.odom = None
-            # Real ROS recordings do not expose EE PoseStamped topics in the
-            # public contract.  Keep zero placeholders unless an evaluator
-            # supplies calibrated EE topics via --real-left/right-ee-topic.
-            self.ee = {"left": ([0.0] * 7 if real else None),
-                       "right": ([0.0] * 7 if real else None)}
+            self.ee = {"left": None, "right": None}
 
             self.required_image_keys = []
             self.feature_to_logical = {}
@@ -1415,10 +1526,12 @@ def run_ros(args):
             self.stop = False
             self.last_wait_log_wall = 0.0
             self.last_safety_log_wall = 0.0
+            self.last_dry_run_log_wall = 0.0
             self.action_safety = Task2ActionSafetyFilter(
-                spine_min=args.spine_min,
-                spine_max=args.spine_max,
+                spine_min=(args.real_spine_height if real else args.spine_min),
+                spine_max=(args.real_spine_height if real else args.spine_max),
                 step_scale=args.action_safety_step_scale,
+                contract=("real42_17" if real else "isaac37_20"),
             )
             self.pad_baseline_median_z = None
             self.pad_lift_started_sim = None
@@ -1429,48 +1542,50 @@ def run_ros(args):
             self.rollout_start_sim = None
             self.rollout_results = []
 
-            self.pubs = {
-                "la": self.create_publisher(
-                    JointState, command_topics["left"], 10
-                ),
-                "ra": self.create_publisher(
-                    JointState, command_topics["right"], 10
-                ),
-                "lg": self.create_publisher(
-                    Float32 if real else JointState, command_topics["left_gripper"], 10
-                ),
-                "rg": self.create_publisher(
-                    Float32 if real else JointState, command_topics["right_gripper"], 10
-                ),
-                "sp": self.create_publisher(
-                    Float32 if real else JointState, command_topics["spine"], 10
-                ),
-                "scene_reset": self.create_publisher(
-                    String, SCENE_RESET_REQUEST_TOPIC, 10
-                ),
-            }
+            self.pubs = {}
+            if not args.dry_run:
+                self.pubs = {
+                    "la": self.create_publisher(JointState, command_topics["left"], 10),
+                    "ra": self.create_publisher(JointState, command_topics["right"], 10),
+                    "lg": self.create_publisher(
+                        Float32 if real else JointState, command_topics["left_gripper"], 10
+                    ),
+                    "rg": self.create_publisher(
+                        Float32 if real else JointState, command_topics["right_gripper"], 10
+                    ),
+                    "sp": self.create_publisher(
+                        Float32 if real else JointState, command_topics["spine"], 10
+                    ),
+                    "scene_reset": self.create_publisher(String, SCENE_RESET_REQUEST_TOPIC, 10),
+                }
 
             if not real:
                 self.create_subscription(Clock, CLOCK_TOPIC, self.cb_clock, 10)
             if real:
                 for side, topic in (("left", state_topics["left"]), ("right", state_topics["right"]),
-                                    ("spine", state_topics["spine"]),
                                     ("left_gripper", state_topics["left_gripper"]),
                                     ("right_gripper", state_topics["right_gripper"])):
                     self.create_subscription(JointState, topic,
-                                             lambda m, side=side: self.cb_real_joints(side, m), 10)
+                                             lambda m, side=side: self.cb_real_joints(side, m), latest_sensor_qos)
+                self.create_subscription(
+                    WrenchStamped, state_topics["left_wrench"],
+                    lambda m: self.cb_real_wrench("left", m), latest_sensor_qos,
+                )
+                self.create_subscription(
+                    WrenchStamped, state_topics["right_wrench"],
+                    lambda m: self.cb_real_wrench("right", m), latest_sensor_qos,
+                )
             else:
                 self.create_subscription(JointState, FULL_STATES_TOPIC, self.cb_joints, 10)
-            self.create_subscription(
-                Odometry, args.real_odom_topic if real else ODOM_TOPIC, self.cb_odom, 10
-            )
-            if args.real_left_ee_topic:
-                self.create_subscription(PoseStamped, args.real_left_ee_topic,
-                                         lambda m: self.cb_ee("left", m), 10)
-            if args.real_right_ee_topic:
-                self.create_subscription(PoseStamped, args.real_right_ee_topic,
-                                         lambda m: self.cb_ee("right", m), 10)
             if not real:
+                self.create_subscription(Odometry, ODOM_TOPIC, self.cb_odom, 10)
+            if not real:
+                self.create_subscription(
+                    PoseStamped, LEFT_EE_TOPIC, lambda m: self.cb_ee("left", m), 10
+                )
+                self.create_subscription(
+                    PoseStamped, RIGHT_EE_TOPIC, lambda m: self.cb_ee("right", m), 10
+                )
                 self.create_subscription(String, SCENE_RESET_TOPIC, self.cb_reset, 10)
                 self.create_subscription(Float32MultiArray, PAD_POINTS_TOPIC, self.cb_pad_points, 10)
 
@@ -1482,6 +1597,8 @@ def run_ros(args):
 
             self.configure_checkpoint_cameras(hello)
             self.server_n_action_steps = int(hello.get("n_action_steps") or 0)
+            self.state_shape = tuple(hello.get("state_shape") or ())
+            self.action_shape = tuple(hello.get("action_shape") or ())
             self.server_replan_interval = int(hello.get("replan_interval") or 0)
             self.server_queue_remaining = 0
             self.server_inference_busy = False
@@ -1509,6 +1626,10 @@ def run_ros(args):
                 self.get_logger().info(
                     "action safety enabled: demonstrated arm ranges + P99.5 target slew limits; "
                     f"step_scale={args.action_safety_step_scale:g}"
+                )
+            if args.dry_run:
+                self.get_logger().warning(
+                    "DRY RUN enabled: inference runs, but no arm/gripper/spine publishers exist"
                 )
 
         # -------------------------- callbacks --------------------------
@@ -1568,6 +1689,19 @@ def run_ros(args):
                 if assigned == 0:
                     for i, value in enumerate(m.position[:len(names)]):
                         self.joints[names[i]] = float(value)
+                if real:
+                    self.real_state_arrival[side] = time.monotonic()
+                    self.sim_time = time.monotonic()
+                    self.last_clock_wall = self.sim_time
+
+        def cb_real_wrench(self, side, m):
+            w = m.wrench
+            values = [w.force.x, w.force.y, w.force.z, w.torque.x, w.torque.y, w.torque.z]
+            with self.lock:
+                self.wrenches[side] = [float(value) for value in values]
+                self.real_state_arrival[f"{side}_wrench"] = time.monotonic()
+                self.sim_time = time.monotonic()
+                self.last_clock_wall = self.sim_time
 
         def cb_odom(self, m):
             p = m.pose.pose.position
@@ -1616,7 +1750,15 @@ def run_ros(args):
             except Exception:
                 stamp_sim = None
             with self.lock:
-                self.camera_frames[logical] = (m, self.sim_time, stamp_sim)
+                if real:
+                    # ROS header time and Python monotonic time are unrelated.
+                    # Use local arrival time for real-robot freshness checks.
+                    arrival = time.monotonic()
+                    self.sim_time = arrival
+                    stamp_sim = None
+                else:
+                    arrival = self.sim_time
+                self.camera_frames[logical] = (m, arrival, stamp_sim)
 
         def cb_reset(self, _m):
             with self.cond:
@@ -1735,11 +1877,13 @@ def run_ros(args):
                         raise RuntimeError(
                             f"expected PI0.5 inference server, got policy={hello.get('policy')!r}"
                         )
-                    if tuple(hello.get("state_shape") or ()) != (37,):
+                    expected_state = (REAL_STATE_DIM,) if real else (ISAAC_STATE_DIM,)
+                    expected_action = (REAL_ACTION_DIM,) if real else (ISAAC_ACTION_DIM,)
+                    if tuple(hello.get("state_shape") or ()) != expected_state:
                         raise RuntimeError(
                             f"PI0.5 server state contract mismatch: {hello.get('state_shape')}"
                         )
-                    if tuple(hello.get("action_shape") or ()) != (20,):
+                    if tuple(hello.get("action_shape") or ()) != expected_action:
                         raise RuntimeError(
                             f"PI0.5 server action contract mismatch: {hello.get('action_shape')}"
                         )
@@ -1819,7 +1963,10 @@ def run_ros(args):
         def validate_reconnect_handshake(self, hello):
             if hello.get("policy") != "pi05":
                 raise RuntimeError(f"reconnected server is not PI0.5: {hello}")
-            if tuple(hello.get("state_shape") or ()) != (37,) or tuple(hello.get("action_shape") or ()) != (20,):
+            if (
+                tuple(hello.get("state_shape") or ()) != self.state_shape
+                or tuple(hello.get("action_shape") or ()) != self.action_shape
+            ):
                 raise RuntimeError(f"reconnected PI0.5 server changed Task2 state/action contract: {hello}")
             if not hello.get("async_execution"):
                 raise RuntimeError("PI0.5 inference server does not support async chunk execution")
@@ -1867,19 +2014,32 @@ def run_ros(args):
                 if self.sim_time is None:
                     return None
 
-                s = build_state(
-                    dict(self.joints),
-                    {
-                        k: (
-                            None if v is None else list(v)
+                if real:
+                    required_sources = ("left", "right", "right_gripper", "left_wrench", "right_wrench")
+                    missing_sources = [
+                        source for source in required_sources
+                        if source not in self.real_state_arrival
+                    ]
+                    stale_sources = [
+                        source for source in required_sources
+                        if source in self.real_state_arrival
+                        and time.monotonic() - self.real_state_arrival[source] > args.real_state_max_age
+                    ]
+                    if missing_sources or stale_sources:
+                        self.maybe_log_wait(
+                            f"waiting for fresh real state; missing={missing_sources} stale={stale_sources}"
                         )
-                        for k, v in self.ee.items()
-                    },
-                    self.odom,
-                )
+                        return None
+                    s = build_real_state(dict(self.joints), dict(self.wrenches))
+                else:
+                    s = build_state(
+                        dict(self.joints),
+                        {k: (None if v is None else list(v)) for k, v in self.ee.items()},
+                        self.odom,
+                    )
                 if s is None:
                     self.maybe_log_wait(
-                        "waiting for complete 37D robot state"
+                        f"waiting for complete {self.state_shape[0]}D robot state"
                     )
                     return None
 
@@ -1947,19 +2107,11 @@ def run_ros(args):
             pub.publish(m)
 
         def apply(self, a):
-            if (
-                len(a) != 20
-                or not all(math.isfinite(float(x)) for x in a)
-            ):
-                raise ValueError("invalid 20D action")
-
-            if (
-                max(abs(float(x)) for x in a[0:3])
-                > args.base_warn_threshold
-            ):
-                self.get_logger().warning(
-                    f"nonzero base action {a[0:3]} ignored for fixpos"
-                )
+            expected_dim = REAL_ACTION_DIM if real else ISAAC_ACTION_DIM
+            if len(a) != expected_dim or not all(math.isfinite(float(x)) for x in a):
+                raise ValueError(f"invalid {expected_dim}D action")
+            if not real and max(abs(float(x)) for x in a[0:3]) > args.base_warn_threshold:
+                self.get_logger().warning(f"nonzero base action {a[0:3]} ignored for fixpos")
 
             if not args.disable_action_safety:
                 with self.lock:
@@ -1977,19 +2129,38 @@ def run_ros(args):
                         )
                         self.last_safety_log_wall = now
 
-            self.pub(
-                self.pubs["la"],
-                LEFT_JOINTS,
-                a[3:10],
+            parts = split_task2_action(
+                a,
+                real=real,
+                spine_min=args.spine_min,
+                spine_max=args.spine_max,
+                real_spine_height=args.real_spine_height,
             )
+            left_arm = parts["left_arm"]
+            right_arm = parts["right_arm"]
+            lo = parts["left_gripper"]
+            ro = parts["right_gripper"]
+            spine = parts["spine"]
+            command_names = REAL_ARM_COMMAND_NAMES if real else LEFT_JOINTS
+
+            if args.dry_run:
+                now = time.monotonic()
+                if now - self.last_dry_run_log_wall >= 1.0:
+                    self.get_logger().info(
+                        "DRY RUN action: "
+                        f"left={[round(float(x), 3) for x in left_arm]} left_gripper={lo:.3f} "
+                        f"right={[round(float(x), 3) for x in right_arm]} right_gripper={ro:.3f} "
+                        f"spine={spine:.3f}"
+                    )
+                    self.last_dry_run_log_wall = now
+                return
+
+            self.pub(self.pubs["la"], command_names, left_arm)
             self.pub(
                 self.pubs["ra"],
-                RIGHT_JOINTS,
-                a[10:17],
+                REAL_ARM_COMMAND_NAMES if real else RIGHT_JOINTS,
+                right_arm,
             )
-
-            lo = max(0.0, min(1.0, float(a[17])))
-            ro = max(0.0, min(1.0, float(a[18])))
 
             if real:
                 self.pubs["lg"].publish(Float32(data=lo))
@@ -1998,10 +2169,6 @@ def run_ros(args):
                 self.pub(self.pubs["lg"], [LEFT_GRIPPER_DRIVER], [(1.0 - lo) * GRIPPER_CLOSED_RAD])
                 self.pub(self.pubs["rg"], [RIGHT_GRIPPER_DRIVER], [(1.0 - ro) * GRIPPER_CLOSED_RAD])
 
-            spine = max(
-                args.spine_min,
-                min(args.spine_max, float(a[19])),
-            )
             if real:
                 self.pubs["sp"].publish(Float32(data=spine))
             else:
@@ -2046,7 +2213,8 @@ def run_ros(args):
                         and time.monotonic() - self.last_clock_wall >= args.clock_stall_wall
                     ):
                         self.get_logger().error(
-                            f"no /isaac/clock update for {args.clock_stall_wall:.1f}s wall; "
+                            f"no {'real state' if real else '/isaac/clock'} update for "
+                            f"{args.clock_stall_wall:.1f}s wall; "
                             "aborting without recording the in-progress rollout"
                         )
                         self.stop = True
@@ -2206,7 +2374,7 @@ def run_ros(args):
                             f"pad_lift={self.pad_max_lift_m:.3f}m "
                             f"grasp={self.grasp_detected} "
                             f"cams={len(self.required_image_keys)} "
-                            f"spine={action[19]:.3f}"
+                            f"spine={action[16 if real else 19]:.3f}"
                         )
 
                 except (
@@ -2265,7 +2433,8 @@ def main_async():
         description=(
             "EBiM Task2 PI0.5 inference server + ROS2 Jazzy adapter. "
             "Inference mode loads LeRobot full or PEFT/LoRA PI0.5 checkpoints; "
-            "ROS mode bridges the verified Task2 37D observation / 20D action contract."
+            "ROS mode supports both the Isaac 37D/20D contract and the official "
+            "real-robot 42D/17D contract."
         )
     )
 
@@ -2293,7 +2462,7 @@ def main_async():
     p.add_argument(
         "--debug-actions",
         action="store_true",
-        help="print the first postprocessed 20D action of every newly planned chunk",
+        help="print the first postprocessed action of every newly planned chunk",
     )
     p.add_argument(
         "--action-ensemble-samples",
@@ -2314,7 +2483,7 @@ def main_async():
     )
 
     # ROS-side arguments (Jazzy container; no LeRobot dependency).
-    p.add_argument("--fps", type=float, default=30.0)
+    p.add_argument("--fps", type=float, default=20.0)
     p.add_argument("--start-delay-sim", type=float, default=1.0)
     p.add_argument(
         "--reset-scene-on-start",
@@ -2327,6 +2496,11 @@ def main_async():
     p.add_argument("--spine-min", type=float, default=0.0)
     p.add_argument("--spine-max", type=float, default=0.54)
     p.add_argument("--base-warn-threshold", type=float, default=0.02)
+    p.add_argument(
+        "--dry-run",
+        action="store_true",
+        help="run observation and inference paths without creating command publishers",
+    )
     p.add_argument(
         "--disable-action-safety",
         action="store_true",
@@ -2421,12 +2595,12 @@ def main_async():
             "uses Image header stamps when available, otherwise callback-arrival sim time"
         ),
     )
-    p.add_argument("--real-odom-topic", default="/swerve_drive_controller/odom")
     p.add_argument("--real-left-joint-states", dest="real_left_joint_states",
                    default="/left/franka_robot_state_broadcaster/measured_joint_states")
     p.add_argument("--real-right-joint-states", dest="real_right_joint_states",
                    default="/right/franka_robot_state_broadcaster/measured_joint_states")
-    p.add_argument("--real-spine-joint-states", dest="real_spine_joint_states", default="/spine/joint_states")
+    p.add_argument("--real-left-wrench", default="/left/franka_robot_state_broadcaster/external_wrench_in_stiffness_frame")
+    p.add_argument("--real-right-wrench", default="/right/franka_robot_state_broadcaster/external_wrench_in_stiffness_frame")
     p.add_argument("--real-left-gripper-states", dest="real_left_gripper_states", default="/left/gripper/joint_states")
     p.add_argument("--real-right-gripper-states", dest="real_right_gripper_states", default="/right/gripper/joint_states")
     p.add_argument("--real-left-arm-command", dest="real_left_arm_command", default="/left/gello/joint_states")
@@ -2434,8 +2608,8 @@ def main_async():
     p.add_argument("--real-left-gripper-command", dest="real_left_gripper_command", default="/left/gripper/gripper_client/target_gripper_width_percent")
     p.add_argument("--real-right-gripper-command", dest="real_right_gripper_command", default="/right/gripper/gripper_client/target_gripper_width_percent")
     p.add_argument("--real-spine-command", dest="real_spine_command", default="/spine/target_height")
-    p.add_argument("--real-left-ee-topic", default="")
-    p.add_argument("--real-right-ee-topic", default="")
+    p.add_argument("--real-spine-height", type=float, default=REAL_DEMO_SPINE_HEIGHT)
+    p.add_argument("--real-state-max-age", type=float, default=0.5)
 
     args = p.parse_args()
 
@@ -2449,6 +2623,10 @@ def main_async():
         p.error("--spine-min must be <= --spine-max")
     if args.action_safety_step_scale <= 0:
         p.error("--action-safety-step-scale must be > 0")
+    if args.real_state_max_age <= 0:
+        p.error("--real-state-max-age must be > 0")
+    if args.dry_run and args.ros_profile != "real":
+        p.error("--dry-run is currently supported only with --ros-profile real")
     if args.grasp_lift_threshold_m <= 0:
         p.error("--grasp-lift-threshold-m must be > 0")
     if args.grasp_lift_sustain_sim < 0:
