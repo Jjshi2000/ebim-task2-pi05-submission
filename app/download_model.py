@@ -25,9 +25,18 @@ def main() -> None:
     parser.add_argument("--repo-id", required=True)
     parser.add_argument("--local-dir", required=True)
     parser.add_argument("--revision")
+    parser.add_argument("--ensure-complete", action="store_true",
+                        help="Use a complete local checkpoint without network access; otherwise fetch missing files")
     args = parser.parse_args()
 
     target = Path(args.local_dir).expanduser().resolve()
+    def missing_files():
+        return [name for name in REQUIRED_FILES
+                if not (target / name).is_file() or (target / name).stat().st_size == 0]
+
+    if args.ensure_complete and not missing_files():
+        print(f"complete local checkpoint ready: {target}", flush=True)
+        return
     target.mkdir(parents=True, exist_ok=True)
     snapshot_download(
         repo_id=args.repo_id,
@@ -37,9 +46,9 @@ def main() -> None:
         revision=args.revision,
     )
 
-    missing = [name for name in REQUIRED_FILES if not (target / name).is_file()]
+    missing = missing_files()
     if missing:
-        raise SystemExit(f"downloaded checkpoint is incomplete; missing: {', '.join(missing)}")
+        raise SystemExit(f"downloaded checkpoint is incomplete; missing/empty: {', '.join(missing)}")
     print(f"checkpoint ready: {target}", flush=True)
 
 

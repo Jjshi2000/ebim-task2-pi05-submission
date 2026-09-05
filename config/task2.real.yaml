@@ -1,0 +1,157 @@
+navigation:
+  enabled: true
+  rate_hz: 20.0
+  sensor_wait_s: 30.0
+  coarse:
+    cruise_vx: 0.08
+    slow_vx: 0.025
+    lidar_slow_m: 0.85
+    lidar_stop_m: 0.40
+    max_travel_m: 2.6
+    timeout_s: 100.0
+    visual_valid_frames: 4
+    visual_capture_limit_multiplier: 1.5
+    vision_period_s: 0.3
+  visual:
+    bank_path: ../artifacts/demo_start_bank
+    feature_type: SIFT
+    width: 960
+    height: 540
+    max_features: 3000
+    sift_contrast_threshold: 0.015
+    shortlist_k: 8
+    ratio_test: 0.72
+    ransac_threshold: 3.0
+    min_good_matches: 24
+    min_inliers: 18
+    min_inlier_ratio: 0.40
+    min_spread: 0.06
+    max_reprojection_error: 2.5
+    min_scale: 0.45
+    max_scale: 2.2
+    max_condition: 80.0
+    max_projective_ratio: 2.5
+    max_corner_extent: 2.0
+    min_overlap: 0.30
+    max_rotation_rad: 0.45
+    # Robust spread floors are dimensionless measurement tolerances, not ready scores.
+    geometry_floors: [0.008, 0.008, 0.012, 0.012, 0.012, 0.012, 0.008, 0.008]
+    acceptance_quantile: 0.95
+    acceptance_margin: 1.25
+    min_calibration_episodes: 8
+    quality_weight: 0.10
+  fine:
+    enable_yaw: false
+    step_x_m: 0.025
+    step_y_m: 0.020
+    step_yaw_rad: 0.025
+    min_step_x_m: 0.005
+    min_step_y_m: 0.005
+    min_step_yaw_rad: 0.006
+    step_shrink_factor: 0.5
+    score_improvement_min: 0.04
+    settle_s: 0.5
+    frames_per_evaluation: 5
+    min_valid_frames: 3
+    observation_timeout_s: 6.0
+    max_iterations: 24
+    timeout_s: 180.0
+    max_radius_m: 0.20
+    max_yaw_rad: 0.12
+    max_path_m: 1.8
+  handoff:
+    consecutive_passes: 3
+    post_stop_settle_s: 1.0
+    stopped_linear_mps: 0.01
+    stopped_angular_rps: 0.02
+  safety:
+    odom_max_age_s: 0.4
+    camera_max_age_s: 0.75
+    lidar_max_age_s: 0.4
+    primitive_timeout_s: 5.0
+    repeated_zero_cmd_count: 8
+    max_linear_mps: 0.08
+    max_angular_rps: 0.08
+    primitive_linear_mps: 0.025
+    position_tolerance_m: 0.002
+    yaw_tolerance_rad: 0.004
+    tracking_error_m: 0.03
+    tracking_error_rad: 0.05
+    max_odom_jump_m: 0.12
+    max_odom_jump_rad: 0.20
+    max_odom_speed_mps: 0.40
+    max_odom_yaw_rps: 0.50
+    odom_noise_m: 0.005
+    odom_noise_rad: 0.01
+    command_lease_s: 0.20
+    direction_half_fov_rad: 0.60
+    min_scan_coverage: 0.80
+    clearance_m: 0.40
+    # Side/reverse probes use clearance beyond this footprint. Forward thresholds
+    # above use raw front LaserScan ranges, matching HKUST's distance convention.
+    footprint_radius_m: 0.40
+    front_half_fov_rad: 1.0471975512
+    # Resolve the physical base frame from Odometry.child_frame_id.
+    base_frame: auto
+    # Optional measured [x_m, y_m, yaw_rad], keyed by the actual laser frame_id.
+    # Empty means TF is required for side/reverse probes. Never guess extrinsics.
+    lidar_extrinsics: {}
+    tf_timeout_s: 0.1
+    require_rear_lidar: true
+    # HKUST accepts arrival-fresh messages with an unset header timestamp.
+    require_stamped_sensors: false
+bank:
+  window_s: 0.75
+  frames_per_episode: 2
+  clusters: 8
+  seed: 1000
+  dataset_repo: ebim-benchmark/ebim_task2_realrobotdata
+  dataset_revision: 495ebb7b56fb9e2f3952398a63d86f08cacb9531
+  dataset_subdir: task2_munich
+  expected_episodes: 238
+  temporal_seconds: [1.5, 3.0, 6.0]
+rig:
+  discovery_timeout_s: 30.0
+  graph_check_period_s: 1.0
+  stream_heartbeat_s: 0.30
+  stream_start_timeout_s: 30.0
+  state_max_age_s: 0.5
+  image_max_age_s: 0.75
+  image_max_skew_s: 0.30
+  arm_stamp_bias_s: 0.10
+  gripper_closed_rad: 0.789
+  spine_state_unit: auto
+  spine_target_mm: 434.0
+  spine_tolerance_m: 0.01
+  spine_timeout_s: 15.0
+  start_pose_timeout_s: 35.0
+  start_pose_step_rad: 0.010
+  start_pose_tolerance_rad: 0.04
+  joint_lower_rad: [-2.7437, -1.7837, -2.9007, -3.0421, -2.8065, 0.5445, -3.0159]
+  joint_upper_rad: [2.7437, 1.7837, 2.9007, -0.1518, 2.8065, 4.5169, 3.0159]
+  tracking_error_rad: 0.25
+  tracking_timeout_s: 1.0
+  controller_names: [joint_follower_controller, joint_impedance_controller]
+  controller_managers: {left: /left/controller_manager, right: /right/controller_manager, base: /controller_manager}
+  arm_controller_overrides: {}
+  reload_impedance: true
+  base_controller: swerve_drive_controller
+  base_hardware_names: []
+  # Empty entries use typed graph discovery. Overrides must exist and be unambiguous.
+  topics: {}
+policy:
+  rate_hz: 20.0
+  replan_steps: 10
+  min_playback_rate: 0.25
+  latency_margin: 1.1
+  max_inference_s: 8.0
+  max_hold_s: 0.5
+  connect_timeout_s: 600.0
+  request_timeout_s: 10.0
+  image_resize: true
+  max_aspect_error: 0.02
+  warmup_chunks: 2
+  # Zero retains continuous manipulation, as requested.
+  max_episode_s: 0.0
+log:
+  directory: ../out

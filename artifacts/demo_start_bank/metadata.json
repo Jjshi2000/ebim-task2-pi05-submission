@@ -1,0 +1,7367 @@
+{
+  "format_version": 1,
+  "feature_type": "SIFT",
+  "visual_config": {
+    "feature_type": "SIFT",
+    "width": 960,
+    "height": 540,
+    "max_features": 3000,
+    "sift_contrast_threshold": 0.015,
+    "shortlist_k": 8,
+    "ratio_test": 0.72,
+    "ransac_threshold": 3.0,
+    "min_good_matches": 24,
+    "min_inliers": 18,
+    "min_inlier_ratio": 0.4,
+    "min_spread": 0.06,
+    "max_reprojection_error": 2.5,
+    "min_scale": 0.45,
+    "max_scale": 2.2,
+    "max_condition": 80.0,
+    "max_projective_ratio": 2.5,
+    "max_corner_extent": 2.0,
+    "min_overlap": 0.3,
+    "max_rotation_rad": 0.45,
+    "geometry_floors": [
+      0.008,
+      0.008,
+      0.012,
+      0.012,
+      0.012,
+      0.012,
+      0.008,
+      0.008
+    ],
+    "acceptance_quantile": 0.95,
+    "acceptance_margin": 1.25,
+    "min_calibration_episodes": 8,
+    "quality_weight": 0.1
+  },
+  "dataset": {
+    "dataset_repo": "ebim-benchmark/ebim_task2_realrobotdata",
+    "dataset_revision": "495ebb7b56fb9e2f3952398a63d86f08cacb9531",
+    "dataset_subdir": "task2_munich"
+  },
+  "episodes": 238,
+  "samples": [
+    {
+      "episode_index": 0,
+      "frame_index": 7,
+      "timestamp": 0.35003648,
+      "video_timestamp": 0.30014922300072777,
+      "joint_motion": 0.00015443532405205157,
+      "image_dimensions": [
+        188,
+        336,
+        3
+      ],
+      "keypoints": 294,
+      "cluster_id": 0
+    },
+    {
+      "episode_index": 0,
+      "frame_index": 8,
+      "timestamp": 0.400041728,
+      "video_timestamp": 0.4001989640009704,
+      "joint_motion": 5.2769604814689944e-05,
+      "image_dimensions": [
+        188,
+        336,
+        3
+      ],
+      "keypoints": 295,
+      "cluster_id": 0
+    },
+    {
+      "episode_index": 1,
+      "frame_index": 7,
+      "timestamp": 0.350172928,
+      "video_timestamp": 0.39994842999739005,
+      "joint_motion": 0.0006022217840379134,
+      "image_dimensions": [
+        188,
+        336,
+        3
+      ],
+      "keypoints": 292,
+      "cluster_id": 0
+    },
+    {
+      "episode_index": 1,
+      "frame_index": 8,
+      "timestamp": 0.400197376,
+      "video_timestamp": 0.39994842999739005,
+      "joint_motion": 0.00047780374166573664,
+      "image_dimensions": [
+        188,
+        336,
+        3
+      ],
+      "keypoints": 292,
+      "cluster_id": 0
+    },
+    {
+      "episode_index": 2,
+      "frame_index": 7,
+      "timestamp": 0.350127872,
+      "video_timestamp": 0.3002315774920503,
+      "joint_motion": 0.0006816388427398022,
+      "image_dimensions": [
+        188,
+        336,
+        3
+      ],
+      "keypoints": 170,
+      "cluster_id": 0
+    },
+    {
+      "episode_index": 2,
+      "frame_index": 11,
+      "timestamp": 0.550200832,
+      "video_timestamp": 0.5003859624867505,
+      "joint_motion": 2.4314677266530037e-05,
+      "image_dimensions": [
+        188,
+        336,
+        3
+      ],
+      "keypoints": 173,
+      "cluster_id": 0
+    },
+    {
+      "episode_index": 3,
+      "frame_index": 2,
+      "timestamp": 0.100034048,
+      "video_timestamp": 0.10029190750004568,
+      "joint_motion": 0.002174398150163726,
+      "image_dimensions": [
+        188,
+        336,
+        3
+      ],
+      "keypoints": 238,
+      "cluster_id": 0
+    },
+    {
+      "episode_index": 3,
+      "frame_index": 8,
+      "timestamp": 0.400136704,
+      "video_timestamp": 0.40116763000018274,
+      "joint_motion": 0.0030770068434558123,
+      "image_dimensions": [
+        188,
+        336,
+        3
+      ],
+      "keypoints": 235,
+      "cluster_id": 0
+    },
+    {
+      "episode_index": 5,
+      "frame_index": 7,
+      "timestamp": 0.350222336,
+      "video_timestamp": 0.3003334770082348,
+      "joint_motion": 0.0002883222810678111,
+      "image_dimensions": [
+        188,
+        336,
+        3
+      ],
+      "keypoints": 153,
+      "cluster_id": 0
+    },
+    {
+      "episode_index": 5,
+      "frame_index": 8,
+      "timestamp": 0.400254208,
+      "video_timestamp": 0.4004446360109798,
+      "joint_motion": 0.0006730242833191276,
+      "image_dimensions": [
+        188,
+        336,
+        3
+      ],
+      "keypoints": 175,
+      "cluster_id": 0
+    },
+    {
+      "episode_index": 6,
+      "frame_index": 1,
+      "timestamp": 0.050032128,
+      "video_timestamp": 0.0,
+      "joint_motion": 0.0007275557702351443,
+      "image_dimensions": [
+        188,
+        336,
+        3
+      ],
+      "keypoints": 166,
+      "cluster_id": 0
+    },
+    {
+      "episode_index": 6,
+      "frame_index": 13,
+      "timestamp": 0.65041792,
+      "video_timestamp": 0.6010928100040211,
+      "joint_motion": 0.00010748342160079404,
+      "image_dimensions": [
+        188,
+        336,
+        3
+      ],
+      "keypoints": 173,
+      "cluster_id": 0
+    },
+    {
+      "episode_index": 7,
+      "frame_index": 4,
+      "timestamp": 0.200028672,
+      "video_timestamp": 0.20049285599132446,
+      "joint_motion": 0.0007851969832556983,
+      "image_dimensions": [
+        188,
+        336,
+        3
+      ],
+      "keypoints": 164,
+      "cluster_id": 0
+    },
+    {
+      "episode_index": 7,
+      "frame_index": 12,
+      "timestamp": 0.600086016,
+      "video_timestamp": 0.6014785679739734,
+      "joint_motion": 0.007168143601479285,
+      "image_dimensions": [
+        188,
+        336,
+        3
+      ],
+      "keypoints": 159,
+      "cluster_id": 0
+    },
+    {
+      "episode_index": 8,
+      "frame_index": 1,
+      "timestamp": 0.050004224,
+      "video_timestamp": 0.0,
+      "joint_motion": 0.0036134720836734345,
+      "image_dimensions": [
+        188,
+        336,
+        3
+      ],
+      "keypoints": 252,
+      "cluster_id": 0
+    },
+    {
+      "episode_index": 8,
+      "frame_index": 13,
+      "timestamp": 0.650054144,
+      "video_timestamp": 0.600831432006727,
+      "joint_motion": 0.0011087431596240702,
+      "image_dimensions": [
+        188,
+        336,
+        3
+      ],
+      "keypoints": 231,
+      "cluster_id": 0
+    },
+    {
+      "episode_index": 10,
+      "frame_index": 3,
+      "timestamp": 0.15021952,
+      "video_timestamp": 0.20027137299854497,
+      "joint_motion": 0.0026088039207283796,
+      "image_dimensions": [
+        188,
+        336,
+        3
+      ],
+      "keypoints": 257,
+      "cluster_id": 0
+    },
+    {
+      "episode_index": 10,
+      "frame_index": 12,
+      "timestamp": 0.600877824,
+      "video_timestamp": 0.600814118995635,
+      "joint_motion": 0.0008483771476011402,
+      "image_dimensions": [
+        188,
+        336,
+        3
+      ],
+      "keypoints": 251,
+      "cluster_id": 0
+    },
+    {
+      "episode_index": 12,
+      "frame_index": 7,
+      "timestamp": 0.350181888,
+      "video_timestamp": 0.3006387419983301,
+      "joint_motion": 0.00034823639170477455,
+      "image_dimensions": [
+        188,
+        336,
+        3
+      ],
+      "keypoints": 170,
+      "cluster_id": 0
+    },
+    {
+      "episode_index": 12,
+      "frame_index": 8,
+      "timestamp": 0.400207872,
+      "video_timestamp": 0.40085165599777345,
+      "joint_motion": 0.00027949186773037376,
+      "image_dimensions": [
+        188,
+        336,
+        3
+      ],
+      "keypoints": 164,
+      "cluster_id": 0
+    },
+    {
+      "episode_index": 13,
+      "frame_index": 7,
+      "timestamp": 0.35005824,
+      "video_timestamp": 0.3009667018249239,
+      "joint_motion": 3.2262194355301056e-05,
+      "image_dimensions": [
+        188,
+        336,
+        3
+      ],
+      "keypoints": 153,
+      "cluster_id": 0
+    },
+    {
+      "episode_index": 13,
+      "frame_index": 9,
+      "timestamp": 0.45007488,
+      "video_timestamp": 0.4012889357665652,
+      "joint_motion": 1.4239149189791663e-05,
+      "image_dimensions": [
+        188,
+        336,
+        3
+      ],
+      "keypoints": 150,
+      "cluster_id": 0
+    },
+    {
+      "episode_index": 15,
+      "frame_index": 7,
+      "timestamp": 0.350021888,
+      "video_timestamp": 0.3997574080026856,
+      "joint_motion": 0.0007912359330397903,
+      "image_dimensions": [
+        188,
+        336,
+        3
+      ],
+      "keypoints": 173,
+      "cluster_id": 0
+    },
+    {
+      "episode_index": 15,
+      "frame_index": 8,
+      "timestamp": 0.400024832,
+      "video_timestamp": 0.3997574080026856,
+      "joint_motion": 0.001144354255172849,
+      "image_dimensions": [
+        188,
+        336,
+        3
+      ],
+      "keypoints": 173,
+      "cluster_id": 0
+    },
+    {
+      "episode_index": 16,
+      "frame_index": 1,
+      "timestamp": 0.05003008,
+      "video_timestamp": 0.0,
+      "joint_motion": 0.001456591157654694,
+      "image_dimensions": [
+        188,
+        336,
+        3
+      ],
+      "keypoints": 152,
+      "cluster_id": 0
+    },
+    {
+      "episode_index": 16,
+      "frame_index": 13,
+      "timestamp": 0.650392064,
+      "video_timestamp": 0.6012410309941428,
+      "joint_motion": 0.009731703625968537,
+      "image_dimensions": [
+        188,
+        336,
+        3
+      ],
+      "keypoints": 169,
+      "cluster_id": 0
+    },
+    {
+      "episode_index": 19,
+      "frame_index": 1,
+      "timestamp": 0.050031872,
+      "video_timestamp": 0.0,
+      "joint_motion": 0.0008246086564627251,
+      "image_dimensions": [
+        188,
+        336,
+        3
+      ],
+      "keypoints": 311,
+      "cluster_id": 0
+    },
+    {
+      "episode_index": 19,
+      "frame_index": 8,
+      "timestamp": 0.400255488,
+      "video_timestamp": 0.40049780799352364,
+      "joint_motion": 0.02403899476261906,
+      "image_dimensions": [
+        188,
+        336,
+        3
+      ],
+      "keypoints": 310,
+      "cluster_id": 0
+    },
+    {
+      "episode_index": 20,
+      "frame_index": 1,
+      "timestamp": 0.050002688,
+      "video_timestamp": 0.0,
+      "joint_motion": 0.0006485081989255501,
+      "image_dimensions": [
+        188,
+        336,
+        3
+      ],
+      "keypoints": 275,
+      "cluster_id": 0
+    },
+    {
+      "episode_index": 20,
+      "frame_index": 8,
+      "timestamp": 0.400021248,
+      "video_timestamp": 0.40089282399972886,
+      "joint_motion": 0.0020283192140414944,
+      "image_dimensions": [
+        188,
+        336,
+        3
+      ],
+      "keypoints": 262,
+      "cluster_id": 0
+    },
+    {
+      "episode_index": 21,
+      "frame_index": 3,
+      "timestamp": 0.15007744,
+      "video_timestamp": 0.10009344299556357,
+      "joint_motion": 0.0012771631608243942,
+      "image_dimensions": [
+        188,
+        336,
+        3
+      ],
+      "keypoints": 248,
+      "cluster_id": 0
+    },
+    {
+      "episode_index": 21,
+      "frame_index": 8,
+      "timestamp": 0.400206336,
+      "video_timestamp": 0.40037377198225427,
+      "joint_motion": 0.008357737043618989,
+      "image_dimensions": [
+        188,
+        336,
+        3
+      ],
+      "keypoints": 226,
+      "cluster_id": 0
+    },
+    {
+      "episode_index": 25,
+      "frame_index": 7,
+      "timestamp": 0.350076672,
+      "video_timestamp": 0.30013477200185357,
+      "joint_motion": 0.00042466124260885716,
+      "image_dimensions": [
+        188,
+        336,
+        3
+      ],
+      "keypoints": 148,
+      "cluster_id": 7
+    },
+    {
+      "episode_index": 25,
+      "frame_index": 9,
+      "timestamp": 0.450098432,
+      "video_timestamp": 0.4001796960024714,
+      "joint_motion": 0.00010707325365597364,
+      "image_dimensions": [
+        188,
+        336,
+        3
+      ],
+      "keypoints": 157,
+      "cluster_id": 7
+    },
+    {
+      "episode_index": 26,
+      "frame_index": 1,
+      "timestamp": 0.050037248,
+      "video_timestamp": 0.0,
+      "joint_motion": 0.0071246172974935434,
+      "image_dimensions": [
+        188,
+        336,
+        3
+      ],
+      "keypoints": 129,
+      "cluster_id": 7
+    },
+    {
+      "episode_index": 26,
+      "frame_index": 13,
+      "timestamp": 0.65048576,
+      "video_timestamp": 0.6007401689985136,
+      "joint_motion": 0.011318340742959499,
+      "image_dimensions": [
+        188,
+        336,
+        3
+      ],
+      "keypoints": 126,
+      "cluster_id": 7
+    },
+    {
+      "episode_index": 27,
+      "frame_index": 5,
+      "timestamp": 0.250096896,
+      "video_timestamp": 0.2003171520019379,
+      "joint_motion": 0.000591746333993371,
+      "image_dimensions": [
+        188,
+        336,
+        3
+      ],
+      "keypoints": 375,
+      "cluster_id": 7
+    },
+    {
+      "episode_index": 27,
+      "frame_index": 8,
+      "timestamp": 0.400155136,
+      "video_timestamp": 0.4006343040038758,
+      "joint_motion": 0.0020113745641573244,
+      "image_dimensions": [
+        188,
+        336,
+        3
+      ],
+      "keypoints": 415,
+      "cluster_id": 7
+    },
+    {
+      "episode_index": 28,
+      "frame_index": 5,
+      "timestamp": 0.250150144,
+      "video_timestamp": 0.2003625280007923,
+      "joint_motion": 0.003283569673468394,
+      "image_dimensions": [
+        188,
+        336,
+        3
+      ],
+      "keypoints": 419,
+      "cluster_id": 7
+    },
+    {
+      "episode_index": 28,
+      "frame_index": 10,
+      "timestamp": 0.500300032,
+      "video_timestamp": 0.5009063200019808,
+      "joint_motion": 0.0031069631831412213,
+      "image_dimensions": [
+        188,
+        336,
+        3
+      ],
+      "keypoints": 415,
+      "cluster_id": 7
+    },
+    {
+      "episode_index": 29,
+      "frame_index": 7,
+      "timestamp": 0.350215424,
+      "video_timestamp": 0.3008021849991405,
+      "joint_motion": 0.0016163951111602278,
+      "image_dimensions": [
+        188,
+        336,
+        3
+      ],
+      "keypoints": 256,
+      "cluster_id": 7
+    },
+    {
+      "episode_index": 29,
+      "frame_index": 8,
+      "timestamp": 0.400246272,
+      "video_timestamp": 0.401069579998854,
+      "joint_motion": 0.0025101912782384142,
+      "image_dimensions": [
+        188,
+        336,
+        3
+      ],
+      "keypoints": 242,
+      "cluster_id": 7
+    },
+    {
+      "episode_index": 30,
+      "frame_index": 1,
+      "timestamp": 0.05000192,
+      "video_timestamp": 0.04307144200073305,
+      "joint_motion": 0.0008004659268535156,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 483,
+      "cluster_id": 7
+    },
+    {
+      "episode_index": 30,
+      "frame_index": 10,
+      "timestamp": 0.500019456,
+      "video_timestamp": 0.5168573040087966,
+      "joint_motion": 0.0002516488496478365,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 478,
+      "cluster_id": 7
+    },
+    {
+      "episode_index": 31,
+      "frame_index": 6,
+      "timestamp": 0.300314624,
+      "video_timestamp": 0.30135317799633476,
+      "joint_motion": 0.00014241756259851925,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 394,
+      "cluster_id": 7
+    },
+    {
+      "episode_index": 31,
+      "frame_index": 8,
+      "timestamp": 0.400419328,
+      "video_timestamp": 0.3874540859952875,
+      "joint_motion": 0.000208402941839847,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 386,
+      "cluster_id": 7
+    },
+    {
+      "episode_index": 32,
+      "frame_index": 4,
+      "timestamp": 0.20011776,
+      "video_timestamp": 0.21161627250486167,
+      "joint_motion": 4.9285653159151636e-05,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 445,
+      "cluster_id": 0
+    },
+    {
+      "episode_index": 32,
+      "frame_index": 8,
+      "timestamp": 0.40023552,
+      "video_timestamp": 0.380909290508751,
+      "joint_motion": 0.0019330343971903632,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 439,
+      "cluster_id": 0
+    },
+    {
+      "episode_index": 33,
+      "frame_index": 4,
+      "timestamp": 0.200109312,
+      "video_timestamp": 0.2124709250313115,
+      "joint_motion": 0.00032427186505905125,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 415,
+      "cluster_id": 0
+    },
+    {
+      "episode_index": 33,
+      "frame_index": 10,
+      "timestamp": 0.500273152,
+      "video_timestamp": 0.5099302200751477,
+      "joint_motion": 0.00027970117040664516,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 419,
+      "cluster_id": 0
+    },
+    {
+      "episode_index": 34,
+      "frame_index": 4,
+      "timestamp": 0.200090368,
+      "video_timestamp": 0.2118569801069144,
+      "joint_motion": 0.003028730143717618,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 369,
+      "cluster_id": 3
+    },
+    {
+      "episode_index": 34,
+      "frame_index": 8,
+      "timestamp": 0.400180736,
+      "video_timestamp": 0.3813425641924459,
+      "joint_motion": 0.022953185080149586,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 402,
+      "cluster_id": 3
+    },
+    {
+      "episode_index": 35,
+      "frame_index": 1,
+      "timestamp": 0.050093312,
+      "video_timestamp": 0.04284600350383295,
+      "joint_motion": 0.0012251139847095683,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 435,
+      "cluster_id": 2
+    },
+    {
+      "episode_index": 35,
+      "frame_index": 8,
+      "timestamp": 0.40074752,
+      "video_timestamp": 0.3856140315344965,
+      "joint_motion": 0.003615727059013478,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 417,
+      "cluster_id": 3
+    },
+    {
+      "episode_index": 36,
+      "frame_index": 1,
+      "timestamp": 0.05001728,
+      "video_timestamp": 0.04244876100046318,
+      "joint_motion": 0.0002079642871023513,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 344,
+      "cluster_id": 2
+    },
+    {
+      "episode_index": 36,
+      "frame_index": 8,
+      "timestamp": 0.400137984,
+      "video_timestamp": 0.3820388490041686,
+      "joint_motion": 0.0010165732299149592,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 335,
+      "cluster_id": 0
+    },
+    {
+      "episode_index": 37,
+      "frame_index": 2,
+      "timestamp": 0.100039168,
+      "video_timestamp": 0.08577578700252872,
+      "joint_motion": 1.2882879034549855e-05,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 399,
+      "cluster_id": 7
+    },
+    {
+      "episode_index": 37,
+      "frame_index": 8,
+      "timestamp": 0.400156672,
+      "video_timestamp": 0.38599104151137925,
+      "joint_motion": 0.002495397887229465,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 410,
+      "cluster_id": 3
+    },
+    {
+      "episode_index": 38,
+      "frame_index": 1,
+      "timestamp": 0.050099712,
+      "video_timestamp": 0.0427867170007307,
+      "joint_motion": 0.00016994191546588236,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 417,
+      "cluster_id": 2
+    },
+    {
+      "episode_index": 38,
+      "frame_index": 13,
+      "timestamp": 0.65129728,
+      "video_timestamp": 0.6418007550109605,
+      "joint_motion": 0.006466508550362156,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 393,
+      "cluster_id": 3
+    },
+    {
+      "episode_index": 39,
+      "frame_index": 2,
+      "timestamp": 0.100071936,
+      "video_timestamp": 0.08631576600070119,
+      "joint_motion": 0.0033453786467125476,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 393,
+      "cluster_id": 2
+    },
+    {
+      "episode_index": 39,
+      "frame_index": 13,
+      "timestamp": 0.65046784,
+      "video_timestamp": 0.6473682450052589,
+      "joint_motion": 0.018880266757008157,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 386,
+      "cluster_id": 7
+    },
+    {
+      "episode_index": 40,
+      "frame_index": 1,
+      "timestamp": 0.050003712,
+      "video_timestamp": 0.04236421950445846,
+      "joint_motion": 0.006592034951082512,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 406,
+      "cluster_id": 3
+    },
+    {
+      "episode_index": 40,
+      "frame_index": 10,
+      "timestamp": 0.5000384,
+      "video_timestamp": 0.5083706340535016,
+      "joint_motion": 0.0034831068695851215,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 436,
+      "cluster_id": 3
+    },
+    {
+      "episode_index": 41,
+      "frame_index": 1,
+      "timestamp": 0.05003136,
+      "video_timestamp": 0.04307032400136145,
+      "joint_motion": 3.709688896147711e-05,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 360,
+      "cluster_id": 0
+    },
+    {
+      "episode_index": 41,
+      "frame_index": 8,
+      "timestamp": 0.400251648,
+      "video_timestamp": 0.3876329160122531,
+      "joint_motion": 0.0254548563101992,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 377,
+      "cluster_id": 7
+    },
+    {
+      "episode_index": 42,
+      "frame_index": 3,
+      "timestamp": 0.150203392,
+      "video_timestamp": 0.17067341200629654,
+      "joint_motion": 0.0024370435025248918,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 376,
+      "cluster_id": 0
+    },
+    {
+      "episode_index": 42,
+      "frame_index": 8,
+      "timestamp": 0.400542464,
+      "video_timestamp": 0.38401517701416726,
+      "joint_motion": 0.03461649257893645,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 383,
+      "cluster_id": 3
+    },
+    {
+      "episode_index": 43,
+      "frame_index": 1,
+      "timestamp": 0.050017536,
+      "video_timestamp": 0.04259487700457151,
+      "joint_motion": 0.006497457614852796,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 396,
+      "cluster_id": 2
+    },
+    {
+      "episode_index": 43,
+      "frame_index": 11,
+      "timestamp": 0.550192384,
+      "video_timestamp": 0.5537334010594297,
+      "joint_motion": 0.04336131627731977,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 419,
+      "cluster_id": 0
+    },
+    {
+      "episode_index": 44,
+      "frame_index": 1,
+      "timestamp": 0.050129152,
+      "video_timestamp": 0.04301293000021261,
+      "joint_motion": 0.01711149569866851,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 333,
+      "cluster_id": 0
+    },
+    {
+      "episode_index": 44,
+      "frame_index": 12,
+      "timestamp": 0.601550336,
+      "video_timestamp": 0.6021810200029766,
+      "joint_motion": 0.04024679507888551,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 390,
+      "cluster_id": 0
+    },
+    {
+      "episode_index": 46,
+      "frame_index": 1,
+      "timestamp": 0.050002944,
+      "video_timestamp": 0.04322595349861582,
+      "joint_motion": 2.239778861885755e-05,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 458,
+      "cluster_id": 0
+    },
+    {
+      "episode_index": 46,
+      "frame_index": 13,
+      "timestamp": 0.650037248,
+      "video_timestamp": 0.6483893024792372,
+      "joint_motion": 0.006927985742060985,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 428,
+      "cluster_id": 0
+    },
+    {
+      "episode_index": 47,
+      "frame_index": 6,
+      "timestamp": 0.30042752,
+      "video_timestamp": 0.302683835996885,
+      "joint_motion": 0.0022860453561763363,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 364,
+      "cluster_id": 3
+    },
+    {
+      "episode_index": 47,
+      "frame_index": 10,
+      "timestamp": 0.500712448,
+      "video_timestamp": 0.5188865759946599,
+      "joint_motion": 0.0014429668301484712,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 359,
+      "cluster_id": 3
+    },
+    {
+      "episode_index": 48,
+      "frame_index": 1,
+      "timestamp": 0.050085888,
+      "video_timestamp": 0.043382065999293215,
+      "joint_motion": 0.0025880779023954074,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 367,
+      "cluster_id": 2
+    },
+    {
+      "episode_index": 48,
+      "frame_index": 10,
+      "timestamp": 0.500859648,
+      "video_timestamp": 0.5205847919915185,
+      "joint_motion": 0.0014349306264302812,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 359,
+      "cluster_id": 2
+    },
+    {
+      "episode_index": 49,
+      "frame_index": 5,
+      "timestamp": 0.250209536,
+      "video_timestamp": 0.2593302150019348,
+      "joint_motion": 0.0008825010344512615,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 378,
+      "cluster_id": 2
+    },
+    {
+      "episode_index": 49,
+      "frame_index": 8,
+      "timestamp": 0.400335104,
+      "video_timestamp": 0.3889953225029022,
+      "joint_motion": 0.003450071300013486,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 387,
+      "cluster_id": 2
+    },
+    {
+      "episode_index": 51,
+      "frame_index": 3,
+      "timestamp": 0.150245376,
+      "video_timestamp": 0.12964122599835282,
+      "joint_motion": 0.00014883666497532172,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 510,
+      "cluster_id": 2
+    },
+    {
+      "episode_index": 51,
+      "frame_index": 8,
+      "timestamp": 0.400654592,
+      "video_timestamp": 0.38892367799505845,
+      "joint_motion": 0.0005950356883867186,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 546,
+      "cluster_id": 2
+    },
+    {
+      "episode_index": 52,
+      "frame_index": 1,
+      "timestamp": 0.050115584,
+      "video_timestamp": 0.04319706000022139,
+      "joint_motion": 0.0017294157317112458,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 489,
+      "cluster_id": 0
+    },
+    {
+      "episode_index": 52,
+      "frame_index": 8,
+      "timestamp": 0.400925696,
+      "video_timestamp": 0.3887735400019925,
+      "joint_motion": 0.003907353945563785,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 481,
+      "cluster_id": 0
+    },
+    {
+      "episode_index": 53,
+      "frame_index": 1,
+      "timestamp": 0.050031616,
+      "video_timestamp": 0.0433706049999238,
+      "joint_motion": 0.003539822957453739,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 427,
+      "cluster_id": 2
+    },
+    {
+      "episode_index": 53,
+      "frame_index": 12,
+      "timestamp": 0.600380416,
+      "video_timestamp": 0.6071884699989332,
+      "joint_motion": 0.035980946253904994,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 538,
+      "cluster_id": 3
+    },
+    {
+      "episode_index": 54,
+      "frame_index": 2,
+      "timestamp": 0.10006656,
+      "video_timestamp": 0.08641914400259121,
+      "joint_motion": 0.0003884496480919622,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 414,
+      "cluster_id": 2
+    },
+    {
+      "episode_index": 54,
+      "frame_index": 12,
+      "timestamp": 0.60039936,
+      "video_timestamp": 0.6049340080181385,
+      "joint_motion": 0.0013966211359867195,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 416,
+      "cluster_id": 0
+    },
+    {
+      "episode_index": 55,
+      "frame_index": 6,
+      "timestamp": 0.300565248,
+      "video_timestamp": 0.30279910150092215,
+      "joint_motion": 0.0008860980374080227,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 347,
+      "cluster_id": 0
+    },
+    {
+      "episode_index": 55,
+      "frame_index": 8,
+      "timestamp": 0.400753664,
+      "video_timestamp": 0.38931313050118566,
+      "joint_motion": 0.005836120077141709,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 389,
+      "cluster_id": 0
+    },
+    {
+      "episode_index": 56,
+      "frame_index": 7,
+      "timestamp": 0.350445568,
+      "video_timestamp": 0.34600068799449607,
+      "joint_motion": 0.006855599698143116,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 428,
+      "cluster_id": 3
+    },
+    {
+      "episode_index": 56,
+      "frame_index": 11,
+      "timestamp": 0.550700032,
+      "video_timestamp": 0.5622511179910561,
+      "joint_motion": 0.0024708467869715115,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 417,
+      "cluster_id": 3
+    },
+    {
+      "episode_index": 57,
+      "frame_index": 1,
+      "timestamp": 0.050086144,
+      "video_timestamp": 0.04333303600056895,
+      "joint_motion": 0.004433966217352817,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 434,
+      "cluster_id": 7
+    },
+    {
+      "episode_index": 57,
+      "frame_index": 13,
+      "timestamp": 0.651118848,
+      "video_timestamp": 0.6499955400085342,
+      "joint_motion": 0.0028552233338900754,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 427,
+      "cluster_id": 7
+    },
+    {
+      "episode_index": 58,
+      "frame_index": 4,
+      "timestamp": 0.200234496,
+      "video_timestamp": 0.21495419499744484,
+      "joint_motion": 0.005117337674580197,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 427,
+      "cluster_id": 2
+    },
+    {
+      "episode_index": 58,
+      "frame_index": 8,
+      "timestamp": 0.400468992,
+      "video_timestamp": 0.3869175509954007,
+      "joint_motion": 0.01847692781794408,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 414,
+      "cluster_id": 2
+    },
+    {
+      "episode_index": 59,
+      "frame_index": 1,
+      "timestamp": 0.050040832,
+      "video_timestamp": 0.0432940499998739,
+      "joint_motion": 0.0015732829701575312,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 405,
+      "cluster_id": 2
+    },
+    {
+      "episode_index": 59,
+      "frame_index": 8,
+      "timestamp": 0.400326912,
+      "video_timestamp": 0.3896464499988651,
+      "joint_motion": 0.0028115135297364447,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 373,
+      "cluster_id": 2
+    },
+    {
+      "episode_index": 60,
+      "frame_index": 3,
+      "timestamp": 0.150264064,
+      "video_timestamp": 0.13010312550348335,
+      "joint_motion": 0.04872801028667683,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 353,
+      "cluster_id": 3
+    },
+    {
+      "episode_index": 60,
+      "frame_index": 11,
+      "timestamp": 0.550967808,
+      "video_timestamp": 0.5637802105150945,
+      "joint_motion": 0.05511222601558868,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 392,
+      "cluster_id": 3
+    },
+    {
+      "episode_index": 61,
+      "frame_index": 7,
+      "timestamp": 0.350257152,
+      "video_timestamp": 0.346733247994322,
+      "joint_motion": 0.014625880522187298,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 422,
+      "cluster_id": 3
+    },
+    {
+      "episode_index": 61,
+      "frame_index": 8,
+      "timestamp": 0.400293888,
+      "video_timestamp": 0.3900749039936122,
+      "joint_motion": 0.008935239638070155,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 405,
+      "cluster_id": 3
+    },
+    {
+      "episode_index": 62,
+      "frame_index": 2,
+      "timestamp": 0.100050944,
+      "video_timestamp": 0.08701622499933578,
+      "joint_motion": 0.003463564177024604,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 320,
+      "cluster_id": 3
+    },
+    {
+      "episode_index": 62,
+      "frame_index": 13,
+      "timestamp": 0.650331136,
+      "video_timestamp": 0.6526216874950184,
+      "joint_motion": 0.0059119055499634865,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 289,
+      "cluster_id": 3
+    },
+    {
+      "episode_index": 63,
+      "frame_index": 1,
+      "timestamp": 0.050078208,
+      "video_timestamp": 0.043492633498270594,
+      "joint_motion": 0.02512371843329506,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 388,
+      "cluster_id": 0
+    },
+    {
+      "episode_index": 63,
+      "frame_index": 8,
+      "timestamp": 0.400625408,
+      "video_timestamp": 0.39143370148443535,
+      "joint_motion": 0.03719707258783107,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 378,
+      "cluster_id": 3
+    },
+    {
+      "episode_index": 64,
+      "frame_index": 2,
+      "timestamp": 0.100119552,
+      "video_timestamp": 0.08674603199859132,
+      "joint_motion": 0.0006868829565999681,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 448,
+      "cluster_id": 3
+    },
+    {
+      "episode_index": 64,
+      "frame_index": 8,
+      "timestamp": 0.40047872,
+      "video_timestamp": 0.39035714399366095,
+      "joint_motion": 0.007934864916823103,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 439,
+      "cluster_id": 3
+    },
+    {
+      "episode_index": 65,
+      "frame_index": 1,
+      "timestamp": 0.0500224,
+      "video_timestamp": 0.04317545899920494,
+      "joint_motion": 0.0226735062703029,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 446,
+      "cluster_id": 3
+    },
+    {
+      "episode_index": 65,
+      "frame_index": 13,
+      "timestamp": 0.650290432,
+      "video_timestamp": 0.6476318849880741,
+      "joint_motion": 0.04484586710456061,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 446,
+      "cluster_id": 3
+    },
+    {
+      "episode_index": 66,
+      "frame_index": 3,
+      "timestamp": 0.150164992,
+      "video_timestamp": 0.17290977600077928,
+      "joint_motion": 0.0010431792775171965,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 550,
+      "cluster_id": 2
+    },
+    {
+      "episode_index": 66,
+      "frame_index": 10,
+      "timestamp": 0.500550144,
+      "video_timestamp": 0.5187293280023378,
+      "joint_motion": 0.01580964030250319,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 560,
+      "cluster_id": 2
+    },
+    {
+      "episode_index": 67,
+      "frame_index": 3,
+      "timestamp": 0.150137856,
+      "video_timestamp": 0.1295094465023995,
+      "joint_motion": 0.00283180739195099,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 524,
+      "cluster_id": 2
+    },
+    {
+      "episode_index": 67,
+      "frame_index": 8,
+      "timestamp": 0.400367872,
+      "video_timestamp": 0.3885283395071985,
+      "joint_motion": 0.008785562966265118,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 546,
+      "cluster_id": 2
+    },
+    {
+      "episode_index": 68,
+      "frame_index": 5,
+      "timestamp": 0.250371584,
+      "video_timestamp": 0.2579007509975619,
+      "joint_motion": 0.0003400598145595391,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 635,
+      "cluster_id": 2
+    },
+    {
+      "episode_index": 68,
+      "frame_index": 12,
+      "timestamp": 0.600891648,
+      "video_timestamp": 0.601768418994311,
+      "joint_motion": 0.0005927857055793141,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 617,
+      "cluster_id": 2
+    },
+    {
+      "episode_index": 69,
+      "frame_index": 1,
+      "timestamp": 0.05000448,
+      "video_timestamp": 0.0431360549974936,
+      "joint_motion": 0.0005602231906156065,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 367,
+      "cluster_id": 3
+    },
+    {
+      "episode_index": 69,
+      "frame_index": 10,
+      "timestamp": 0.500045568,
+      "video_timestamp": 0.5176326599699232,
+      "joint_motion": 0.0007771126265447634,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 381,
+      "cluster_id": 3
+    },
+    {
+      "episode_index": 70,
+      "frame_index": 1,
+      "timestamp": 0.050116608,
+      "video_timestamp": 0.04305510750137579,
+      "joint_motion": 0.001253792039255474,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 380,
+      "cluster_id": 3
+    },
+    {
+      "episode_index": 70,
+      "frame_index": 9,
+      "timestamp": 0.45105024,
+      "video_timestamp": 0.4305510750137579,
+      "joint_motion": 0.003744668470659298,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 399,
+      "cluster_id": 3
+    },
+    {
+      "episode_index": 71,
+      "frame_index": 5,
+      "timestamp": 0.250208768,
+      "video_timestamp": 0.2561594939986314,
+      "joint_motion": 0.0006590779546479411,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 364,
+      "cluster_id": 3
+    },
+    {
+      "episode_index": 71,
+      "frame_index": 12,
+      "timestamp": 0.600501248,
+      "video_timestamp": 0.5977054859968066,
+      "joint_motion": 0.00029986118169127634,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 401,
+      "cluster_id": 3
+    },
+    {
+      "episode_index": 72,
+      "frame_index": 4,
+      "timestamp": 0.200087808,
+      "video_timestamp": 0.21544322499774055,
+      "joint_motion": 0.0011701919198143687,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 414,
+      "cluster_id": 3
+    },
+    {
+      "episode_index": 72,
+      "frame_index": 8,
+      "timestamp": 0.400175616,
+      "video_timestamp": 0.38779780499593297,
+      "joint_motion": 0.0018235975631897105,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 448,
+      "cluster_id": 3
+    },
+    {
+      "episode_index": 73,
+      "frame_index": 2,
+      "timestamp": 0.100177408,
+      "video_timestamp": 0.08540920999778173,
+      "joint_motion": 0.00186063263126565,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 350,
+      "cluster_id": 3
+    },
+    {
+      "episode_index": 73,
+      "frame_index": 13,
+      "timestamp": 0.65115264,
+      "video_timestamp": 0.640569074983363,
+      "joint_motion": 0.001964681871949521,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 326,
+      "cluster_id": 3
+    },
+    {
+      "episode_index": 74,
+      "frame_index": 2,
+      "timestamp": 0.100155904,
+      "video_timestamp": 0.08586528100149315,
+      "joint_motion": 0.0032004030363601546,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 326,
+      "cluster_id": 3
+    },
+    {
+      "episode_index": 74,
+      "frame_index": 13,
+      "timestamp": 0.65101312,
+      "video_timestamp": 0.6439896075111987,
+      "joint_motion": 0.004711735579656918,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 291,
+      "cluster_id": 3
+    },
+    {
+      "episode_index": 75,
+      "frame_index": 6,
+      "timestamp": 0.300416256,
+      "video_timestamp": 0.30078737149908275,
+      "joint_motion": 0.0001810312832634572,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 351,
+      "cluster_id": 3
+    },
+    {
+      "episode_index": 75,
+      "frame_index": 8,
+      "timestamp": 0.400554752,
+      "video_timestamp": 0.3867266204988207,
+      "joint_motion": 0.0009821053820892698,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 356,
+      "cluster_id": 3
+    },
+    {
+      "episode_index": 76,
+      "frame_index": 7,
+      "timestamp": 0.350646528,
+      "video_timestamp": 0.3449963360090294,
+      "joint_motion": 0.002036467001730169,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 364,
+      "cluster_id": 3
+    },
+    {
+      "episode_index": 76,
+      "frame_index": 8,
+      "timestamp": 0.400738816,
+      "video_timestamp": 0.3881208780101581,
+      "joint_motion": 0.001764734027312845,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 379,
+      "cluster_id": 3
+    },
+    {
+      "episode_index": 77,
+      "frame_index": 1,
+      "timestamp": 0.050086144,
+      "video_timestamp": 0.04246775300031204,
+      "joint_motion": 0.006343062961845024,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 474,
+      "cluster_id": 2
+    },
+    {
+      "episode_index": 77,
+      "frame_index": 8,
+      "timestamp": 0.40068864,
+      "video_timestamp": 0.38220977700280834,
+      "joint_motion": 0.02116029217541411,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 417,
+      "cluster_id": 2
+    },
+    {
+      "episode_index": 78,
+      "frame_index": 3,
+      "timestamp": 0.150196224,
+      "video_timestamp": 0.16927636800118054,
+      "joint_motion": 0.000413966749433992,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 404,
+      "cluster_id": 2
+    },
+    {
+      "episode_index": 78,
+      "frame_index": 11,
+      "timestamp": 0.550719232,
+      "video_timestamp": 0.5501481960038367,
+      "joint_motion": 0.0018421754267693973,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 382,
+      "cluster_id": 2
+    },
+    {
+      "episode_index": 79,
+      "frame_index": 3,
+      "timestamp": 0.150098688,
+      "video_timestamp": 0.1291176164957024,
+      "joint_motion": 0.0007297093737530286,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 413,
+      "cluster_id": 3
+    },
+    {
+      "episode_index": 79,
+      "frame_index": 8,
+      "timestamp": 0.400263168,
+      "video_timestamp": 0.3873528494871072,
+      "joint_motion": 0.0016351853035890217,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 437,
+      "cluster_id": 3
+    },
+    {
+      "episode_index": 80,
+      "frame_index": 3,
+      "timestamp": 0.150111488,
+      "video_timestamp": 0.1698211780004383,
+      "joint_motion": 0.0006909093192472417,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 477,
+      "cluster_id": 3
+    },
+    {
+      "episode_index": 80,
+      "frame_index": 8,
+      "timestamp": 0.400297216,
+      "video_timestamp": 0.3820976505009862,
+      "joint_motion": 0.0035913639501218347,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 468,
+      "cluster_id": 3
+    },
+    {
+      "episode_index": 81,
+      "frame_index": 7,
+      "timestamp": 0.350174464,
+      "video_timestamp": 0.3408607680518782,
+      "joint_motion": 0.000686269098581138,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 341,
+      "cluster_id": 3
+    },
+    {
+      "episode_index": 81,
+      "frame_index": 10,
+      "timestamp": 0.500249088,
+      "video_timestamp": 0.5112911520778173,
+      "joint_motion": 0.0003532936994542205,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 352,
+      "cluster_id": 3
+    },
+    {
+      "episode_index": 82,
+      "frame_index": 1,
+      "timestamp": 0.050040064,
+      "video_timestamp": 0.04316670050119036,
+      "joint_motion": 0.0003797865077756474,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 366,
+      "cluster_id": 3
+    },
+    {
+      "episode_index": 82,
+      "frame_index": 10,
+      "timestamp": 0.500400896,
+      "video_timestamp": 0.5180004060142843,
+      "joint_motion": 0.0015739967379991887,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 374,
+      "cluster_id": 3
+    },
+    {
+      "episode_index": 83,
+      "frame_index": 1,
+      "timestamp": 0.05001856,
+      "video_timestamp": 0.043032788932798424,
+      "joint_motion": 0.002766532591879848,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 388,
+      "cluster_id": 0
+    },
+    {
+      "episode_index": 83,
+      "frame_index": 8,
+      "timestamp": 0.400147712,
+      "video_timestamp": 0.38729510039518583,
+      "joint_motion": 0.015029295520974768,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 395,
+      "cluster_id": 0
+    },
+    {
+      "episode_index": 84,
+      "frame_index": 5,
+      "timestamp": 0.250744832,
+      "video_timestamp": 0.2598366479947575,
+      "joint_motion": 0.003098635229931604,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 314,
+      "cluster_id": 3
+    },
+    {
+      "episode_index": 84,
+      "frame_index": 13,
+      "timestamp": 0.651936512,
+      "video_timestamp": 0.6495916199868936,
+      "joint_motion": 0.004877800482157075,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 303,
+      "cluster_id": 3
+    },
+    {
+      "episode_index": 85,
+      "frame_index": 2,
+      "timestamp": 0.100102144,
+      "video_timestamp": 0.08645452900148036,
+      "joint_motion": 0.0002747278429964112,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 354,
+      "cluster_id": 3
+    },
+    {
+      "episode_index": 85,
+      "frame_index": 8,
+      "timestamp": 0.400408064,
+      "video_timestamp": 0.3890453805066616,
+      "joint_motion": 0.0018793219427702223,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 337,
+      "cluster_id": 3
+    },
+    {
+      "episode_index": 86,
+      "frame_index": 1,
+      "timestamp": 0.05000448,
+      "video_timestamp": 0.04339488050056199,
+      "joint_motion": 0.006756161000904554,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 350,
+      "cluster_id": 3
+    },
+    {
+      "episode_index": 86,
+      "frame_index": 12,
+      "timestamp": 0.600054016,
+      "video_timestamp": 0.6075283270078679,
+      "joint_motion": 0.0007175594349846851,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 338,
+      "cluster_id": 3
+    },
+    {
+      "episode_index": 87,
+      "frame_index": 3,
+      "timestamp": 0.150048256,
+      "video_timestamp": 0.12971491498489704,
+      "joint_motion": 6.035099057601518e-06,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 364,
+      "cluster_id": 3
+    },
+    {
+      "episode_index": 87,
+      "frame_index": 8,
+      "timestamp": 0.400129024,
+      "video_timestamp": 0.38914474495469115,
+      "joint_motion": 0.0001183222310993995,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 370,
+      "cluster_id": 3
+    },
+    {
+      "episode_index": 88,
+      "frame_index": 4,
+      "timestamp": 0.200312576,
+      "video_timestamp": 0.2171165974994714,
+      "joint_motion": 0.0011453701556736902,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 363,
+      "cluster_id": 2
+    },
+    {
+      "episode_index": 88,
+      "frame_index": 13,
+      "timestamp": 0.651016192,
+      "video_timestamp": 0.6513497924984142,
+      "joint_motion": 0.0017170960854747755,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 391,
+      "cluster_id": 2
+    },
+    {
+      "episode_index": 89,
+      "frame_index": 2,
+      "timestamp": 0.10003584,
+      "video_timestamp": 0.08654477899363375,
+      "joint_motion": 0.000964470409799444,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 454,
+      "cluster_id": 2
+    },
+    {
+      "episode_index": 89,
+      "frame_index": 8,
+      "timestamp": 0.400142848,
+      "video_timestamp": 0.3894515054713519,
+      "joint_motion": 0.000676538481620886,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 471,
+      "cluster_id": 2
+    },
+    {
+      "episode_index": 90,
+      "frame_index": 5,
+      "timestamp": 0.25046528,
+      "video_timestamp": 0.25822233001320904,
+      "joint_motion": 0.00015937535265603064,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 403,
+      "cluster_id": 3
+    },
+    {
+      "episode_index": 90,
+      "frame_index": 9,
+      "timestamp": 0.450837504,
+      "video_timestamp": 0.430370550022015,
+      "joint_motion": 0.0007913697934910167,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 381,
+      "cluster_id": 3
+    },
+    {
+      "episode_index": 91,
+      "frame_index": 4,
+      "timestamp": 0.200030976,
+      "video_timestamp": 0.17247169099683693,
+      "joint_motion": 3.707452027109943e-05,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 372,
+      "cluster_id": 2
+    },
+    {
+      "episode_index": 91,
+      "frame_index": 8,
+      "timestamp": 0.400061952,
+      "video_timestamp": 0.34494338199367386,
+      "joint_motion": 0.0007880913802839648,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 373,
+      "cluster_id": 2
+    },
+    {
+      "episode_index": 92,
+      "frame_index": 2,
+      "timestamp": 0.100090368,
+      "video_timestamp": 0.08587557599781719,
+      "joint_motion": 0.008275931189826847,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 470,
+      "cluster_id": 2
+    },
+    {
+      "episode_index": 92,
+      "frame_index": 9,
+      "timestamp": 0.450406144,
+      "video_timestamp": 0.4293778799890859,
+      "joint_motion": 0.009253697253150391,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 505,
+      "cluster_id": 3
+    },
+    {
+      "episode_index": 93,
+      "frame_index": 1,
+      "timestamp": 0.050046976,
+      "video_timestamp": 0.04283314000071752,
+      "joint_motion": 5.7246530077138596e-05,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 365,
+      "cluster_id": 7
+    },
+    {
+      "episode_index": 93,
+      "frame_index": 8,
+      "timestamp": 0.400376576,
+      "video_timestamp": 0.3854982600064577,
+      "joint_motion": 0.003117566017168959,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 406,
+      "cluster_id": 7
+    },
+    {
+      "episode_index": 94,
+      "frame_index": 7,
+      "timestamp": 0.350204928,
+      "video_timestamp": 0.34550363200349704,
+      "joint_motion": 4.7249606091037785e-05,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 402,
+      "cluster_id": 7
+    },
+    {
+      "episode_index": 94,
+      "frame_index": 11,
+      "timestamp": 0.55032192,
+      "video_timestamp": 0.5614434020056828,
+      "joint_motion": 0.00011917335743580616,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 359,
+      "cluster_id": 7
+    },
+    {
+      "episode_index": 95,
+      "frame_index": 5,
+      "timestamp": 0.250115584,
+      "video_timestamp": 0.2587060320035396,
+      "joint_motion": 0.001000737550771151,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 332,
+      "cluster_id": 7
+    },
+    {
+      "episode_index": 95,
+      "frame_index": 11,
+      "timestamp": 0.550254336,
+      "video_timestamp": 0.5605297360076691,
+      "joint_motion": 0.0021486906503441366,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 323,
+      "cluster_id": 7
+    },
+    {
+      "episode_index": 96,
+      "frame_index": 5,
+      "timestamp": 0.250312448,
+      "video_timestamp": 0.25975876799783454,
+      "joint_motion": 0.0004533879756859161,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 343,
+      "cluster_id": 7
+    },
+    {
+      "episode_index": 96,
+      "frame_index": 8,
+      "timestamp": 0.400499968,
+      "video_timestamp": 0.3896381519967518,
+      "joint_motion": 0.00403746138783653,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 366,
+      "cluster_id": 7
+    },
+    {
+      "episode_index": 97,
+      "frame_index": 2,
+      "timestamp": 0.100017408,
+      "video_timestamp": 0.08567992599444958,
+      "joint_motion": 0.00016805180514116734,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 347,
+      "cluster_id": 7
+    },
+    {
+      "episode_index": 97,
+      "frame_index": 9,
+      "timestamp": 0.450078208,
+      "video_timestamp": 0.4712395929694727,
+      "joint_motion": 0.001344401485933996,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 343,
+      "cluster_id": 7
+    },
+    {
+      "episode_index": 98,
+      "frame_index": 2,
+      "timestamp": 0.100070656,
+      "video_timestamp": 0.0863764900079828,
+      "joint_motion": 0.004600005702025661,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 303,
+      "cluster_id": 6
+    },
+    {
+      "episode_index": 98,
+      "frame_index": 8,
+      "timestamp": 0.400282624,
+      "video_timestamp": 0.38869420503592256,
+      "joint_motion": 0.005839073360597221,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 319,
+      "cluster_id": 6
+    },
+    {
+      "episode_index": 99,
+      "frame_index": 1,
+      "timestamp": 0.050030336,
+      "video_timestamp": 0.0430933210014209,
+      "joint_motion": 9.378227842618729e-05,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 375,
+      "cluster_id": 7
+    },
+    {
+      "episode_index": 99,
+      "frame_index": 8,
+      "timestamp": 0.400242688,
+      "video_timestamp": 0.38783988901278815,
+      "joint_motion": 0.00045054120765335084,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 361,
+      "cluster_id": 1
+    },
+    {
+      "episode_index": 100,
+      "frame_index": 5,
+      "timestamp": 0.250047744,
+      "video_timestamp": 0.2591903729965072,
+      "joint_motion": 0.006357419267550636,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 304,
+      "cluster_id": 1
+    },
+    {
+      "episode_index": 100,
+      "frame_index": 8,
+      "timestamp": 0.400076544,
+      "video_timestamp": 0.38878555949476085,
+      "joint_motion": 0.021286761868234742,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 333,
+      "cluster_id": 1
+    },
+    {
+      "episode_index": 101,
+      "frame_index": 7,
+      "timestamp": 0.350539008,
+      "video_timestamp": 0.34527594801389255,
+      "joint_motion": 0.004887472174761634,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 319,
+      "cluster_id": 1
+    },
+    {
+      "episode_index": 101,
+      "frame_index": 13,
+      "timestamp": 0.651000832,
+      "video_timestamp": 0.6473924025260486,
+      "joint_motion": 0.003359172228317609,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 345,
+      "cluster_id": 1
+    },
+    {
+      "episode_index": 102,
+      "frame_index": 2,
+      "timestamp": 0.100102912,
+      "video_timestamp": 0.08657365600303504,
+      "joint_motion": 0.0008893969060332318,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 309,
+      "cluster_id": 1
+    },
+    {
+      "episode_index": 102,
+      "frame_index": 9,
+      "timestamp": 0.450463232,
+      "video_timestamp": 0.43286828001517524,
+      "joint_motion": 0.014712057921701978,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 309,
+      "cluster_id": 1
+    },
+    {
+      "episode_index": 103,
+      "frame_index": 2,
+      "timestamp": 0.100081664,
+      "video_timestamp": 0.0863195949990991,
+      "joint_motion": 0.0021033972884131396,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 361,
+      "cluster_id": 1
+    },
+    {
+      "episode_index": 103,
+      "frame_index": 9,
+      "timestamp": 0.450367744,
+      "video_timestamp": 0.43159797499549546,
+      "joint_motion": 0.005738281994484375,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 336,
+      "cluster_id": 1
+    },
+    {
+      "episode_index": 104,
+      "frame_index": 6,
+      "timestamp": 0.300301056,
+      "video_timestamp": 0.30239946107594384,
+      "joint_motion": 0.0008352924511762673,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 326,
+      "cluster_id": 0
+    },
+    {
+      "episode_index": 104,
+      "frame_index": 11,
+      "timestamp": 0.550551808,
+      "video_timestamp": 0.5615989991410386,
+      "joint_motion": 0.0018734594042615282,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 324,
+      "cluster_id": 0
+    },
+    {
+      "episode_index": 105,
+      "frame_index": 1,
+      "timestamp": 0.050092288,
+      "video_timestamp": 0.043154331000097974,
+      "joint_motion": 0.00258109129893468,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 304,
+      "cluster_id": 1
+    },
+    {
+      "episode_index": 105,
+      "frame_index": 9,
+      "timestamp": 0.450831616,
+      "video_timestamp": 0.43154331000097973,
+      "joint_motion": 0.006095819315040738,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 290,
+      "cluster_id": 1
+    },
+    {
+      "episode_index": 106,
+      "frame_index": 6,
+      "timestamp": 0.30018432,
+      "video_timestamp": 0.30167457599495634,
+      "joint_motion": 3.8628730563489624e-05,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 302,
+      "cluster_id": 0
+    },
+    {
+      "episode_index": 106,
+      "frame_index": 8,
+      "timestamp": 0.400245504,
+      "video_timestamp": 0.38786731199351526,
+      "joint_motion": 0.00016389154437618323,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 292,
+      "cluster_id": 0
+    },
+    {
+      "episode_index": 107,
+      "frame_index": 2,
+      "timestamp": 0.100132352,
+      "video_timestamp": 0.08618931800314465,
+      "joint_motion": 0.002875181202382304,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 322,
+      "cluster_id": 0
+    },
+    {
+      "episode_index": 107,
+      "frame_index": 12,
+      "timestamp": 0.6007936,
+      "video_timestamp": 0.6033252260220126,
+      "joint_motion": 0.001233427285121834,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 328,
+      "cluster_id": 0
+    },
+    {
+      "episode_index": 108,
+      "frame_index": 4,
+      "timestamp": 0.200235008,
+      "video_timestamp": 0.21575692000513108,
+      "joint_motion": 0.00048244205674243825,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 289,
+      "cluster_id": 1
+    },
+    {
+      "episode_index": 108,
+      "frame_index": 8,
+      "timestamp": 0.40046976,
+      "video_timestamp": 0.38836245600923597,
+      "joint_motion": 0.0011381825840821379,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 310,
+      "cluster_id": 1
+    },
+    {
+      "episode_index": 109,
+      "frame_index": 2,
+      "timestamp": 0.100127232,
+      "video_timestamp": 0.08623351399805779,
+      "joint_motion": 0.0012662793749865574,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 315,
+      "cluster_id": 1
+    },
+    {
+      "episode_index": 109,
+      "frame_index": 10,
+      "timestamp": 0.500635904,
+      "video_timestamp": 0.5174010839883467,
+      "joint_motion": 0.002919931993935007,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 310,
+      "cluster_id": 1
+    },
+    {
+      "episode_index": 110,
+      "frame_index": 1,
+      "timestamp": 0.05006976,
+      "video_timestamp": 0.04317172499939034,
+      "joint_motion": 0.00016122942104833428,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 276,
+      "cluster_id": 1
+    },
+    {
+      "episode_index": 110,
+      "frame_index": 10,
+      "timestamp": 0.500698368,
+      "video_timestamp": 0.5180606999926841,
+      "joint_motion": 0.0007636078615800089,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 286,
+      "cluster_id": 1
+    },
+    {
+      "episode_index": 111,
+      "frame_index": 6,
+      "timestamp": 0.300014336,
+      "video_timestamp": 0.301725028515046,
+      "joint_motion": 0.0004990083035058687,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 286,
+      "cluster_id": 1
+    },
+    {
+      "episode_index": 111,
+      "frame_index": 8,
+      "timestamp": 0.4000192,
+      "video_timestamp": 0.3879321795193449,
+      "joint_motion": 0.000918712247371263,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 272,
+      "cluster_id": 1
+    },
+    {
+      "episode_index": 112,
+      "frame_index": 1,
+      "timestamp": 0.050069504,
+      "video_timestamp": 0.04310310699982185,
+      "joint_motion": 0.001950699624547838,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 313,
+      "cluster_id": 0
+    },
+    {
+      "episode_index": 112,
+      "frame_index": 8,
+      "timestamp": 0.400555264,
+      "video_timestamp": 0.38792796299839666,
+      "joint_motion": 0.002202117835193331,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 300,
+      "cluster_id": 1
+    },
+    {
+      "episode_index": 114,
+      "frame_index": 6,
+      "timestamp": 0.300027648,
+      "video_timestamp": 0.2977473310108226,
+      "joint_motion": 0.0011097049130181131,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 280,
+      "cluster_id": 2
+    },
+    {
+      "episode_index": 114,
+      "frame_index": 8,
+      "timestamp": 0.400036864,
+      "video_timestamp": 0.3828179970139148,
+      "joint_motion": 0.003019688726629836,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 292,
+      "cluster_id": 2
+    },
+    {
+      "episode_index": 115,
+      "frame_index": 7,
+      "timestamp": 0.350260224,
+      "video_timestamp": 0.3395706640042166,
+      "joint_motion": 0.000703385278539677,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 316,
+      "cluster_id": 2
+    },
+    {
+      "episode_index": 115,
+      "frame_index": 8,
+      "timestamp": 0.400297216,
+      "video_timestamp": 0.3820169970047437,
+      "joint_motion": 0.0006068210863221082,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 306,
+      "cluster_id": 2
+    },
+    {
+      "episode_index": 116,
+      "frame_index": 2,
+      "timestamp": 0.100073216,
+      "video_timestamp": 0.0848613499967757,
+      "joint_motion": 7.798082226470151e-05,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 294,
+      "cluster_id": 2
+    },
+    {
+      "episode_index": 116,
+      "frame_index": 8,
+      "timestamp": 0.400292608,
+      "video_timestamp": 0.38187607498549064,
+      "joint_motion": 0.0006491679770048648,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 299,
+      "cluster_id": 2
+    },
+    {
+      "episode_index": 117,
+      "frame_index": 2,
+      "timestamp": 0.10011392,
+      "video_timestamp": 0.08472993399883263,
+      "joint_motion": 0.00017266431943530029,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 283,
+      "cluster_id": 2
+    },
+    {
+      "episode_index": 117,
+      "frame_index": 8,
+      "timestamp": 0.400456192,
+      "video_timestamp": 0.38128470299474687,
+      "joint_motion": 0.002847201674244641,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 281,
+      "cluster_id": 2
+    },
+    {
+      "episode_index": 118,
+      "frame_index": 7,
+      "timestamp": 0.35009024,
+      "video_timestamp": 0.34075423604189475,
+      "joint_motion": 0.006832088550673827,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 287,
+      "cluster_id": 2
+    },
+    {
+      "episode_index": 118,
+      "frame_index": 8,
+      "timestamp": 0.400103168,
+      "video_timestamp": 0.38334851554713156,
+      "joint_motion": 0.006977679616357788,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 275,
+      "cluster_id": 2
+    },
+    {
+      "episode_index": 119,
+      "frame_index": 2,
+      "timestamp": 0.100002816,
+      "video_timestamp": 0.08637632400162085,
+      "joint_motion": 5.9074820654165375e-05,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 284,
+      "cluster_id": 2
+    },
+    {
+      "episode_index": 119,
+      "frame_index": 8,
+      "timestamp": 0.40001152,
+      "video_timestamp": 0.3886934580072938,
+      "joint_motion": 0.0012816816433382332,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 257,
+      "cluster_id": 2
+    },
+    {
+      "episode_index": 120,
+      "frame_index": 2,
+      "timestamp": 0.10013056,
+      "video_timestamp": 0.08607033000157567,
+      "joint_motion": 0.000734072109031047,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 295,
+      "cluster_id": 2
+    },
+    {
+      "episode_index": 120,
+      "frame_index": 8,
+      "timestamp": 0.400521984,
+      "video_timestamp": 0.38731648500709054,
+      "joint_motion": 0.004060343961709658,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 304,
+      "cluster_id": 2
+    },
+    {
+      "episode_index": 121,
+      "frame_index": 3,
+      "timestamp": 0.150143232,
+      "video_timestamp": 0.17066905800506094,
+      "joint_motion": 0.0004229192830938405,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 272,
+      "cluster_id": 2
+    },
+    {
+      "episode_index": 121,
+      "frame_index": 8,
+      "timestamp": 0.400381952,
+      "video_timestamp": 0.3840053805113871,
+      "joint_motion": 0.003859649004923535,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 272,
+      "cluster_id": 2
+    },
+    {
+      "episode_index": 122,
+      "frame_index": 2,
+      "timestamp": 0.100030976,
+      "video_timestamp": 0.08565932100198967,
+      "joint_motion": 0.0025756087593767425,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 278,
+      "cluster_id": 2
+    },
+    {
+      "episode_index": 122,
+      "frame_index": 11,
+      "timestamp": 0.55017088,
+      "video_timestamp": 0.5567855865129329,
+      "joint_motion": 0.007385891721623734,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 292,
+      "cluster_id": 2
+    },
+    {
+      "episode_index": 123,
+      "frame_index": 1,
+      "timestamp": 0.050043136,
+      "video_timestamp": 0.0430272915016127,
+      "joint_motion": 0.0014076378819758268,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 290,
+      "cluster_id": 2
+    },
+    {
+      "episode_index": 123,
+      "frame_index": 11,
+      "timestamp": 0.550473728,
+      "video_timestamp": 0.5593547895209651,
+      "joint_motion": 0.00022232993513599593,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 290,
+      "cluster_id": 2
+    },
+    {
+      "episode_index": 124,
+      "frame_index": 6,
+      "timestamp": 0.300371712,
+      "video_timestamp": 0.2984540020028958,
+      "joint_motion": 3.04339683394697e-05,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 289,
+      "cluster_id": 1
+    },
+    {
+      "episode_index": 124,
+      "frame_index": 9,
+      "timestamp": 0.45055744,
+      "video_timestamp": 0.46899914600455056,
+      "joint_motion": 5.3077205254410257e-05,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 280,
+      "cluster_id": 1
+    },
+    {
+      "episode_index": 125,
+      "frame_index": 5,
+      "timestamp": 0.250208,
+      "video_timestamp": 0.25810489800535424,
+      "joint_motion": 0.0003006397188270755,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 269,
+      "cluster_id": 7
+    },
+    {
+      "episode_index": 125,
+      "frame_index": 8,
+      "timestamp": 0.4003328,
+      "video_timestamp": 0.3871573470080314,
+      "joint_motion": 0.0019582399181150663,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 251,
+      "cluster_id": 7
+    },
+    {
+      "episode_index": 126,
+      "frame_index": 1,
+      "timestamp": 0.05007232,
+      "video_timestamp": 0.04317384500137213,
+      "joint_motion": 0.0008941213861363155,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 242,
+      "cluster_id": 2
+    },
+    {
+      "episode_index": 126,
+      "frame_index": 8,
+      "timestamp": 0.400579328,
+      "video_timestamp": 0.3885646050123492,
+      "joint_motion": 0.0018575258980015727,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 243,
+      "cluster_id": 2
+    },
+    {
+      "episode_index": 127,
+      "frame_index": 7,
+      "timestamp": 0.350247168,
+      "video_timestamp": 0.3427312399953743,
+      "joint_motion": 0.0011155246813908948,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 292,
+      "cluster_id": 2
+    },
+    {
+      "episode_index": 127,
+      "frame_index": 8,
+      "timestamp": 0.400282368,
+      "video_timestamp": 0.3855726449947961,
+      "joint_motion": 0.0016422380394794335,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 283,
+      "cluster_id": 2
+    },
+    {
+      "episode_index": 128,
+      "frame_index": 1,
+      "timestamp": 0.05000576,
+      "video_timestamp": 0.043051947986497696,
+      "joint_motion": 0.001853888562850104,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 338,
+      "cluster_id": 1
+    },
+    {
+      "episode_index": 128,
+      "frame_index": 9,
+      "timestamp": 0.450050816,
+      "video_timestamp": 0.43051947986497696,
+      "joint_motion": 0.002569970646634184,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 303,
+      "cluster_id": 1
+    },
+    {
+      "episode_index": 129,
+      "frame_index": 3,
+      "timestamp": 0.150194688,
+      "video_timestamp": 0.12946641600119582,
+      "joint_motion": 0.0009512285365203257,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 307,
+      "cluster_id": 2
+    },
+    {
+      "episode_index": 129,
+      "frame_index": 9,
+      "timestamp": 0.450584064,
+      "video_timestamp": 0.4315547200039861,
+      "joint_motion": 0.0047667681621419026,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 311,
+      "cluster_id": 2
+    },
+    {
+      "episode_index": 130,
+      "frame_index": 1,
+      "timestamp": 0.050070784,
+      "video_timestamp": 0.04306964400200786,
+      "joint_motion": 0.0001271523305592921,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 335,
+      "cluster_id": 0
+    },
+    {
+      "episode_index": 130,
+      "frame_index": 12,
+      "timestamp": 0.600850688,
+      "video_timestamp": 0.6029750160281101,
+      "joint_motion": 0.0021841087727031325,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 361,
+      "cluster_id": 1
+    },
+    {
+      "episode_index": 131,
+      "frame_index": 4,
+      "timestamp": 0.200298496,
+      "video_timestamp": 0.21557917001266372,
+      "joint_motion": 0.00023223386886457616,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 345,
+      "cluster_id": 6
+    },
+    {
+      "episode_index": 131,
+      "frame_index": 10,
+      "timestamp": 0.500746496,
+      "video_timestamp": 0.5173900080303929,
+      "joint_motion": 0.0009755523262656177,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 338,
+      "cluster_id": 6
+    },
+    {
+      "episode_index": 132,
+      "frame_index": 1,
+      "timestamp": 0.050091008,
+      "video_timestamp": 0.04329294499892253,
+      "joint_motion": 7.233402336531397e-05,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 362,
+      "cluster_id": 1
+    },
+    {
+      "episode_index": 132,
+      "frame_index": 10,
+      "timestamp": 0.500910592,
+      "video_timestamp": 0.5195153399870703,
+      "joint_motion": 0.00037982982179464556,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 301,
+      "cluster_id": 1
+    },
+    {
+      "episode_index": 133,
+      "frame_index": 1,
+      "timestamp": 0.05004032,
+      "video_timestamp": 0.04294711599991917,
+      "joint_motion": 0.0001039890460378791,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 313,
+      "cluster_id": 1
+    },
+    {
+      "episode_index": 133,
+      "frame_index": 12,
+      "timestamp": 0.60048256,
+      "video_timestamp": 0.6012596239988683,
+      "joint_motion": 0.002078008597673562,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 329,
+      "cluster_id": 1
+    },
+    {
+      "episode_index": 134,
+      "frame_index": 1,
+      "timestamp": 0.050053632,
+      "video_timestamp": 0.04292150199955838,
+      "joint_motion": 0.0007354613206056852,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 346,
+      "cluster_id": 1
+    },
+    {
+      "episode_index": 134,
+      "frame_index": 11,
+      "timestamp": 0.550588928,
+      "video_timestamp": 0.5579795259942589,
+      "joint_motion": 0.0015315683961054552,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 334,
+      "cluster_id": 1
+    },
+    {
+      "episode_index": 135,
+      "frame_index": 7,
+      "timestamp": 0.350317568,
+      "video_timestamp": 0.34529339199852016,
+      "joint_motion": 0.005310280916983546,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 330,
+      "cluster_id": 6
+    },
+    {
+      "episode_index": 135,
+      "frame_index": 9,
+      "timestamp": 0.450408192,
+      "video_timestamp": 0.4316167399981502,
+      "joint_motion": 0.0022116273112590345,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 353,
+      "cluster_id": 6
+    },
+    {
+      "episode_index": 136,
+      "frame_index": 5,
+      "timestamp": 0.250569728,
+      "video_timestamp": 0.2587600916555661,
+      "joint_motion": 0.0006334439365043452,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 294,
+      "cluster_id": 1
+    },
+    {
+      "episode_index": 136,
+      "frame_index": 8,
+      "timestamp": 0.400911616,
+      "video_timestamp": 0.3881401374833492,
+      "joint_motion": 0.002442292338854858,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 291,
+      "cluster_id": 1
+    },
+    {
+      "episode_index": 137,
+      "frame_index": 2,
+      "timestamp": 0.10008192,
+      "video_timestamp": 0.0863367240022259,
+      "joint_motion": 0.0028182683949299903,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 344,
+      "cluster_id": 6
+    },
+    {
+      "episode_index": 137,
+      "frame_index": 8,
+      "timestamp": 0.400328192,
+      "video_timestamp": 0.3885152580100166,
+      "joint_motion": 0.017913806216592467,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 285,
+      "cluster_id": 6
+    },
+    {
+      "episode_index": 138,
+      "frame_index": 2,
+      "timestamp": 0.100078848,
+      "video_timestamp": 0.08616957800127417,
+      "joint_motion": 0.00028030318594902736,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 358,
+      "cluster_id": 1
+    },
+    {
+      "episode_index": 138,
+      "frame_index": 8,
+      "timestamp": 0.400315392,
+      "video_timestamp": 0.3877631010057338,
+      "joint_motion": 0.001368368823288267,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 315,
+      "cluster_id": 1
+    },
+    {
+      "episode_index": 139,
+      "frame_index": 1,
+      "timestamp": 0.050021376,
+      "video_timestamp": 0.04311607650066275,
+      "joint_motion": 0.00016204214144899866,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 337,
+      "cluster_id": 6
+    },
+    {
+      "episode_index": 139,
+      "frame_index": 9,
+      "timestamp": 0.450191872,
+      "video_timestamp": 0.43116076500662753,
+      "joint_motion": 0.0032443432304914426,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 330,
+      "cluster_id": 6
+    },
+    {
+      "episode_index": 140,
+      "frame_index": 3,
+      "timestamp": 0.150203136,
+      "video_timestamp": 0.129343034999587,
+      "joint_motion": 0.0023140371983102516,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 328,
+      "cluster_id": 1
+    },
+    {
+      "episode_index": 140,
+      "frame_index": 8,
+      "timestamp": 0.400541696,
+      "video_timestamp": 0.38802910499876103,
+      "joint_motion": 0.007438670700196598,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 315,
+      "cluster_id": 1
+    },
+    {
+      "episode_index": 141,
+      "frame_index": 7,
+      "timestamp": 0.350213888,
+      "video_timestamp": 0.34510534800719406,
+      "joint_motion": 0.0019837440799641407,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 326,
+      "cluster_id": 1
+    },
+    {
+      "episode_index": 141,
+      "frame_index": 8,
+      "timestamp": 0.40024448,
+      "video_timestamp": 0.3882435165080933,
+      "joint_motion": 0.002351162962164561,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 330,
+      "cluster_id": 1
+    },
+    {
+      "episode_index": 142,
+      "frame_index": 7,
+      "timestamp": 0.350633472,
+      "video_timestamp": 0.3458053999791276,
+      "joint_motion": 0.0016450606057455339,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 482,
+      "cluster_id": 1
+    },
+    {
+      "episode_index": 142,
+      "frame_index": 9,
+      "timestamp": 0.450814464,
+      "video_timestamp": 0.43225674997390956,
+      "joint_motion": 0.000900130485887411,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 489,
+      "cluster_id": 1
+    },
+    {
+      "episode_index": 143,
+      "frame_index": 4,
+      "timestamp": 0.200218368,
+      "video_timestamp": 0.2157133200034691,
+      "joint_motion": 0.00028184712385596373,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 294,
+      "cluster_id": 1
+    },
+    {
+      "episode_index": 143,
+      "frame_index": 8,
+      "timestamp": 0.400436736,
+      "video_timestamp": 0.38828397600624437,
+      "joint_motion": 0.0027810452872413533,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 281,
+      "cluster_id": 1
+    },
+    {
+      "episode_index": 144,
+      "frame_index": 4,
+      "timestamp": 0.20011136,
+      "video_timestamp": 0.2153113550049355,
+      "joint_motion": 0.0002780962226702634,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 310,
+      "cluster_id": 1
+    },
+    {
+      "episode_index": 144,
+      "frame_index": 8,
+      "timestamp": 0.400222464,
+      "video_timestamp": 0.38756043900888393,
+      "joint_motion": 0.0007738220820372431,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 309,
+      "cluster_id": 1
+    },
+    {
+      "episode_index": 145,
+      "frame_index": 1,
+      "timestamp": 0.050035968,
+      "video_timestamp": 0.043516494001097215,
+      "joint_motion": 0.00037308151284833383,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 330,
+      "cluster_id": 1
+    },
+    {
+      "episode_index": 145,
+      "frame_index": 8,
+      "timestamp": 0.400288256,
+      "video_timestamp": 0.3916484460098749,
+      "joint_motion": 0.006335552039340149,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 300,
+      "cluster_id": 1
+    },
+    {
+      "episode_index": 146,
+      "frame_index": 1,
+      "timestamp": 0.0500224,
+      "video_timestamp": 0.04374973900128729,
+      "joint_motion": 0.0029594164402010053,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 331,
+      "cluster_id": 1
+    },
+    {
+      "episode_index": 146,
+      "frame_index": 8,
+      "timestamp": 0.400178432,
+      "video_timestamp": 0.3937476510115856,
+      "joint_motion": 0.007915483666763184,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 302,
+      "cluster_id": 1
+    },
+    {
+      "episode_index": 147,
+      "frame_index": 2,
+      "timestamp": 0.100072192,
+      "video_timestamp": 0.08738970200057317,
+      "joint_motion": 0.000939107398412593,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 278,
+      "cluster_id": 1
+    },
+    {
+      "episode_index": 147,
+      "frame_index": 9,
+      "timestamp": 0.450325248,
+      "video_timestamp": 0.4369485100028659,
+      "joint_motion": 0.0015004693379294133,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 301,
+      "cluster_id": 1
+    },
+    {
+      "episode_index": 148,
+      "frame_index": 1,
+      "timestamp": 0.050049024,
+      "video_timestamp": 0.043780070502356175,
+      "joint_motion": 0.00013570713072341432,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 341,
+      "cluster_id": 1
+    },
+    {
+      "episode_index": 148,
+      "frame_index": 10,
+      "timestamp": 0.500489216,
+      "video_timestamp": 0.4815807755259179,
+      "joint_motion": 0.004859230954308449,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 300,
+      "cluster_id": 1
+    },
+    {
+      "episode_index": 149,
+      "frame_index": 5,
+      "timestamp": 0.250180096,
+      "video_timestamp": 0.26269124999608334,
+      "joint_motion": 0.0013144668881605913,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 348,
+      "cluster_id": 1
+    },
+    {
+      "episode_index": 149,
+      "frame_index": 12,
+      "timestamp": 0.60043264,
+      "video_timestamp": 0.6129462499908611,
+      "joint_motion": 0.0018692994161192147,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 338,
+      "cluster_id": 1
+    },
+    {
+      "episode_index": 150,
+      "frame_index": 4,
+      "timestamp": 0.200239872,
+      "video_timestamp": 0.2192720274907876,
+      "joint_motion": 0.003242089481307632,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 324,
+      "cluster_id": 1
+    },
+    {
+      "episode_index": 150,
+      "frame_index": 10,
+      "timestamp": 0.500599808,
+      "video_timestamp": 0.4823984604797328,
+      "joint_motion": 0.0055250506059390464,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 294,
+      "cluster_id": 1
+    },
+    {
+      "episode_index": 151,
+      "frame_index": 2,
+      "timestamp": 0.10014336,
+      "video_timestamp": 0.0877251100003473,
+      "joint_motion": 0.002710196434047828,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 422,
+      "cluster_id": 7
+    },
+    {
+      "episode_index": 151,
+      "frame_index": 8,
+      "timestamp": 0.400573184,
+      "video_timestamp": 0.39476299500156287,
+      "joint_motion": 0.005016661022672039,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 384,
+      "cluster_id": 7
+    },
+    {
+      "episode_index": 152,
+      "frame_index": 7,
+      "timestamp": 0.350724096,
+      "video_timestamp": 0.34995323199074635,
+      "joint_motion": 0.0032550678527820836,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 372,
+      "cluster_id": 1
+    },
+    {
+      "episode_index": 152,
+      "frame_index": 13,
+      "timestamp": 0.651344896,
+      "video_timestamp": 0.6561623099826495,
+      "joint_motion": 0.0012170043226094036,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 360,
+      "cluster_id": 1
+    },
+    {
+      "episode_index": 153,
+      "frame_index": 7,
+      "timestamp": 0.350052352,
+      "video_timestamp": 0.3447168,
+      "joint_motion": 0.0006333970786871695,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 361,
+      "cluster_id": 7
+    },
+    {
+      "episode_index": 153,
+      "frame_index": 8,
+      "timestamp": 0.400059904,
+      "video_timestamp": 0.3878064,
+      "joint_motion": 0.0011784414421168164,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 358,
+      "cluster_id": 7
+    },
+    {
+      "episode_index": 154,
+      "frame_index": 6,
+      "timestamp": 0.300227584,
+      "video_timestamp": 0.3030924190065704,
+      "joint_motion": 0.00035232710384242786,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 446,
+      "cluster_id": 7
+    },
+    {
+      "episode_index": 154,
+      "frame_index": 9,
+      "timestamp": 0.450341632,
+      "video_timestamp": 0.43298917000938625,
+      "joint_motion": 0.0011868383607832275,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 453,
+      "cluster_id": 7
+    },
+    {
+      "episode_index": 155,
+      "frame_index": 7,
+      "timestamp": 0.350459904,
+      "video_timestamp": 0.34357077599842234,
+      "joint_motion": 0.0005926453022850703,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 400,
+      "cluster_id": 7
+    },
+    {
+      "episode_index": 155,
+      "frame_index": 8,
+      "timestamp": 0.400525568,
+      "video_timestamp": 0.3865171229982251,
+      "joint_motion": 0.0005783245699854231,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 389,
+      "cluster_id": 7
+    },
+    {
+      "episode_index": 156,
+      "frame_index": 1,
+      "timestamp": 0.050052352,
+      "video_timestamp": 0.04249985400070512,
+      "joint_motion": 0.0005276884168028942,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 262,
+      "cluster_id": 7
+    },
+    {
+      "episode_index": 156,
+      "frame_index": 8,
+      "timestamp": 0.400418048,
+      "video_timestamp": 0.3824986860063461,
+      "joint_motion": 0.006065242114158525,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 295,
+      "cluster_id": 7
+    },
+    {
+      "episode_index": 157,
+      "frame_index": 7,
+      "timestamp": 0.350376192,
+      "video_timestamp": 0.34548413799391026,
+      "joint_motion": 0.0006694638744283532,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 260,
+      "cluster_id": 6
+    },
+    {
+      "episode_index": 157,
+      "frame_index": 11,
+      "timestamp": 0.550591232,
+      "video_timestamp": 0.5182262069908654,
+      "joint_motion": 0.00025166730615471504,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 246,
+      "cluster_id": 6
+    },
+    {
+      "episode_index": 158,
+      "frame_index": 2,
+      "timestamp": 0.100112384,
+      "video_timestamp": 0.08579431000143378,
+      "joint_motion": 0.006774621280131603,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 258,
+      "cluster_id": 6
+    },
+    {
+      "episode_index": 158,
+      "frame_index": 8,
+      "timestamp": 0.400449792,
+      "video_timestamp": 0.386074395006452,
+      "joint_motion": 0.016669674963100668,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 241,
+      "cluster_id": 6
+    },
+    {
+      "episode_index": 159,
+      "frame_index": 5,
+      "timestamp": 0.250194944,
+      "video_timestamp": 0.25789921799707505,
+      "joint_motion": 5.724013755097817e-05,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 305,
+      "cluster_id": 6
+    },
+    {
+      "episode_index": 159,
+      "frame_index": 10,
+      "timestamp": 0.500389632,
+      "video_timestamp": 0.5157984359941501,
+      "joint_motion": 7.819104872587418e-05,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 246,
+      "cluster_id": 6
+    },
+    {
+      "episode_index": 160,
+      "frame_index": 1,
+      "timestamp": 0.0500608,
+      "video_timestamp": 0.04317054298848482,
+      "joint_motion": 5.5112608948568616e-05,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 270,
+      "cluster_id": 7
+    },
+    {
+      "episode_index": 160,
+      "frame_index": 8,
+      "timestamp": 0.400486144,
+      "video_timestamp": 0.3885348868963634,
+      "joint_motion": 0.0012492021211875884,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 240,
+      "cluster_id": 7
+    },
+    {
+      "episode_index": 162,
+      "frame_index": 5,
+      "timestamp": 0.250153984,
+      "video_timestamp": 0.2590231079911031,
+      "joint_motion": 0.0010151406061753763,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 251,
+      "cluster_id": 6
+    },
+    {
+      "episode_index": 162,
+      "frame_index": 11,
+      "timestamp": 0.55033856,
+      "video_timestamp": 0.5612167339807235,
+      "joint_motion": 0.003167698013543806,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 211,
+      "cluster_id": 6
+    },
+    {
+      "episode_index": 163,
+      "frame_index": 1,
+      "timestamp": 0.050052352,
+      "video_timestamp": 0.04321893200045678,
+      "joint_motion": 0.00027804447501122726,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 232,
+      "cluster_id": 6
+    },
+    {
+      "episode_index": 163,
+      "frame_index": 8,
+      "timestamp": 0.40041856,
+      "video_timestamp": 0.38897038800411105,
+      "joint_motion": 0.005186245772380556,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 221,
+      "cluster_id": 7
+    },
+    {
+      "episode_index": 164,
+      "frame_index": 7,
+      "timestamp": 0.35003008,
+      "video_timestamp": 0.3449616280004785,
+      "joint_motion": 0.0022731796316178446,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 228,
+      "cluster_id": 7
+    },
+    {
+      "episode_index": 164,
+      "frame_index": 8,
+      "timestamp": 0.400034304,
+      "video_timestamp": 0.3880818315005384,
+      "joint_motion": 0.0028754097998732442,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 223,
+      "cluster_id": 7
+    },
+    {
+      "episode_index": 165,
+      "frame_index": 7,
+      "timestamp": 0.350025728,
+      "video_timestamp": 0.3449853319824881,
+      "joint_motion": 0.0006512004093151305,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 238,
+      "cluster_id": 7
+    },
+    {
+      "episode_index": 165,
+      "frame_index": 8,
+      "timestamp": 0.40002944,
+      "video_timestamp": 0.3881084984802991,
+      "joint_motion": 0.002103438564880299,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 232,
+      "cluster_id": 7
+    },
+    {
+      "episode_index": 166,
+      "frame_index": 7,
+      "timestamp": 0.350065152,
+      "video_timestamp": 0.3442876439989131,
+      "joint_motion": 0.0065248466216084825,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 204,
+      "cluster_id": 7
+    },
+    {
+      "episode_index": 166,
+      "frame_index": 10,
+      "timestamp": 0.500093184,
+      "video_timestamp": 0.5164314659983696,
+      "joint_motion": 0.0038627975370407776,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 203,
+      "cluster_id": 7
+    },
+    {
+      "episode_index": 167,
+      "frame_index": 3,
+      "timestamp": 0.150176,
+      "video_timestamp": 0.12930572849797092,
+      "joint_motion": 0.00028563565704081895,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 243,
+      "cluster_id": 6
+    },
+    {
+      "episode_index": 167,
+      "frame_index": 13,
+      "timestamp": 0.650762496,
+      "video_timestamp": 0.6465286424898546,
+      "joint_motion": 0.004852028029114933,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 244,
+      "cluster_id": 6
+    },
+    {
+      "episode_index": 168,
+      "frame_index": 1,
+      "timestamp": 0.05001344,
+      "video_timestamp": 0.043150815997375684,
+      "joint_motion": 0.012373891631977583,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 218,
+      "cluster_id": 7
+    },
+    {
+      "episode_index": 168,
+      "frame_index": 11,
+      "timestamp": 0.55014784,
+      "video_timestamp": 0.560960607965884,
+      "joint_motion": 0.02070459697139877,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 213,
+      "cluster_id": 7
+    },
+    {
+      "episode_index": 169,
+      "frame_index": 4,
+      "timestamp": 0.200224,
+      "video_timestamp": 0.21609209500160836,
+      "joint_motion": 6.242402870396913e-05,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 240,
+      "cluster_id": 6
+    },
+    {
+      "episode_index": 169,
+      "frame_index": 8,
+      "timestamp": 0.400448,
+      "video_timestamp": 0.38896577100289503,
+      "joint_motion": 0.0006292852389599822,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 231,
+      "cluster_id": 6
+    },
+    {
+      "episode_index": 171,
+      "frame_index": 2,
+      "timestamp": 0.100056064,
+      "video_timestamp": 0.08644559600124255,
+      "joint_motion": 0.0036500069865616105,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 396,
+      "cluster_id": 4
+    },
+    {
+      "episode_index": 171,
+      "frame_index": 8,
+      "timestamp": 0.400224256,
+      "video_timestamp": 0.3890051820055915,
+      "joint_motion": 0.011729649070375988,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 410,
+      "cluster_id": 4
+    },
+    {
+      "episode_index": 172,
+      "frame_index": 4,
+      "timestamp": 0.200008448,
+      "video_timestamp": 0.21614035250646887,
+      "joint_motion": 2.891537981563771e-05,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 391,
+      "cluster_id": 6
+    },
+    {
+      "episode_index": 172,
+      "frame_index": 11,
+      "timestamp": 0.550023424,
+      "video_timestamp": 0.5619649165168191,
+      "joint_motion": 0.0016942110039284066,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 379,
+      "cluster_id": 6
+    },
+    {
+      "episode_index": 173,
+      "frame_index": 2,
+      "timestamp": 0.1,
+      "video_timestamp": 0.08638921399767965,
+      "joint_motion": 0.001546693940829902,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 419,
+      "cluster_id": 6
+    },
+    {
+      "episode_index": 173,
+      "frame_index": 13,
+      "timestamp": 0.650000128,
+      "video_timestamp": 0.6479191049825974,
+      "joint_motion": 0.011879909404248726,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 430,
+      "cluster_id": 6
+    },
+    {
+      "episode_index": 174,
+      "frame_index": 1,
+      "timestamp": 0.050055936,
+      "video_timestamp": 0.04303142399877332,
+      "joint_motion": 0.009450074622726196,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 368,
+      "cluster_id": 6
+    },
+    {
+      "episode_index": 174,
+      "frame_index": 9,
+      "timestamp": 0.45050368,
+      "video_timestamp": 0.4303142399877332,
+      "joint_motion": 0.0103282838616058,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 391,
+      "cluster_id": 6
+    },
+    {
+      "episode_index": 175,
+      "frame_index": 2,
+      "timestamp": 0.10011392,
+      "video_timestamp": 0.08631258399752395,
+      "joint_motion": 6.826124845581133e-05,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 389,
+      "cluster_id": 7
+    },
+    {
+      "episode_index": 175,
+      "frame_index": 8,
+      "timestamp": 0.400456192,
+      "video_timestamp": 0.3884066279888578,
+      "joint_motion": 0.00093156927512953,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 389,
+      "cluster_id": 7
+    },
+    {
+      "episode_index": 176,
+      "frame_index": 3,
+      "timestamp": 0.150136064,
+      "video_timestamp": 0.12913255500083143,
+      "joint_motion": 0.003097390791831862,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 353,
+      "cluster_id": 7
+    },
+    {
+      "episode_index": 176,
+      "frame_index": 11,
+      "timestamp": 0.55049856,
+      "video_timestamp": 0.5595744050036029,
+      "joint_motion": 0.0005822098835481169,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 304,
+      "cluster_id": 7
+    },
+    {
+      "episode_index": 177,
+      "frame_index": 3,
+      "timestamp": 0.15000832,
+      "video_timestamp": 0.1291504499968214,
+      "joint_motion": 0.001040816015222845,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 369,
+      "cluster_id": 5
+    },
+    {
+      "episode_index": 177,
+      "frame_index": 10,
+      "timestamp": 0.50002816,
+      "video_timestamp": 0.5166017999872856,
+      "joint_motion": 0.01350224577490596,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 342,
+      "cluster_id": 5
+    },
+    {
+      "episode_index": 178,
+      "frame_index": 2,
+      "timestamp": 0.100094208,
+      "video_timestamp": 0.08612177599811566,
+      "joint_motion": 0.0024350539978863677,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 345,
+      "cluster_id": 5
+    },
+    {
+      "episode_index": 178,
+      "frame_index": 8,
+      "timestamp": 0.400376832,
+      "video_timestamp": 0.38754799199152046,
+      "joint_motion": 0.005769497866067377,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 342,
+      "cluster_id": 5
+    },
+    {
+      "episode_index": 179,
+      "frame_index": 5,
+      "timestamp": 0.2502592,
+      "video_timestamp": 0.2585446200033763,
+      "joint_motion": 0.0009626119904426382,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 344,
+      "cluster_id": 5
+    },
+    {
+      "episode_index": 179,
+      "frame_index": 8,
+      "timestamp": 0.400414464,
+      "video_timestamp": 0.3878169300050645,
+      "joint_motion": 0.009665297258983536,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 309,
+      "cluster_id": 5
+    },
+    {
+      "episode_index": 180,
+      "frame_index": 1,
+      "timestamp": 0.050053376,
+      "video_timestamp": 0.04305531349903746,
+      "joint_motion": 0.000331564846707199,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 307,
+      "cluster_id": 5
+    },
+    {
+      "episode_index": 180,
+      "frame_index": 11,
+      "timestamp": 0.550586368,
+      "video_timestamp": 0.559719075487487,
+      "joint_motion": 0.0031445904101021025,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 275,
+      "cluster_id": 5
+    },
+    {
+      "episode_index": 181,
+      "frame_index": 2,
+      "timestamp": 0.1000896,
+      "video_timestamp": 0.08627738800152593,
+      "joint_motion": 0.005258181820127673,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 328,
+      "cluster_id": 5
+    },
+    {
+      "episode_index": 181,
+      "frame_index": 12,
+      "timestamp": 0.600536832,
+      "video_timestamp": 0.6039417160106815,
+      "joint_motion": 0.0025095886614669035,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 299,
+      "cluster_id": 5
+    },
+    {
+      "episode_index": 182,
+      "frame_index": 1,
+      "timestamp": 0.050075648,
+      "video_timestamp": 0.04315951800038842,
+      "joint_motion": 0.0005127372677315174,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 331,
+      "cluster_id": 5
+    },
+    {
+      "episode_index": 182,
+      "frame_index": 8,
+      "timestamp": 0.400604928,
+      "video_timestamp": 0.3884356620034958,
+      "joint_motion": 0.0012474878787447918,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 295,
+      "cluster_id": 5
+    },
+    {
+      "episode_index": 183,
+      "frame_index": 6,
+      "timestamp": 0.300561664,
+      "video_timestamp": 0.3027817345093957,
+      "joint_motion": 0.00336226040601537,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 314,
+      "cluster_id": 5
+    },
+    {
+      "episode_index": 183,
+      "frame_index": 10,
+      "timestamp": 0.500936192,
+      "video_timestamp": 0.519054402016107,
+      "joint_motion": 0.003343196461524568,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 326,
+      "cluster_id": 5
+    },
+    {
+      "episode_index": 184,
+      "frame_index": 7,
+      "timestamp": 0.35015808,
+      "video_timestamp": 0.3441404840030418,
+      "joint_motion": 0.0033848019941704168,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 283,
+      "cluster_id": 5
+    },
+    {
+      "episode_index": 184,
+      "frame_index": 8,
+      "timestamp": 0.400180736,
+      "video_timestamp": 0.38715804450342206,
+      "joint_motion": 0.003232664391467488,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 281,
+      "cluster_id": 5
+    },
+    {
+      "episode_index": 185,
+      "frame_index": 1,
+      "timestamp": 0.05004288,
+      "video_timestamp": 0.04292566749870966,
+      "joint_motion": 0.004582099602565268,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 374,
+      "cluster_id": 5
+    },
+    {
+      "episode_index": 185,
+      "frame_index": 8,
+      "timestamp": 0.400342272,
+      "video_timestamp": 0.38633100748838695,
+      "joint_motion": 0.008056612103250788,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 315,
+      "cluster_id": 5
+    },
+    {
+      "episode_index": 186,
+      "frame_index": 3,
+      "timestamp": 0.150149888,
+      "video_timestamp": 0.17092303599827835,
+      "joint_motion": 0.0007414677475487853,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 232,
+      "cluster_id": 6
+    },
+    {
+      "episode_index": 186,
+      "frame_index": 13,
+      "timestamp": 0.650649856,
+      "video_timestamp": 0.6409613849935438,
+      "joint_motion": 0.01642429581990016,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 239,
+      "cluster_id": 6
+    },
+    {
+      "episode_index": 187,
+      "frame_index": 3,
+      "timestamp": 0.150208768,
+      "video_timestamp": 0.17079728799931967,
+      "joint_motion": 0.0024873220353137,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 258,
+      "cluster_id": 6
+    },
+    {
+      "episode_index": 187,
+      "frame_index": 13,
+      "timestamp": 0.65090432,
+      "video_timestamp": 0.6404898299974489,
+      "joint_motion": 0.01033773298616485,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 252,
+      "cluster_id": 6
+    },
+    {
+      "episode_index": 188,
+      "frame_index": 7,
+      "timestamp": 0.350074112,
+      "video_timestamp": 0.3414541879900152,
+      "joint_motion": 0.005313298845728956,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 276,
+      "cluster_id": 6
+    },
+    {
+      "episode_index": 188,
+      "frame_index": 8,
+      "timestamp": 0.400084736,
+      "video_timestamp": 0.3841359614887671,
+      "joint_motion": 0.004498872143127745,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 264,
+      "cluster_id": 6
+    },
+    {
+      "episode_index": 189,
+      "frame_index": 1,
+      "timestamp": 0.050050304,
+      "video_timestamp": 0.04252269250148169,
+      "joint_motion": 0.0032055859882246154,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 286,
+      "cluster_id": 5
+    },
+    {
+      "episode_index": 189,
+      "frame_index": 8,
+      "timestamp": 0.400401664,
+      "video_timestamp": 0.38270423251333524,
+      "joint_motion": 0.02331920299655867,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 257,
+      "cluster_id": 5
+    },
+    {
+      "episode_index": 190,
+      "frame_index": 5,
+      "timestamp": 0.25021056,
+      "video_timestamp": 0.2549733630049228,
+      "joint_motion": 0.0014090943782596086,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 267,
+      "cluster_id": 5
+    },
+    {
+      "episode_index": 190,
+      "frame_index": 8,
+      "timestamp": 0.400336896,
+      "video_timestamp": 0.3824600445073842,
+      "joint_motion": 0.00417138597538795,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 273,
+      "cluster_id": 5
+    },
+    {
+      "episode_index": 191,
+      "frame_index": 7,
+      "timestamp": 0.350176512,
+      "video_timestamp": 0.3398368640264075,
+      "joint_motion": 0.009695832639951982,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 325,
+      "cluster_id": 7
+    },
+    {
+      "episode_index": 191,
+      "frame_index": 12,
+      "timestamp": 0.600302592,
+      "video_timestamp": 0.5947145120462131,
+      "joint_motion": 0.010300363493372742,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 309,
+      "cluster_id": 7
+    },
+    {
+      "episode_index": 192,
+      "frame_index": 5,
+      "timestamp": 0.250098688,
+      "video_timestamp": 0.25599652799854045,
+      "joint_motion": 0.01649669698273597,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 275,
+      "cluster_id": 6
+    },
+    {
+      "episode_index": 192,
+      "frame_index": 11,
+      "timestamp": 0.550217216,
+      "video_timestamp": 0.5546591439968376,
+      "joint_motion": 0.034026593079563974,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 231,
+      "cluster_id": 6
+    },
+    {
+      "episode_index": 193,
+      "frame_index": 1,
+      "timestamp": 0.050052864,
+      "video_timestamp": 0.04334337000011436,
+      "joint_motion": 0.003702206683971467,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 236,
+      "cluster_id": 6
+    },
+    {
+      "episode_index": 193,
+      "frame_index": 10,
+      "timestamp": 0.500529408,
+      "video_timestamp": 0.5201204400013724,
+      "joint_motion": 0.008186593174665205,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 250,
+      "cluster_id": 6
+    },
+    {
+      "episode_index": 194,
+      "frame_index": 7,
+      "timestamp": 0.35042944,
+      "video_timestamp": 0.34459337601255674,
+      "joint_motion": 0.004863003559192195,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 305,
+      "cluster_id": 6
+    },
+    {
+      "episode_index": 194,
+      "frame_index": 11,
+      "timestamp": 0.550674688,
+      "video_timestamp": 0.5599642360204047,
+      "joint_motion": 0.004110424039519496,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 289,
+      "cluster_id": 5
+    },
+    {
+      "episode_index": 195,
+      "frame_index": 1,
+      "timestamp": 0.05004672,
+      "video_timestamp": 0.04315912700175753,
+      "joint_motion": 0.0055834390637997415,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 402,
+      "cluster_id": 6
+    },
+    {
+      "episode_index": 195,
+      "frame_index": 8,
+      "timestamp": 0.400372992,
+      "video_timestamp": 0.38843214301581774,
+      "joint_motion": 0.014820531972779038,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 410,
+      "cluster_id": 6
+    },
+    {
+      "episode_index": 196,
+      "frame_index": 1,
+      "timestamp": 0.050063104,
+      "video_timestamp": 0.04306194500909383,
+      "joint_motion": 0.0002232677098025522,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 342,
+      "cluster_id": 5
+    },
+    {
+      "episode_index": 196,
+      "frame_index": 9,
+      "timestamp": 0.450566912,
+      "video_timestamp": 0.43061945009093827,
+      "joint_motion": 0.0005348321354721558,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 355,
+      "cluster_id": 5
+    },
+    {
+      "episode_index": 197,
+      "frame_index": 2,
+      "timestamp": 0.100151296,
+      "video_timestamp": 0.08597814800180109,
+      "joint_motion": 0.0011019258005641264,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 246,
+      "cluster_id": 4
+    },
+    {
+      "episode_index": 197,
+      "frame_index": 8,
+      "timestamp": 0.40060544,
+      "video_timestamp": 0.3869016660081049,
+      "joint_motion": 0.0012116761465357437,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 257,
+      "cluster_id": 4
+    },
+    {
+      "episode_index": 198,
+      "frame_index": 1,
+      "timestamp": 0.050031104,
+      "video_timestamp": 0.04297381600037244,
+      "joint_motion": 0.00932762890257998,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 280,
+      "cluster_id": 5
+    },
+    {
+      "episode_index": 198,
+      "frame_index": 8,
+      "timestamp": 0.400249344,
+      "video_timestamp": 0.38676434400335197,
+      "joint_motion": 0.02363566612817512,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 311,
+      "cluster_id": 5
+    },
+    {
+      "episode_index": 199,
+      "frame_index": 1,
+      "timestamp": 0.050055168,
+      "video_timestamp": 0.0428846230000396,
+      "joint_motion": 0.002898204662391329,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 310,
+      "cluster_id": 5
+    },
+    {
+      "episode_index": 199,
+      "frame_index": 8,
+      "timestamp": 0.400440576,
+      "video_timestamp": 0.3859616070003564,
+      "joint_motion": 0.004296503721644986,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 279,
+      "cluster_id": 5
+    },
+    {
+      "episode_index": 200,
+      "frame_index": 3,
+      "timestamp": 0.150136832,
+      "video_timestamp": 0.12879279899358823,
+      "joint_motion": 0.0014802529199161834,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 275,
+      "cluster_id": 5
+    },
+    {
+      "episode_index": 200,
+      "frame_index": 8,
+      "timestamp": 0.4003648,
+      "video_timestamp": 0.38637839698076465,
+      "joint_motion": 0.003028966820944908,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 255,
+      "cluster_id": 5
+    },
+    {
+      "episode_index": 201,
+      "frame_index": 2,
+      "timestamp": 0.100065792,
+      "video_timestamp": 0.08555545399400048,
+      "joint_motion": 0.00036253206043452917,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 291,
+      "cluster_id": 4
+    },
+    {
+      "episode_index": 201,
+      "frame_index": 8,
+      "timestamp": 0.400262912,
+      "video_timestamp": 0.38499954297300215,
+      "joint_motion": 0.0027309869860739477,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 283,
+      "cluster_id": 5
+    },
+    {
+      "episode_index": 202,
+      "frame_index": 1,
+      "timestamp": 0.050045184,
+      "video_timestamp": 0.04256403399950027,
+      "joint_motion": 0.002390725516435344,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 282,
+      "cluster_id": 4
+    },
+    {
+      "episode_index": 202,
+      "frame_index": 8,
+      "timestamp": 0.400361216,
+      "video_timestamp": 0.3830763059955024,
+      "joint_motion": 0.003916868127456702,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 280,
+      "cluster_id": 4
+    },
+    {
+      "episode_index": 203,
+      "frame_index": 7,
+      "timestamp": 0.350064128,
+      "video_timestamp": 0.33840117600348285,
+      "joint_motion": 0.0016631921795255368,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 274,
+      "cluster_id": 4
+    },
+    {
+      "episode_index": 203,
+      "frame_index": 8,
+      "timestamp": 0.400073472,
+      "video_timestamp": 0.38070132300391823,
+      "joint_motion": 0.002187247659112489,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 277,
+      "cluster_id": 4
+    },
+    {
+      "episode_index": 204,
+      "frame_index": 1,
+      "timestamp": 0.050095616,
+      "video_timestamp": 0.042377113999916755,
+      "joint_motion": 0.0007940815780898846,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 295,
+      "cluster_id": 5
+    },
+    {
+      "episode_index": 204,
+      "frame_index": 12,
+      "timestamp": 0.601147904,
+      "video_timestamp": 0.5932795959988346,
+      "joint_motion": 0.004099635644571439,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 275,
+      "cluster_id": 5
+    },
+    {
+      "episode_index": 205,
+      "frame_index": 6,
+      "timestamp": 0.300421888,
+      "video_timestamp": 0.29675267300740416,
+      "joint_motion": 0.00011430470859315939,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 259,
+      "cluster_id": 4
+    },
+    {
+      "episode_index": 205,
+      "frame_index": 8,
+      "timestamp": 0.400562688,
+      "video_timestamp": 0.38153915100951963,
+      "joint_motion": 0.0015085831466674921,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 255,
+      "cluster_id": 4
+    },
+    {
+      "episode_index": 206,
+      "frame_index": 7,
+      "timestamp": 0.350014464,
+      "video_timestamp": 0.3395891999904195,
+      "joint_motion": 0.0020367434564749517,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 243,
+      "cluster_id": 4
+    },
+    {
+      "episode_index": 206,
+      "frame_index": 8,
+      "timestamp": 0.400016384,
+      "video_timestamp": 0.3820378499892219,
+      "joint_motion": 0.0019407334707632067,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 251,
+      "cluster_id": 4
+    },
+    {
+      "episode_index": 207,
+      "frame_index": 1,
+      "timestamp": 0.050024704,
+      "video_timestamp": 0.0422843984984949,
+      "joint_motion": 0.0004578110620994668,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 317,
+      "cluster_id": 4
+    },
+    {
+      "episode_index": 207,
+      "frame_index": 8,
+      "timestamp": 0.400197376,
+      "video_timestamp": 0.38055958648645405,
+      "joint_motion": 0.003858435390970798,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 285,
+      "cluster_id": 4
+    },
+    {
+      "episode_index": 208,
+      "frame_index": 1,
+      "timestamp": 0.0500608,
+      "video_timestamp": 0.0429722730025019,
+      "joint_motion": 0.0005189452168589463,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 285,
+      "cluster_id": 4
+    },
+    {
+      "episode_index": 208,
+      "frame_index": 8,
+      "timestamp": 0.400486656,
+      "video_timestamp": 0.3867504570225171,
+      "joint_motion": 0.003879741467191338,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 291,
+      "cluster_id": 4
+    },
+    {
+      "episode_index": 209,
+      "frame_index": 3,
+      "timestamp": 0.15027584,
+      "video_timestamp": 0.1700567079996819,
+      "joint_motion": 0.0004566331714788025,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 425,
+      "cluster_id": 4
+    },
+    {
+      "episode_index": 209,
+      "frame_index": 8,
+      "timestamp": 0.400735744,
+      "video_timestamp": 0.3826275929992843,
+      "joint_motion": 0.00031108588600381817,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 413,
+      "cluster_id": 4
+    },
+    {
+      "episode_index": 210,
+      "frame_index": 4,
+      "timestamp": 0.200200448,
+      "video_timestamp": 0.21557915999877164,
+      "joint_motion": 0.0009540073308810736,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 320,
+      "cluster_id": 4
+    },
+    {
+      "episode_index": 210,
+      "frame_index": 8,
+      "timestamp": 0.40040064,
+      "video_timestamp": 0.38804248799778895,
+      "joint_motion": 0.001093785130688394,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 325,
+      "cluster_id": 4
+    },
+    {
+      "episode_index": 211,
+      "frame_index": 3,
+      "timestamp": 0.150160896,
+      "video_timestamp": 0.12891664501330563,
+      "joint_motion": 0.0005511651984911072,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 344,
+      "cluster_id": 4
+    },
+    {
+      "episode_index": 211,
+      "frame_index": 9,
+      "timestamp": 0.450482944,
+      "video_timestamp": 0.42972215004435205,
+      "joint_motion": 0.0002147465458524287,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 324,
+      "cluster_id": 4
+    },
+    {
+      "episode_index": 212,
+      "frame_index": 1,
+      "timestamp": 0.050057216,
+      "video_timestamp": 0.0430285690008541,
+      "joint_motion": 0.0019311815226403302,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 306,
+      "cluster_id": 4
+    },
+    {
+      "episode_index": 212,
+      "frame_index": 11,
+      "timestamp": 0.550628352,
+      "video_timestamp": 0.5593713970111033,
+      "joint_motion": 0.012459390594009013,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 331,
+      "cluster_id": 4
+    },
+    {
+      "episode_index": 213,
+      "frame_index": 2,
+      "timestamp": 0.100072192,
+      "video_timestamp": 0.08587252400519822,
+      "joint_motion": 0.0035289562671055857,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 305,
+      "cluster_id": 6
+    },
+    {
+      "episode_index": 213,
+      "frame_index": 8,
+      "timestamp": 0.400288768,
+      "video_timestamp": 0.386426358023392,
+      "joint_motion": 0.034001287448523224,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 285,
+      "cluster_id": 6
+    },
+    {
+      "episode_index": 214,
+      "frame_index": 4,
+      "timestamp": 0.200304896,
+      "video_timestamp": 0.21546197500306608,
+      "joint_motion": 0.006735970628965707,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 250,
+      "cluster_id": 6
+    },
+    {
+      "episode_index": 214,
+      "frame_index": 8,
+      "timestamp": 0.400609792,
+      "video_timestamp": 0.38783155500551897,
+      "joint_motion": 0.01305004442500729,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 243,
+      "cluster_id": 6
+    },
+    {
+      "episode_index": 215,
+      "frame_index": 1,
+      "timestamp": 0.050016256,
+      "video_timestamp": 0.042831120995904075,
+      "joint_motion": 0.0010676845938102021,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 237,
+      "cluster_id": 6
+    },
+    {
+      "episode_index": 215,
+      "frame_index": 8,
+      "timestamp": 0.40013056,
+      "video_timestamp": 0.3854800889631367,
+      "joint_motion": 0.011285580169368245,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 247,
+      "cluster_id": 6
+    },
+    {
+      "episode_index": 216,
+      "frame_index": 2,
+      "timestamp": 0.100153088,
+      "video_timestamp": 0.08620870099882914,
+      "joint_motion": 0.00042825460680179244,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 289,
+      "cluster_id": 6
+    },
+    {
+      "episode_index": 216,
+      "frame_index": 11,
+      "timestamp": 0.550842624,
+      "video_timestamp": 0.5603565564923894,
+      "joint_motion": 0.0017249659859585103,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 272,
+      "cluster_id": 6
+    },
+    {
+      "episode_index": 217,
+      "frame_index": 2,
+      "timestamp": 0.100092672,
+      "video_timestamp": 0.08602359999805201,
+      "joint_motion": 0.0024761480512050407,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 259,
+      "cluster_id": 6
+    },
+    {
+      "episode_index": 217,
+      "frame_index": 9,
+      "timestamp": 0.450417408,
+      "video_timestamp": 0.43011799999026,
+      "joint_motion": 0.014744756640555145,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 249,
+      "cluster_id": 6
+    },
+    {
+      "episode_index": 218,
+      "frame_index": 1,
+      "timestamp": 0.050061312,
+      "video_timestamp": 0.043149259001704916,
+      "joint_motion": 0.00019206268518113487,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 262,
+      "cluster_id": 6
+    },
+    {
+      "episode_index": 218,
+      "frame_index": 13,
+      "timestamp": 0.6507968,
+      "video_timestamp": 0.6472388850255737,
+      "joint_motion": 0.009442563309285293,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 249,
+      "cluster_id": 6
+    },
+    {
+      "episode_index": 219,
+      "frame_index": 1,
+      "timestamp": 0.050034688,
+      "video_timestamp": 0.042974808998710624,
+      "joint_motion": 0.0012894972512339953,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 253,
+      "cluster_id": 6
+    },
+    {
+      "episode_index": 219,
+      "frame_index": 8,
+      "timestamp": 0.400278016,
+      "video_timestamp": 0.3867732809883956,
+      "joint_motion": 0.011625701012659924,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 269,
+      "cluster_id": 6
+    },
+    {
+      "episode_index": 220,
+      "frame_index": 1,
+      "timestamp": 0.050089216,
+      "video_timestamp": 0.043111365998163086,
+      "joint_motion": 0.0037952689189796255,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 227,
+      "cluster_id": 6
+    },
+    {
+      "episode_index": 220,
+      "frame_index": 8,
+      "timestamp": 0.400714496,
+      "video_timestamp": 0.3880022939834678,
+      "joint_motion": 0.010722988956837471,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 250,
+      "cluster_id": 6
+    },
+    {
+      "episode_index": 221,
+      "frame_index": 1,
+      "timestamp": 0.050032128,
+      "video_timestamp": 0.04302882899956598,
+      "joint_motion": 0.001619436033672514,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 449,
+      "cluster_id": 5
+    },
+    {
+      "episode_index": 221,
+      "frame_index": 10,
+      "timestamp": 0.500322048,
+      "video_timestamp": 0.5163459479947917,
+      "joint_motion": 0.0005850773076963242,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 427,
+      "cluster_id": 5
+    },
+    {
+      "episode_index": 222,
+      "frame_index": 6,
+      "timestamp": 0.300420096,
+      "video_timestamp": 0.30065922249966925,
+      "joint_motion": 0.000786902854482838,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 340,
+      "cluster_id": 5
+    },
+    {
+      "episode_index": 222,
+      "frame_index": 10,
+      "timestamp": 0.50070016,
+      "video_timestamp": 0.5154158099994329,
+      "joint_motion": 0.0010538448183036308,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 345,
+      "cluster_id": 5
+    },
+    {
+      "episode_index": 223,
+      "frame_index": 1,
+      "timestamp": 0.05002496,
+      "video_timestamp": 0.043262863999923504,
+      "joint_motion": 0.000937167302754177,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 472,
+      "cluster_id": 6
+    },
+    {
+      "episode_index": 223,
+      "frame_index": 8,
+      "timestamp": 0.400198656,
+      "video_timestamp": 0.38936577599931155,
+      "joint_motion": 0.006427789777812002,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 471,
+      "cluster_id": 6
+    },
+    {
+      "episode_index": 224,
+      "frame_index": 1,
+      "timestamp": 0.050063104,
+      "video_timestamp": 0.043202460522678114,
+      "joint_motion": 0.0031791084916714743,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 324,
+      "cluster_id": 4
+    },
+    {
+      "episode_index": 224,
+      "frame_index": 10,
+      "timestamp": 0.500631296,
+      "video_timestamp": 0.5184295262721373,
+      "joint_motion": 0.01864233759348167,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 336,
+      "cluster_id": 5
+    },
+    {
+      "episode_index": 225,
+      "frame_index": 5,
+      "timestamp": 0.250292992,
+      "video_timestamp": 0.2588977799978866,
+      "joint_motion": 0.008991740580584802,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 321,
+      "cluster_id": 4
+    },
+    {
+      "episode_index": 225,
+      "frame_index": 8,
+      "timestamp": 0.400468736,
+      "video_timestamp": 0.38834666999682993,
+      "joint_motion": 0.01090905994639978,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 326,
+      "cluster_id": 4
+    },
+    {
+      "episode_index": 226,
+      "frame_index": 1,
+      "timestamp": 0.050004992,
+      "video_timestamp": 0.04323076299906836,
+      "joint_motion": 0.0036308428208844954,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 332,
+      "cluster_id": 4
+    },
+    {
+      "episode_index": 226,
+      "frame_index": 10,
+      "timestamp": 0.500048896,
+      "video_timestamp": 0.5187691559888203,
+      "joint_motion": 0.006828191138822582,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 342,
+      "cluster_id": 4
+    },
+    {
+      "episode_index": 227,
+      "frame_index": 1,
+      "timestamp": 0.050001408,
+      "video_timestamp": 0.04313486700050828,
+      "joint_motion": 0.0022720869960902446,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 323,
+      "cluster_id": 4
+    },
+    {
+      "episode_index": 227,
+      "frame_index": 9,
+      "timestamp": 0.450013184,
+      "video_timestamp": 0.43134867000508276,
+      "joint_motion": 0.005095880914886464,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 293,
+      "cluster_id": 4
+    },
+    {
+      "episode_index": 228,
+      "frame_index": 6,
+      "timestamp": 0.300416,
+      "video_timestamp": 0.30229938900548087,
+      "joint_motion": 0.0023858412441691377,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 321,
+      "cluster_id": 4
+    },
+    {
+      "episode_index": 228,
+      "frame_index": 8,
+      "timestamp": 0.400554752,
+      "video_timestamp": 0.3886706430070468,
+      "joint_motion": 0.005741010701254477,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 309,
+      "cluster_id": 4
+    },
+    {
+      "episode_index": 229,
+      "frame_index": 4,
+      "timestamp": 0.200261632,
+      "video_timestamp": 0.21467860250744086,
+      "joint_motion": 0.006327650307490517,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 328,
+      "cluster_id": 4
+    },
+    {
+      "episode_index": 229,
+      "frame_index": 8,
+      "timestamp": 0.400523264,
+      "video_timestamp": 0.38642148451339353,
+      "joint_motion": 0.0453075580154294,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 348,
+      "cluster_id": 4
+    },
+    {
+      "episode_index": 230,
+      "frame_index": 4,
+      "timestamp": 0.200153088,
+      "video_timestamp": 0.21531290001125764,
+      "joint_motion": 0.0030444635655974763,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 337,
+      "cluster_id": 4
+    },
+    {
+      "episode_index": 230,
+      "frame_index": 8,
+      "timestamp": 0.400306432,
+      "video_timestamp": 0.3875632200202638,
+      "joint_motion": 0.00689776708629002,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 313,
+      "cluster_id": 4
+    },
+    {
+      "episode_index": 231,
+      "frame_index": 3,
+      "timestamp": 0.1500992,
+      "video_timestamp": 0.13016039968445964,
+      "joint_motion": 0.007737609806331954,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 351,
+      "cluster_id": 4
+    },
+    {
+      "episode_index": 231,
+      "frame_index": 10,
+      "timestamp": 0.500330496,
+      "video_timestamp": 0.5206415987378386,
+      "joint_motion": 0.004872077359655015,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 330,
+      "cluster_id": 4
+    },
+    {
+      "episode_index": 232,
+      "frame_index": 7,
+      "timestamp": 0.350388736,
+      "video_timestamp": 0.3447877799915474,
+      "joint_motion": 0.0015951403921363031,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 372,
+      "cluster_id": 4
+    },
+    {
+      "episode_index": 232,
+      "frame_index": 8,
+      "timestamp": 0.40044416,
+      "video_timestamp": 0.38788625249049086,
+      "joint_motion": 0.0036973547243929084,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 367,
+      "cluster_id": 4
+    },
+    {
+      "episode_index": 233,
+      "frame_index": 7,
+      "timestamp": 0.350533888,
+      "video_timestamp": 0.34883559998860225,
+      "joint_motion": 0.006777521158812004,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 362,
+      "cluster_id": 4
+    },
+    {
+      "episode_index": 233,
+      "frame_index": 13,
+      "timestamp": 0.65099136,
+      "video_timestamp": 0.6540667499786292,
+      "joint_motion": 0.004055039451170016,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 334,
+      "cluster_id": 4
+    },
+    {
+      "episode_index": 234,
+      "frame_index": 3,
+      "timestamp": 0.150225408,
+      "video_timestamp": 0.13107294900187366,
+      "joint_motion": 0.0003456650340644802,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 304,
+      "cluster_id": 4
+    },
+    {
+      "episode_index": 234,
+      "frame_index": 8,
+      "timestamp": 0.400601088,
+      "video_timestamp": 0.393218847005621,
+      "joint_motion": 0.0011518856452189987,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 302,
+      "cluster_id": 4
+    },
+    {
+      "episode_index": 235,
+      "frame_index": 6,
+      "timestamp": 0.300381952,
+      "video_timestamp": 0.305314890998338,
+      "joint_motion": 0.002226772697064809,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 340,
+      "cluster_id": 4
+    },
+    {
+      "episode_index": 235,
+      "frame_index": 8,
+      "timestamp": 0.400509184,
+      "video_timestamp": 0.3925477169978631,
+      "joint_motion": 0.00573599095892463,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 311,
+      "cluster_id": 4
+    },
+    {
+      "episode_index": 236,
+      "frame_index": 2,
+      "timestamp": 0.100227072,
+      "video_timestamp": 0.08728488199957611,
+      "joint_motion": 0.002434070482632642,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 332,
+      "cluster_id": 4
+    },
+    {
+      "episode_index": 236,
+      "frame_index": 8,
+      "timestamp": 0.400908288,
+      "video_timestamp": 0.39278196899809253,
+      "joint_motion": 0.0038256825886683063,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 303,
+      "cluster_id": 4
+    },
+    {
+      "episode_index": 237,
+      "frame_index": 1,
+      "timestamp": 0.050040576,
+      "video_timestamp": 0.04358968700171589,
+      "joint_motion": 0.009374877373029706,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 327,
+      "cluster_id": 4
+    },
+    {
+      "episode_index": 237,
+      "frame_index": 10,
+      "timestamp": 0.500404992,
+      "video_timestamp": 0.47948655701887477,
+      "joint_motion": 0.012608547080926895,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 317,
+      "cluster_id": 4
+    },
+    {
+      "episode_index": 238,
+      "frame_index": 7,
+      "timestamp": 0.350514944,
+      "video_timestamp": 0.34879382400402986,
+      "joint_motion": 0.018523740594315996,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 316,
+      "cluster_id": 4
+    },
+    {
+      "episode_index": 238,
+      "frame_index": 13,
+      "timestamp": 0.650956544,
+      "video_timestamp": 0.653988420007556,
+      "joint_motion": 0.006023768666300251,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 321,
+      "cluster_id": 5
+    },
+    {
+      "episode_index": 239,
+      "frame_index": 4,
+      "timestamp": 0.200413184,
+      "video_timestamp": 0.218755675008172,
+      "joint_motion": 0.0032750584993723425,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 293,
+      "cluster_id": 4
+    },
+    {
+      "episode_index": 239,
+      "frame_index": 8,
+      "timestamp": 0.400826624,
+      "video_timestamp": 0.39376021501470965,
+      "joint_motion": 0.01814052806717999,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 300,
+      "cluster_id": 4
+    },
+    {
+      "episode_index": 240,
+      "frame_index": 2,
+      "timestamp": 0.100057856,
+      "video_timestamp": 0.08774157999862249,
+      "joint_motion": 0.00509863601929387,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 319,
+      "cluster_id": 4
+    },
+    {
+      "episode_index": 240,
+      "frame_index": 8,
+      "timestamp": 0.400230912,
+      "video_timestamp": 0.3948371099938012,
+      "joint_motion": 0.03061444689904402,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 313,
+      "cluster_id": 4
+    },
+    {
+      "episode_index": 241,
+      "frame_index": 1,
+      "timestamp": 0.050050048,
+      "video_timestamp": 0.04381430848751268,
+      "joint_motion": 0.016754922037991764,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 300,
+      "cluster_id": 4
+    },
+    {
+      "episode_index": 241,
+      "frame_index": 10,
+      "timestamp": 0.5004992,
+      "video_timestamp": 0.4819573933626395,
+      "joint_motion": 0.016982227521468503,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 305,
+      "cluster_id": 4
+    },
+    {
+      "episode_index": 242,
+      "frame_index": 3,
+      "timestamp": 0.150251264,
+      "video_timestamp": 0.13132993049564454,
+      "joint_motion": 0.0009141871345262256,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 318,
+      "cluster_id": 5
+    },
+    {
+      "episode_index": 242,
+      "frame_index": 12,
+      "timestamp": 0.601005056,
+      "video_timestamp": 0.6128730089796744,
+      "joint_motion": 0.005747192231830452,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 311,
+      "cluster_id": 5
+    },
+    {
+      "episode_index": 243,
+      "frame_index": 7,
+      "timestamp": 0.350354688,
+      "video_timestamp": 0.35066186799552945,
+      "joint_motion": 0.009707915682794355,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 336,
+      "cluster_id": 5
+    },
+    {
+      "episode_index": 243,
+      "frame_index": 10,
+      "timestamp": 0.500506624,
+      "video_timestamp": 0.482160068493853,
+      "joint_motion": 0.006925493299933643,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 318,
+      "cluster_id": 5
+    },
+    {
+      "episode_index": 244,
+      "frame_index": 1,
+      "timestamp": 0.0500416,
+      "video_timestamp": 0.043784551999599935,
+      "joint_motion": 0.0016463555772227038,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 329,
+      "cluster_id": 4
+    },
+    {
+      "episode_index": 244,
+      "frame_index": 9,
+      "timestamp": 0.450374912,
+      "video_timestamp": 0.43784551999599935,
+      "joint_motion": 0.017439004826410524,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 326,
+      "cluster_id": 5
+    },
+    {
+      "episode_index": 245,
+      "frame_index": 7,
+      "timestamp": 0.350546432,
+      "video_timestamp": 0.3508037440089604,
+      "joint_motion": 0.003198806345066177,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 334,
+      "cluster_id": 5
+    },
+    {
+      "episode_index": 245,
+      "frame_index": 8,
+      "timestamp": 0.40062464,
+      "video_timestamp": 0.39465421201008044,
+      "joint_motion": 0.004101875417108586,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 339,
+      "cluster_id": 5
+    },
+    {
+      "episode_index": 246,
+      "frame_index": 7,
+      "timestamp": 0.35021184,
+      "video_timestamp": 0.35179135200955836,
+      "joint_motion": 0.001991452414697089,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 292,
+      "cluster_id": 5
+    },
+    {
+      "episode_index": 246,
+      "frame_index": 8,
+      "timestamp": 0.400242176,
+      "video_timestamp": 0.39576527101075315,
+      "joint_motion": 0.001893917261085111,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 298,
+      "cluster_id": 5
+    },
+    {
+      "episode_index": 247,
+      "frame_index": 1,
+      "timestamp": 0.050033408,
+      "video_timestamp": 0.044045982002846734,
+      "joint_motion": 0.0010869830345860772,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 285,
+      "cluster_id": 5
+    },
+    {
+      "episode_index": 247,
+      "frame_index": 13,
+      "timestamp": 0.650433792,
+      "video_timestamp": 0.660689730042701,
+      "joint_motion": 0.025959324508904532,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 289,
+      "cluster_id": 5
+    },
+    {
+      "episode_index": 248,
+      "frame_index": 3,
+      "timestamp": 0.15007872,
+      "video_timestamp": 0.13178526298626303,
+      "joint_motion": 0.006667686913844991,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 274,
+      "cluster_id": 5
+    },
+    {
+      "episode_index": 248,
+      "frame_index": 12,
+      "timestamp": 0.600314624,
+      "video_timestamp": 0.6149978939358941,
+      "joint_motion": 0.014456981771265873,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 270,
+      "cluster_id": 5
+    },
+    {
+      "episode_index": 249,
+      "frame_index": 6,
+      "timestamp": 0.300556288,
+      "video_timestamp": 0.3090798199989984,
+      "joint_motion": 0.004213150286535335,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 281,
+      "cluster_id": 5
+    },
+    {
+      "episode_index": 249,
+      "frame_index": 8,
+      "timestamp": 0.400741888,
+      "video_timestamp": 0.39738833999871226,
+      "joint_motion": 0.0073226998908542396,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 307,
+      "cluster_id": 5
+    },
+    {
+      "episode_index": 250,
+      "frame_index": 1,
+      "timestamp": 0.050064384,
+      "video_timestamp": 0.0441139564962796,
+      "joint_motion": 0.001988020164143903,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 287,
+      "cluster_id": 5
+    },
+    {
+      "episode_index": 250,
+      "frame_index": 9,
+      "timestamp": 0.450578688,
+      "video_timestamp": 0.441139564962796,
+      "joint_motion": 0.02013177955362938,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 268,
+      "cluster_id": 5
+    },
+    {
+      "episode_index": 251,
+      "frame_index": 3,
+      "timestamp": 0.150085376,
+      "video_timestamp": 0.13199190600023522,
+      "joint_motion": 0.00017195177898096247,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 305,
+      "cluster_id": 5
+    },
+    {
+      "episode_index": 251,
+      "frame_index": 11,
+      "timestamp": 0.550312704,
+      "video_timestamp": 0.5719649260010193,
+      "joint_motion": 0.004421491039957055,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 260,
+      "cluster_id": 5
+    }
+  ],
+  "references": [
+    {
+      "reference_id": 0,
+      "episode_index": 55,
+      "frame_index": 8,
+      "timestamp": 0.400753664,
+      "video_timestamp": 0.38931313050118566,
+      "joint_motion": 0.005836120077141709,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 389,
+      "cluster_size": 60,
+      "statistics": {
+        "median": [
+          -0.0011329792439937591,
+          0.002454502604625843,
+          0.0017175674438476562,
+          -0.006408236424128215,
+          0.00037329991658528646,
+          -0.00011879249855324073,
+          -0.0005140655674040317,
+          -0.0006542629665798611
+        ],
+        "mad": [
+          0.0015883896499872207,
+          0.0021234215271693693,
+          0.011491966247558594,
+          0.009508875785050568,
+          0.005291906992594401,
+          0.006153587058738426,
+          0.0010761425209542116,
+          0.00397174976490162
+        ],
+        "spread": [
+          0.008,
+          0.008,
+          0.017037989158630373,
+          0.014097859238915971,
+          0.012,
+          0.012,
+          0.008,
+          0.008
+        ],
+        "p05": [
+          -0.004950087269147237,
+          -0.0015137719169810964,
+          -0.027780605951944988,
+          -0.029234571545212355,
+          -0.01924703280131022,
+          -0.023684245921947338,
+          -0.004837941875060399,
+          -0.024272110550491895
+        ],
+        "p95": [
+          0.005210784748196589,
+          0.013159385742964547,
+          0.0496875254313151,
+          0.011104266511069397,
+          0.046108846664428695,
+          0.04751871179651327,
+          0.0031064915036161708,
+          0.007270722565827545
+        ],
+        "episodes": 65,
+        "registrations": 108,
+        "calibrated": true,
+        "distance_limit": 3.0501452182575632,
+        "inlier_ratio_low": 0.4,
+        "reprojection_high": 1.847078621387481,
+        "similarity_low": 0.19350893199443817
+      }
+    },
+    {
+      "reference_id": 1,
+      "episode_index": 132,
+      "frame_index": 10,
+      "timestamp": 0.500910592,
+      "video_timestamp": 0.5195153399870703,
+      "joint_motion": 0.00037982982179464556,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 301,
+      "cluster_size": 59,
+      "statistics": {
+        "median": [
+          0.00017028838240851958,
+          0.0014702188747900504,
+          0.0002587000528971354,
+          -0.0012547621020564327,
+          0.00046882629394531247,
+          -0.0008190013744212962,
+          0.0005444689032932122,
+          0.00010878951461226852
+        ],
+        "mad": [
+          0.00222673153039068,
+          0.002472428425594612,
+          0.0037295659383138023,
+          0.0028565983529444095,
+          0.001572386423746745,
+          0.0027217723705150465,
+          0.0022307918096582096,
+          0.0030646995261863425
+        ],
+        "spread": [
+          0.008,
+          0.008,
+          0.012,
+          0.012,
+          0.012,
+          0.012,
+          0.008,
+          0.008
+        ],
+        "p05": [
+          -0.047450618346532185,
+          -0.010407847298516166,
+          -0.012428452173868815,
+          -0.01926968645166468,
+          -0.023069788614908854,
+          -0.063733480947989,
+          -0.01389814704656601,
+          -0.04542887369791667
+        ],
+        "p95": [
+          0.019112446506818134,
+          0.03040452965983635,
+          0.014904842376708983,
+          0.010871646889933825,
+          0.010011097590128571,
+          0.00849530820493344,
+          0.0385917684435844,
+          0.01580309267397277
+        ],
+        "episodes": 71,
+        "registrations": 124,
+        "calibrated": true,
+        "distance_limit": 6.612746602205792,
+        "inlier_ratio_low": 0.4,
+        "reprojection_high": 1.6580205783247948,
+        "similarity_low": 0.10144029855728148
+      }
+    },
+    {
+      "reference_id": 2,
+      "episode_index": 117,
+      "frame_index": 2,
+      "timestamp": 0.10011392,
+      "video_timestamp": 0.08472993399883263,
+      "joint_motion": 0.00017266431943530029,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 283,
+      "cluster_size": 60,
+      "statistics": {
+        "median": [
+          -0.0005777571971217791,
+          0.001005253968415437,
+          -3.255208333333334e-05,
+          -0.0002792498372771122,
+          -0.0003060022989908854,
+          -0.0013389869972511574,
+          0.00017779502086341382,
+          -0.00023984555844907407
+        ],
+        "mad": [
+          0.0007470893207937479,
+          0.0011568069871928958,
+          0.0028397560119628905,
+          0.002807022244841964,
+          0.0015270233154296875,
+          0.0019124348958333335,
+          0.001233675718928377,
+          0.002968456127025463
+        ],
+        "spread": [
+          0.008,
+          0.008,
+          0.012,
+          0.012,
+          0.012,
+          0.012,
+          0.008,
+          0.008
+        ],
+        "p05": [
+          -0.01435454323887825,
+          -0.008860246649494878,
+          -0.008627182642618815,
+          -0.011102954988126402,
+          -0.015462074279785156,
+          -0.013387123390480322,
+          -0.010244728128115336,
+          -0.028050729257089117
+        ],
+        "p95": [
+          0.005754508549968387,
+          0.008607793207521782,
+          0.01582007090250651,
+          0.011153126469364864,
+          0.004028145472208659,
+          0.012576480441623255,
+          0.018666681945323935,
+          0.009307844373914924
+        ],
+        "episodes": 60,
+        "registrations": 100,
+        "calibrated": true,
+        "distance_limit": 2.8324372200121077,
+        "inlier_ratio_low": 0.4,
+        "reprojection_high": 1.5972609966993332,
+        "similarity_low": 0.18430606573820116
+      }
+    },
+    {
+      "reference_id": 3,
+      "episode_index": 75,
+      "frame_index": 8,
+      "timestamp": 0.400554752,
+      "video_timestamp": 0.3867266204988207,
+      "joint_motion": 0.0009821053820892698,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 356,
+      "cluster_size": 59,
+      "statistics": {
+        "median": [
+          0.0006803200580179692,
+          0.000277462104956309,
+          -0.0018418947855631512,
+          -0.0010555690085446393,
+          0.0005103747049967448,
+          -0.0013948793764467593,
+          -3.347263555042445e-06,
+          0.00025001808449074076
+        ],
+        "mad": [
+          0.0007601142783338825,
+          0.0009898530388319934,
+          0.005522441864013672,
+          0.0034124998030839143,
+          0.0020073572794596355,
+          0.002265365035445602,
+          0.0013862110955718283,
+          0.0031962076822916667
+        ],
+        "spread": [
+          0.008,
+          0.008,
+          0.012,
+          0.012,
+          0.012,
+          0.012,
+          0.008,
+          0.008
+        ],
+        "p05": [
+          -0.0008505888717869917,
+          -0.002409036601031268,
+          -0.03920685132344563,
+          -0.014414574261064883,
+          -0.039846067428588865,
+          -0.051519611499927655,
+          -0.006428026879827181,
+          -0.007132517496744792
+        ],
+        "p95": [
+          0.004097075822452699,
+          0.005340261238592642,
+          0.006667855580647784,
+          0.017045798213393595,
+          0.009486761093139617,
+          0.008336221200448479,
+          0.004418979498247296,
+          0.03273620605468748
+        ],
+        "episodes": 59,
+        "registrations": 102,
+        "calibrated": true,
+        "distance_limit": 4.1917043445739,
+        "inlier_ratio_low": 0.4,
+        "reprojection_high": 1.8299625515937803,
+        "similarity_low": 0.09781379178166388
+      }
+    },
+    {
+      "reference_id": 4,
+      "episode_index": 228,
+      "frame_index": 8,
+      "timestamp": 0.400554752,
+      "video_timestamp": 0.3886706430070468,
+      "joint_motion": 0.005741010701254477,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 309,
+      "cluster_size": 60,
+      "statistics": {
+        "median": [
+          -0.00030385379989941914,
+          0.0014358000622855293,
+          -0.002574475606282552,
+          0.0008916138498871414,
+          0.00036398569742838543,
+          -1.0398582175925926e-05,
+          -2.3483490804210305e-05,
+          0.0032604076244212962
+        ],
+        "mad": [
+          0.0013753959288199742,
+          0.0018681860632366602,
+          0.004373105367024739,
+          0.007768704604219507,
+          0.0018294016520182292,
+          0.004627256040219908,
+          0.002756110584596172,
+          0.0048187255859375
+        ],
+        "spread": [
+          0.008,
+          0.008,
+          0.012,
+          0.012,
+          0.012,
+          0.012,
+          0.008,
+          0.008
+        ],
+        "p05": [
+          -0.017254092097282406,
+          -0.028284662741201894,
+          -0.020179754892985024,
+          -0.020186432379263416,
+          -0.010895690917968751,
+          -0.025531005859374997,
+          -0.07273242473602294,
+          -0.027217113353587962
+        ],
+        "p95": [
+          0.03527441938718158,
+          0.022715428846853736,
+          0.009580008188883453,
+          0.03257107875965259,
+          0.007969220479329386,
+          0.02082174795645254,
+          0.040171014070510866,
+          0.04723845305266201
+        ],
+        "episodes": 70,
+        "registrations": 119,
+        "calibrated": true,
+        "distance_limit": 8.170630642795482,
+        "inlier_ratio_low": 0.4,
+        "reprojection_high": 1.8444092124700546,
+        "similarity_low": 0.14677119106054307
+      }
+    },
+    {
+      "reference_id": 5,
+      "episode_index": 180,
+      "frame_index": 11,
+      "timestamp": 0.550586368,
+      "video_timestamp": 0.559719075487487,
+      "joint_motion": 0.0031445904101021025,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 275,
+      "cluster_size": 59,
+      "statistics": {
+        "median": [
+          -0.0002798356891920169,
+          -1.0041784089817494e-05,
+          -0.0005112012227376302,
+          -0.0007629811211868568,
+          -0.00013704299926757811,
+          -0.0003085666232638889,
+          -4.9047478629897035e-05,
+          0.00045878092447916666
+        ],
+        "mad": [
+          0.0009554381016641855,
+          0.0006919650567902459,
+          0.0026422818501790363,
+          0.0021570997657599273,
+          0.0017261187235514323,
+          0.003030678077980324,
+          0.0009999758602740865,
+          0.0024241694697627316
+        ],
+        "spread": [
+          0.008,
+          0.008,
+          0.012,
+          0.012,
+          0.012,
+          0.012,
+          0.008,
+          0.008
+        ],
+        "p05": [
+          -0.003630481983224551,
+          -0.003838821671627186,
+          -0.022918208440144857,
+          -0.023611274030473497,
+          -0.01713746706644694,
+          -0.009510260687934027,
+          -0.042175052662690456,
+          -0.02697347570348669
+        ],
+        "p95": [
+          0.003989361512164261,
+          0.003568804595205517,
+          0.029504111607869442,
+          0.014135089317957487,
+          0.01107693990071614,
+          0.023211008707682206,
+          0.011419816513856214,
+          0.03079119081850398
+        ],
+        "episodes": 67,
+        "registrations": 112,
+        "calibrated": true,
+        "distance_limit": 5.651536156805795,
+        "inlier_ratio_low": 0.4,
+        "reprojection_high": 1.7769071012735367,
+        "similarity_low": 0.12218874841928482
+      }
+    },
+    {
+      "reference_id": 6,
+      "episode_index": 193,
+      "frame_index": 1,
+      "timestamp": 0.050052864,
+      "video_timestamp": 0.04334337000011436,
+      "joint_motion": 0.003702206683971467,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 236,
+      "cluster_size": 60,
+      "statistics": {
+        "median": [
+          -0.00030004739140470824,
+          -0.00015508249677993632,
+          0.001509412129720052,
+          -0.0013701572462364478,
+          -0.0010007540384928387,
+          -0.00027058919270833335,
+          5.864802709159752e-05,
+          -0.0008781150535300925
+        ],
+        "mad": [
+          0.0006606105404595534,
+          0.000660775132753231,
+          0.0040988922119140625,
+          0.003446415839371858,
+          0.0016233126322428386,
+          0.002636210123697917,
+          0.0007898903704093148,
+          0.0031162968388310187
+        ],
+        "spread": [
+          0.008,
+          0.008,
+          0.012,
+          0.012,
+          0.012,
+          0.012,
+          0.008,
+          0.008
+        ],
+        "p05": [
+          -0.0032051673904061316,
+          -0.0033935757919594093,
+          -0.01456995964050293,
+          -0.016837607931207726,
+          -0.013098599116007487,
+          -0.017058710168909145,
+          -0.006383747110764185,
+          -0.021444730405454283
+        ],
+        "p95": [
+          0.0021206071848670622,
+          0.0018167821676642695,
+          0.02170759518941241,
+          0.024548639544734244,
+          0.009315929412841794,
+          0.03093387745044846,
+          0.004535935819148927,
+          0.01251818056459778
+        ],
+        "episodes": 80,
+        "registrations": 140,
+        "calibrated": true,
+        "distance_limit": 4.5504811033937225,
+        "inlier_ratio_low": 0.4,
+        "reprojection_high": 1.6209997832775114,
+        "similarity_low": 0.1587428644299507
+      }
+    },
+    {
+      "reference_id": 7,
+      "episode_index": 164,
+      "frame_index": 8,
+      "timestamp": 0.400034304,
+      "video_timestamp": 0.3880818315005384,
+      "joint_motion": 0.0028754097998732442,
+      "image_dimensions": [
+        720,
+        1280,
+        3
+      ],
+      "keypoints": 223,
+      "cluster_size": 59,
+      "statistics": {
+        "median": [
+          0.00017618675871441762,
+          -0.00032095158541644057,
+          0.0007409731547037761,
+          0.0031410147746404014,
+          -0.0006328264872233072,
+          -0.0004840426974826389,
+          -0.000332142428184549,
+          -0.0006015918872974537
+        ],
+        "mad": [
+          0.0008534267777577042,
+          0.0013932874909153691,
+          0.004116566975911458,
+          0.004659167373621905,
+          0.0013573010762532552,
+          0.00273284912109375,
+          0.0013641866855323315,
+          0.003124660915798611
+        ],
+        "spread": [
+          0.008,
+          0.008,
+          0.012,
+          0.012,
+          0.012,
+          0.012,
+          0.008,
+          0.008
+        ],
+        "p05": [
+          -0.00493152259538571,
+          -0.011061843457045379,
+          -0.00969867706298828,
+          -0.015228521823883057,
+          -0.014815966288248697,
+          -0.02067633734809028,
+          -0.01648787409067154,
+          -0.041759321424696176
+        ],
+        "p95": [
+          0.04381035069624583,
+          0.024035399048416704,
+          0.031697654724121095,
+          0.028147913349999325,
+          0.009332052866617837,
+          0.021993368643301505,
+          0.038323531548182174,
+          0.02147719771773727
+        ],
+        "episodes": 107,
+        "registrations": 166,
+        "calibrated": true,
+        "distance_limit": 5.658669380977155,
+        "inlier_ratio_low": 0.4,
+        "reprojection_high": 1.6360710188746452,
+        "similarity_low": 0.10270397141575813
+      }
+    }
+  ],
+  "start_pose": {
+    "left": [
+      1.5136463642120361,
+      0.5823910236358643,
+      -1.9151761531829834,
+      -1.7822807431221008,
+      1.368835985660553,
+      1.1909014582633972,
+      -0.9791233837604523
+    ],
+    "right": [
+      1.4781324863433838,
+      -0.6062887609004974,
+      -1.2632859349250793,
+      -1.8024960160255432,
+      -1.4311811923980713,
+      1.094462275505066,
+      0.4500756114721298
+    ]
+  },
+  "start_pose_p05": {
+    "left": [
+      1.0542453825473785,
+      0.5326550632715226,
+      -2.2799686193466187,
+      -2.053381156921387,
+      1.0970151543617248,
+      0.9127320468425751,
+      -1.6825527250766754
+    ],
+    "right": [
+      1.1185989439487458,
+      -0.6524871468544007,
+      -1.7079787135124207,
+      -2.0588922023773195,
+      -1.684228491783142,
+      0.828231281042099,
+      -0.00700478830840438
+    ]
+  },
+  "start_pose_p95": {
+    "left": [
+      1.9314134061336512,
+      0.6515726804733276,
+      -1.5591606259346011,
+      -1.4930966317653656,
+      1.6276162266731262,
+      1.5230708599090577,
+      -0.40606808215379736
+    ],
+    "right": [
+      1.9580762445926663,
+      -0.5405754834413529,
+      -0.6862921386957169,
+      -1.465777033567429,
+      -1.1330481112003326,
+      1.4529683351516722,
+      1.4094429314136505
+    ]
+  },
+  "references_sha256": "d23ad39d0636a556cab36c7ad868c78dbb5139c28dfae6745f4c36f00ce5425e"
+}

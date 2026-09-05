@@ -1,112 +1,79 @@
 #!/usr/bin/env bash
 set -eo pipefail
-
 source /opt/ros/jazzy/setup.bash
 set -u
 
 MODE="${MODE:-all}"
 MODEL_DIR="${MODEL_DIR:-/models/pi05-task2-fullft-30k}"
-MODEL_REPO="${MODEL_REPO:-junjie-jjs/ebim-task2-pi05-fullft-30k}"
-MODEL_REVISION="${MODEL_REVISION:-af799f06e59be97a7a1b2603d610d22669305cf3}"
 INFERENCE_HOST="${INFERENCE_HOST:-127.0.0.1}"
 INFERENCE_PORT="${INFERENCE_PORT:-8765}"
-DEVICE="${DEVICE:-cuda}"
-N_ACTION_STEPS="${N_ACTION_STEPS:-10}"
-FPS="${FPS:-20}"
-TASK="${TASK:-Pick up the thermal pad and place it on the target RAM board.}"
+REAL_CONFIG="${REAL_CONFIG:-/app/config/task2.real.yaml}"
 ROS_PROFILE="${ROS_PROFILE:-real}"
-NAV_FORWARD_DISTANCE="${NAV_FORWARD_DISTANCE:-0}"
-REAL_LEFT_ARM_COMMAND="${REAL_LEFT_ARM_COMMAND:-/left/gello/joint_states}"
-REAL_RIGHT_ARM_COMMAND="${REAL_RIGHT_ARM_COMMAND:-/right/gello/joint_states}"
-REAL_LEFT_WRENCH="${REAL_LEFT_WRENCH:-/left/franka_robot_state_broadcaster/external_wrench_in_stiffness_frame}"
-REAL_RIGHT_WRENCH="${REAL_RIGHT_WRENCH:-/right/franka_robot_state_broadcaster/external_wrench_in_stiffness_frame}"
-REAL_SPINE_HEIGHT="${REAL_SPINE_HEIGHT:-434.0}"
-DRY_RUN="${DRY_RUN:-0}"
 
 download_checkpoint() {
-    if [[ -f "${MODEL_DIR}/model.safetensors" ]]; then
-        return
-    fi
-    if [[ -z "${MODEL_REPO}" ]]; then
-        echo "ERROR: set MODEL_REPO or mount a complete checkpoint at ${MODEL_DIR}" >&2
-        exit 2
-    fi
-    python3 /app/download_model.py \
-        --repo-id "${MODEL_REPO}" \
+    python3 /app/download_model.py --ensure-complete \
+        --repo-id "${MODEL_REPO:-junjie-jjs/ebim-task2-pi05-fullft-30k}" \
         --local-dir "${MODEL_DIR}" \
-        --revision "${MODEL_REVISION}"
+        --revision "${MODEL_REVISION:-af799f06e59be97a7a1b2603d610d22669305cf3}"
 }
 
-inference_command=(
-    python3 /app/task2_pi05_eval_node.py
-    --mode inference
-    --checkpoint "${MODEL_DIR}"
-    --device "${DEVICE}"
-    --task "${TASK}"
-    --host "${INFERENCE_HOST}"
-    --port "${INFERENCE_PORT}"
-    --n-action-steps-override "${N_ACTION_STEPS}"
-)
-
-ros_command=(
-    python3 /app/task2_pi05_eval_node.py
-    --mode ros
-    --host "${INFERENCE_HOST}"
-    --port "${INFERENCE_PORT}"
-    --fps "${FPS}"
-    --ros-profile "${ROS_PROFILE}"
-    --real-left-arm-command "${REAL_LEFT_ARM_COMMAND}"
-    --real-right-arm-command "${REAL_RIGHT_ARM_COMMAND}"
-    --real-left-wrench "${REAL_LEFT_WRENCH}"
-    --real-right-wrench "${REAL_RIGHT_WRENCH}"
-    --real-spine-height "${REAL_SPINE_HEIGHT}"
-    --start-delay-sim 1.0
-    --reset-scene-on-start
-)
-
-if [[ "${DRY_RUN}" == "1" ]]; then
-    ros_command+=(--dry-run)
+inference_command=(python3 /app/task2_pi05_eval_node.py --mode inference
+    --checkpoint "${MODEL_DIR}" --device "${DEVICE:-cuda}"
+    --task "${TASK:-Pick up the thermal pad and place it on the target RAM board.}"
+    --host "${INFERENCE_HOST}" --port "${INFERENCE_PORT}" --n-action-steps-override 10)
+ros_command=(python3 /app/task2_real_runner.py --config "${REAL_CONFIG}"
+    --host "${INFERENCE_HOST}" --port "${INFERENCE_PORT}")
+if [[ "${ROS_PROFILE}" != real ]]; then
+    ros_command=(python3 /app/task2_pi05_eval_node.py --mode ros --ros-profile isaac
+        --host "${INFERENCE_HOST}" --port "${INFERENCE_PORT}" --fps "${FPS:-30}")
+elif [[ "${NAV_FORWARD_DISTANCE:-0}" != 0 ]]; then
+    echo "ERROR: NAV_FORWARD_DISTANCE is retired; configure bounded navigation in REAL_CONFIG." >&2
+    exit 2
 fi
-
-navigation_command=(
-    python3 /app/task2_base_nav.py
-    --forward-distance "${NAV_FORWARD_DISTANCE}"
-)
+if [[ "${DRY_RUN:-0}" == 1 ]]; then ros_command+=(--dry-run); fi
 
 case "${MODE}" in
+    preflight)
+        exec python3 /app/task2_real_runner.py --config "${REAL_CONFIG}" --preflight
+        ;;
+    navigation)
+        ros_command+=(--navigation-only)
+        exec "${ros_command[@]}"
+        ;;
     inference)
         download_checkpoint
         exec "${inference_command[@]}"
         ;;
     ros)
-        if [[ "${ROS_PROFILE}" == "real" && "${DRY_RUN}" != "1" && "${NAV_FORWARD_DISTANCE}" != "0" ]]; then
-            "${navigation_command[@]}"
-        fi
         exec "${ros_command[@]}"
         ;;
     all)
-        # On the real testbed, finish the table approach before loading or
-        # starting policy inference so no policy node can contend for the base.
-        if [[ "${ROS_PROFILE}" == "real" && "${DRY_RUN}" != "1" && "${NAV_FORWARD_DISTANCE}" != "0" ]]; then
-            "${navigation_command[@]}"
+        if [[ "${DRY_RUN:-0}" == 1 && "${ROS_PROFILE}" == real ]]; then
+            exec "${ros_command[@]}"
         fi
         download_checkpoint
         "${inference_command[@]}" &
         inference_pid=$!
+        ros_pid=
         cleanup() {
+            if [[ -n "${ros_pid}" ]]; then
+                kill -TERM "${ros_pid}" 2>/dev/null || true
+                wait "${ros_pid}" 2>/dev/null || true
+            fi
             kill "${inference_pid}" 2>/dev/null || true
             wait "${inference_pid}" 2>/dev/null || true
         }
-        trap cleanup EXIT INT TERM
-        python3 /app/wait_for_port.py \
-            --host "${INFERENCE_HOST}" \
-            --port "${INFERENCE_PORT}" \
-            --process-pid "${inference_pid}" \
-            --timeout 600
-        "${ros_command[@]}"
+        trap cleanup EXIT
+        trap 'exit 130' INT
+        trap 'exit 143' TERM
+        python3 /app/wait_for_port.py --host "${INFERENCE_HOST}" --port "${INFERENCE_PORT}" \
+            --process-pid "${inference_pid}" --timeout 600
+        "${ros_command[@]}" &
+        ros_pid=$!
+        wait "${ros_pid}"
         ;;
     *)
-        echo "ERROR: MODE must be all, inference, or ros; got ${MODE}" >&2
+        echo "ERROR: MODE must be all, inference, ros, navigation, or preflight" >&2
         exit 2
         ;;
 esac

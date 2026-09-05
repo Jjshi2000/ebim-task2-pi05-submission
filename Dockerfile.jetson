@@ -1,0 +1,36 @@
+# Candidate JetPack 6 / AGX Orin target; native build and hardware validation required.
+FROM nvcr.io/nvidia/pytorch:25.06-py3-igpu
+ARG DEBIAN_FRONTEND=noninteractive
+ARG LEROBOT_COMMIT=22bd7a2f489b367d8df42de803b1e8c4ca63a3f9
+ENV PYTHONUNBUFFERED=1 HF_HUB_DISABLE_XET=1 TOKENIZERS_PARALLELISM=false \
+    HF_HOME=/cache/huggingface HF_HUB_CACHE=/cache/huggingface/hub \
+    RMW_IMPLEMENTATION=rmw_cyclonedds_cpp FASTDDS_BUILTIN_TRANSPORTS=UDPv4
+RUN apt-get update && apt-get install -y --no-install-recommends curl ca-certificates git python3-venv \
+    && curl -fsSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -o /usr/share/keyrings/ros-archive-keyring.gpg \
+    && echo 'deb [signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu noble main' > /etc/apt/sources.list.d/ros2.list \
+    && apt-get update && apt-get install -y --no-install-recommends \
+        ros-jazzy-ros-base ros-jazzy-tf2-ros ros-jazzy-controller-manager-msgs \
+        ros-jazzy-rmw-cyclonedds-cpp ros-jazzy-rmw-fastrtps-cpp \
+        ros-jazzy-lifecycle-msgs ros-jazzy-rcl-interfaces libgl1 libglib2.0-0 \
+    && rm -rf /var/lib/apt/lists/*
+COPY requirements-jetson.txt /tmp/requirements-jetson.txt
+COPY scripts/ngc_constraints.py /tmp/ngc_constraints.py
+RUN python3 /tmp/ngc_constraints.py \
+    && python3 -m venv --system-site-packages /opt/venv \
+    && /opt/venv/bin/python -m pip install --no-cache-dir --upgrade pip 'setuptools<82' wheel \
+    && /opt/venv/bin/python -m pip install --no-cache-dir -c /tmp/ngc-constraints.txt -r /tmp/requirements-jetson.txt \
+    && /opt/venv/bin/python -m pip install --no-cache-dir --no-deps \
+        "lerobot @ git+https://github.com/huggingface/lerobot.git@${LEROBOT_COMMIT}"
+ENV PATH=/opt/venv/bin:$PATH
+RUN python3 -c "import numpy as np, torch, torchvision; assert torch.from_numpy(np.ones(2)).sum().item() == 2; print(torch.__version__, torchvision.__version__)"
+WORKDIR /app
+COPY app/ /app/
+COPY config/ /app/config/
+COPY artifacts/ /app/artifacts/
+COPY scripts/ /app/scripts/
+COPY model-manifest.json /app/model-manifest.json
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh && python3 -m compileall -q /app
+RUN bash -c 'source /opt/ros/jazzy/setup.bash && python3 -c "import rclpy, tf2_ros; from controller_manager_msgs.srv import ListControllers, SwitchController, LoadController, UnloadController, ConfigureController, ListHardwareComponents, SetHardwareComponentState; from rcl_interfaces.srv import GetParameters; from lifecycle_msgs.msg import State; from lerobot.policies.pi05.modeling_pi05 import PI05Policy; from lerobot.policies.factory import make_pre_post_processors; from transformers import AutoTokenizer; print(\"ROS and PI05 imports OK\")"'
+VOLUME ["/cache/huggingface", "/models"]
+ENTRYPOINT ["/entrypoint.sh"]

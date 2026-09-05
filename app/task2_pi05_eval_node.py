@@ -218,7 +218,7 @@ class Task2ActionSafetyFilter:
                 [float(joints[name]) for name in LEFT_JOINTS]
                 + [1.0]
                 + [float(joints[name]) for name in RIGHT_JOINTS]
-                + [_clip(float(joints[RIGHT_GRIPPER_DRIVER]), 0.0, 1.0)]
+                + [_clip(1.0 - float(joints[RIGHT_GRIPPER_DRIVER]) / 0.789, 0.0, 1.0)]
                 + [REAL_DEMO_SPINE_HEIGHT]
             )
 
@@ -713,6 +713,49 @@ class AsyncActionChunkExecutor:
                     self.cond.notify_all()
 
 
+def strict_pi05_load(policy_class, config, weights):
+    """Use upstream key conversion, but never swallow a missing/partial checkpoint."""
+    from safetensors.torch import load_file
+    import torch
+    device = config.device
+    try:
+        config.device = "meta"
+        with torch.device("meta"):
+            policy = policy_class(config)
+    finally:
+        config.device = device
+    original = load_file(str(weights), device="cpu")
+    fixed = policy._fix_pytorch_state_dict_keys(original, config)
+    remapped = {k if k.startswith("model.") else "model." + k: v for k, v in fixed.items()}
+    expected = policy.state_dict()
+    if set(remapped) != set(expected):
+        raise RuntimeError(f"checkpoint keys differ: missing={set(expected) - set(remapped)}, unexpected={set(remapped) - set(expected)}")
+    for name, value in remapped.items():
+        if value.shape != expected[name].shape:
+            raise RuntimeError(f"checkpoint shape mismatch: {name}")
+    # Materialize only saved weights; preserve the original mixed-precision layout.
+    policy.load_state_dict({k: v.to(device=device, dtype=expected[k].dtype)
+                            for k, v in remapped.items()}, strict=True, assign=True)
+    # These deterministic, nonpersistent Transformers buffers are not in weights.
+    for module in policy.modules():
+        for name, value in list(module.named_buffers(recurse=False)):
+            if not value.is_meta:
+                continue
+            if name in ("inv_freq", "original_inv_freq") and not list(module.parameters()):
+                regenerated = type(module)(module.config, device=torch.device(device))
+                replacement = getattr(regenerated, name)
+            elif name == "position_ids":
+                replacement = torch.arange(value.shape[-1], device=device).expand(value.shape)
+            elif name == "embed_scale" and hasattr(module, "embedding_dim"):
+                replacement = torch.tensor(module.embedding_dim ** 0.5, device=device)
+            else:
+                raise RuntimeError(f"unknown unsaved meta buffer: {type(module).__name__}.{name}")
+            setattr(module, name, replacement.to(dtype=value.dtype))
+    if any(v.is_meta for v in list(policy.parameters()) + list(policy.buffers())):
+        raise RuntimeError("unmaterialized model tensor")
+    return policy
+
+
 def load_pi05_policy_and_processors(checkpoint: str, device: str):
     """Load a LeRobot PI0.5 checkpoint, including PEFT adapter and saved processors.
 
@@ -780,11 +823,9 @@ def load_pi05_policy_and_processors(checkpoint: str, device: str):
             raise RuntimeError("adapter_config.json has no base_model_name_or_path")
 
         print(f"Loading PI0.5 base policy: {base_path}")
-        base_policy = PI05Policy.from_pretrained(
-            pretrained_name_or_path=base_path,
-            config=config,
-            revision=getattr(peft_config, "revision", None),
-        )
+        from transformers.utils import cached_file
+        weights = cached_file(base_path, "model.safetensors", revision=getattr(peft_config, "revision", None))
+        base_policy = strict_pi05_load(PI05Policy, config, weights)
         policy = PeftModel.from_pretrained(
             base_policy,
             str(ckpt),
@@ -797,7 +838,7 @@ def load_pi05_policy_and_processors(checkpoint: str, device: str):
             raise FileNotFoundError(
                 f"checkpoint is not marked PEFT and has no full model weights: {model_path}"
             )
-        policy = PI05Policy.from_pretrained(str(ckpt), config=config)
+        policy = strict_pi05_load(PI05Policy, config, model_path)
 
     policy.to(torch.device(device))
     policy.eval()
@@ -810,7 +851,10 @@ def load_pi05_policy_and_processors(checkpoint: str, device: str):
             pretrained_path=str(ckpt),
             preprocessor_overrides={
                 "device_processor": {"device": str(torch.device(device))},
+                **({"tokenizer_processor": {"tokenizer_name": str(ckpt / "tokenizer")}}
+                   if (ckpt / "tokenizer").is_dir() else {}),
             },
+            postprocessor_overrides={"device_processor": {"device": "cpu"}},
         )
     except Exception as exc:
         raise RuntimeError(
@@ -1056,7 +1100,8 @@ def run_inference(args):
         conn.setsockopt(socket.IPPROTO_TCP, socket.TCP_NODELAY, 1)
         print("ROS adapter connected:", addr)
 
-        send_obj(
+        try:
+            send_obj(
             conn,
             {
                 "ok": True,
@@ -1076,13 +1121,19 @@ def run_inference(args):
                 "chunk_size": int(getattr(config, "chunk_size", 0)),
                 "n_action_steps": int(getattr(config, "n_action_steps", 0)),
                 "async_execution": True,
+                "full_chunk_protocol": True,
                 "replan_interval": replan_interval,
             },
-        )
+            )
+        except (ConnectionError, OSError):
+            conn.close()
+            continue
 
         first_image_log = True
+        protocol = None
 
         try:
+            reset_executor()
             while True:
                 req = recv_obj(conn)
                 op = req.get("op")
@@ -1093,12 +1144,16 @@ def run_inference(args):
                     send_obj(conn, {"ok": True, "seed": reset_seed})
                     continue
 
-                if op not in ("infer", "cached"):
+                if op not in ("infer", "cached", "chunk"):
                     raise ValueError(f"unknown request op={op!r}")
+                requested_protocol = "chunk" if op == "chunk" else "async"
+                if protocol is not None and requested_protocol != protocol:
+                    raise ValueError("cannot mix full-chunk and async protocols on one connection")
+                protocol = requested_protocol
 
                 t0 = time.perf_counter()
                 inference_accepted = False
-                if op == "infer":
+                if op in ("infer", "chunk"):
                     state = np.asarray(req["state"], dtype=np.float32)
                     if state.shape != state_shape or not np.isfinite(state).all():
                         raise ValueError(
@@ -1125,6 +1180,19 @@ def run_inference(args):
                         for key in image_keys:
                             print(f"  {key}: {shape_log[key]}")
                         first_image_log = False
+
+                    if op == "chunk":
+                        from lerobot.policies.utils import prepare_observation_for_inference
+                        with torch.inference_mode():
+                            observation = prepare_observation_for_inference(
+                                raw_observation, device=device, task=args.task, robot_type=args.robot_type)
+                            observation = preprocessor(observation)
+                            actions = postprocessor(policy.predict_action_chunk(observation))
+                            chunk = actions[0].detach().float().cpu().numpy()
+                        if chunk.shape != (chunk_size, action_dim) or not np.isfinite(chunk).all():
+                            raise ValueError(f"invalid full action chunk: {chunk.shape}")
+                        send_obj(conn, {"ok": True, "chunk": chunk, "inference_s": time.perf_counter() - t0})
+                        continue
 
                     inference_accepted = executor.request_inference(
                         raw_observation,
@@ -2656,22 +2724,17 @@ def main_async():
         if not args.checkpoint:
             p.error("--checkpoint is required for --mode inference")
         run_inference(args)
+    elif args.ros_profile == "real":
+        from task2_real_runner import main as real_main
+        print("Using bounded real runner; real settings are in config/task2.real.yaml", flush=True)
+        raise SystemExit(real_main(["--host", args.host, "--port", str(args.port)] +
+                                   (["--dry-run"] if args.dry_run else [])))
     else:
         run_ros(args)
 
 
 def main():
-    """Use the pre-async v2 deployment path by default.
-
-    The async implementation remains in this module for comparison, but the
-    legacy policy-owned action queue avoids hard replacement of partial chunks.
-    """
-    if os.environ.get("TASK2_PI05_USE_ASYNC") == "1":
-        return main_async()
-
-    from task2_pi05_eval_node_v2 import main as legacy_main
-
-    return legacy_main()
+    return main_async()
 
 
 if __name__ == "__main__":

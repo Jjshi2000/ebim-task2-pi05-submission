@@ -4,4 +4,4 @@ __pycache__/
 .env
 models/
 rollout_results/
-
+out/

@@ -11,6 +11,14 @@ SPEC.loader.exec_module(MODULE)
 
 
 class RealContractTest(unittest.TestCase):
+    def test_bgra_camera_stride_preserves_rgb_colors(self):
+        packet = dict(height=2, width=1, encoding="bgra8", step=8,
+                      data=bytes([0, 0, 255, 255, 77, 77, 77, 77,
+                                  255, 0, 0, 255, 77, 77, 77, 77]))
+        image = MODULE.decode_image(packet)
+        self.assertEqual(image.shape, (2, 1, 3))
+        self.assertEqual(image[:, 0].tolist(), [[255, 0, 0], [0, 0, 255]])
+
     def make_joints(self):
         joints = {
             name: float(index + 1)
