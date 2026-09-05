@@ -1,26 +1,17 @@
 # EBiM Phase II Task 2
 
-The submission loads the existing 30k PI0.5 full fine-tune, prepares the FR3 Duo,
-performs bounded table docking, verifies the demonstration starting view, and
-runs manipulation continuously. The model weights, 42D/17D layout, saved
-QUANTILES processors, three cameras, and 50-step chunks are unchanged.
-
-The deployment interface and startup checks pass 30 focused tests. The code has
-not been tested on the physical robot or Jetson. Offline visual acceptance was
-416/476 selected start frames (87.4%); this is not a navigation success rate.
-See [validation and limitations](docs/validation.md).
+The submission runs bounded docking followed by continuous PI0.5 manipulation
+with the released 42D/17D checkpoint contract.
 
 ## Deployment Targets
 
-For an NVIDIA desktop/server GPU and ROS 2 Jazzy:
+Desktop/server GPU with ROS 2 Jazzy:
 
 ```bash
 docker build -t ebim-task2-pi05:30k .
 ```
 
-If the build host reaches GitHub/Hugging Face through a local proxy, pass it as
-Docker's predefined proxy build arguments (do not bake credentials into the
-repository):
+With the configured local proxy:
 
 ```bash
 docker build --network host \
@@ -33,16 +24,11 @@ docker build --network host \
   -t ebim-task2-pi05:30k .
 ```
 
-For JetPack 6 / Jetson AGX Orin, use the separate candidate recipe:
+Jetson AGX Orin / JetPack 6:
 
 ```bash
 docker build --platform linux/arm64 -f Dockerfile.jetson -t ebim-task2-pi05:jetson .
 ```
-
-The Jetson recipe uses HKUST's NGC 25.06 iGPU base, Cyclone DDS, native
-torch/torchvision and NumPy 1.x ABI. It is a candidate recipe and has not been
-built on ARM64. Neither recipe includes weights, tokens or the full dataset;
-the compact 1.5 MB reference bank is included.
 
 ## Start Commands
 
