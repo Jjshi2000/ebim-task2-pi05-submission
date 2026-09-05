@@ -5,12 +5,10 @@ performs bounded table docking, verifies the demonstration starting view, and
 runs manipulation continuously. The model weights, 42D/17D layout, saved
 QUANTILES processors, three cameras, and 50-step chunks are unchanged.
 
-The latest interface/lifecycle/startup fixes passed 30 focused unit checks. Earlier
-dataset, synthetic motion, ROS fake-rig and GPU inference results are retained
-as historical evidence; the new command process has not been exercised with ROS.
-This code has **not** been tested on the physical robot or Jetson.
-Offline visual acceptance is 416/476 selected start frames (87.4%); this is
-not a navigation success rate. See [validation and limitations](docs/validation.md).
+The deployment interface and startup checks pass 30 focused tests. The code has
+not been tested on the physical robot or Jetson. Offline visual acceptance was
+416/476 selected start frames (87.4%); this is not a navigation success rate.
+See [validation and limitations](docs/validation.md).
 
 ## Deployment Targets
 
@@ -42,15 +40,9 @@ docker build --platform linux/arm64 -f Dockerfile.jetson -t ebim-task2-pi05:jets
 ```
 
 The Jetson recipe uses HKUST's NGC 25.06 iGPU base, Cyclone DDS, native
-torch/torchvision and NumPy 1.x ABI strategy;
-the desktop CUDA wheels are not a substitute. The Jetson recipe was not built
-in this session. Neither recipe bakes weights, tokens, or the full dataset.
-The compact reference bank (about 1.5 MB) is included.
-
-The local pre-existing `ebim-task2-pi05:30k` image is an older x86_64 build:
-inspection found none of the new real runner, command stream, lifecycle module,
-configuration or reference bank inside it. Build a new image from the complete
-updated checkout before submitting; the old tag does not contain these fixes.
+torch/torchvision and NumPy 1.x ABI. It is a candidate recipe and has not been
+built on ARM64. Neither recipe includes weights, tokens or the full dataset;
+the compact 1.5 MB reference bank is included.
 
 ## Start Commands
 
